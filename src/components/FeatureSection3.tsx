@@ -3,11 +3,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ComingSoonGraphic from "./mockups/ComingSoonGraphic";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FeatureSection3 = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -49,33 +51,31 @@ const FeatureSection3 = () => {
 
           <div ref={textRef} className="order-1 lg:order-2 space-y-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-warmGray-800 leading-tight">
-              Tantangan Seru
-              <span className="text-gradient block">Menantimu</span>
+              {t("feature3.title1")}
+              <span className="text-gradient block">{t("feature3.title2")}</span>
             </h2>
 
             <p className="text-lg sm:text-xl text-warmGray-600 leading-relaxed">
-              Games dan quiz seru yang dirancang khusus untuk pasangan dan
-              sahabat sedang dalam perjalanan. Sempurna untuk date night atau
-              sekadar bersenang-senang bersama.
+              {t("feature3.description")}
             </p>
 
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-blush-500 rounded-full"></div>
                 <span className="text-warmGray-700">
-                  Couple challenges untuk memperdalam connection
+                  {t("feature3.point1")}
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-sage-500 rounded-full"></div>
                 <span className="text-warmGray-700">
-                  Fun quizzes yang reveal personality insights
+                  {t("feature3.point2")}
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-cream-500 rounded-full"></div>
                 <span className="text-warmGray-700">
-                  Interactive games untuk quality time
+                  {t("feature3.point3")}
                 </span>
               </div>
             </div>
@@ -88,7 +88,7 @@ const FeatureSection3 = () => {
                   onClick={() => window.open("https://instagram.com", "_blank")}
                 >
                   <Instagram className="w-4 h-4 mr-2" />
-                  Ikuti Perkembangan
+                  {t("feature3.followDev")}
                 </Button>
               </div>
             </div>

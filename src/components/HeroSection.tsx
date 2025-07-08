@@ -3,11 +3,13 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 import FloatingShapes from "./FloatingShapes";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
+  const { t } = useLanguage();
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -95,18 +97,16 @@ const HeroSection = () => {
           ref={titleRef}
           className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gradient leading-tight mb-6"
         >
-          Perdalam Koneksimu.
+          {t("hero.title1")}
           <br />
-          Ciptakan Momen Bersama.
+          {t("hero.title2")}
         </h1>
 
         <p
           ref={subtitleRef}
           className="text-lg sm:text-xl lg:text-2xl text-livales-dark mb-8 max-w-2xl mx-auto leading-relaxed opacity-80"
         >
-          Livales adalah ruang digital eksklusif untuk pasangan dan sahabat
-          terbaik untuk tumbuh, berbagi kenangan, dan memperkuat ikatan yang
-          kalian miliki.
+          {t("hero.subtitle")}
         </p>
 
         <div ref={ctaRef}>
@@ -115,7 +115,7 @@ const HeroSection = () => {
             size="lg"
             className="bg-livales-green hover:bg-green-600 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >
-            Masuk Daftar Tunggu
+            {t("hero.cta")}
           </Button>
         </div>
       </div>
