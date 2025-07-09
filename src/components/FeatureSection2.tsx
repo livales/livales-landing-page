@@ -2,11 +2,13 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 import MemoryJarMockup from './mockups/MemoryJarMockup';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FeatureSection2 = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -55,27 +57,26 @@ const FeatureSection2 = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div ref={textRef} className="space-y-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-warmGray-800 leading-tight">
-              Abadikan Setiap 
-              <span className="text-gradient block">Momen Berharga</span>
+              {t("feature2.title1")} 
+              <span className="text-gradient block">{t("feature2.title2")}</span>
             </h2>
             
             <p className="text-lg sm:text-xl text-warmGray-600 leading-relaxed">
-              Buat timeline pribadi dari kenangan paling berharga kalian. Dari foto dan catatan 
-              hingga tanggal spesial, semua tersimpan rapi dalam satu tempat yang indah.
+              {t("feature2.description")}
             </p>
             
             <div ref={listRef} className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-blush-500 rounded-full"></div>
-                <span className="text-warmGray-700">Photo journal yang terorganisir secara chronological</span>
+                <span className="text-warmGray-700">{t("feature2.point1")}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-sage-500 rounded-full"></div>
-                <span className="text-warmGray-700">Memory jar untuk menyimpan moment spontan</span>
+                <span className="text-warmGray-700">{t("feature2.point2")}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-cream-500 rounded-full"></div>
-                <span className="text-warmGray-700">Timeline yang bisa dishare untuk anniversary</span>
+                <span className="text-warmGray-700">{t("feature2.point3")}</span>
               </div>
             </div>
           </div>

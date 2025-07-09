@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSelector from "./LanguageSelector";
 
 const Navbar = () => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
@@ -57,10 +60,10 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { label: "Beranda", href: "hero" },
-    { label: "Fitur", href: "features" },
-    { label: "Kenangan", href: "memories" },
-    { label: "Kontak", href: "waitlist-section" },
+    { label: t("nav.home"), href: "hero" },
+    { label: t("nav.features"), href: "features" },
+    { label: t("nav.memories"), href: "memories" },
+    { label: t("nav.contact"), href: "waitlist-section" },
   ];
 
   return (
@@ -106,13 +109,14 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Desktop CTA */}
-            <div className="hidden md:block">
+            {/* Language Selector & Desktop CTA */}
+            <div className="hidden md:flex items-center space-x-4">
+              <LanguageSelector />
               <Button
                 onClick={() => scrollToSection("waitlist-section")}
                 className="bg-livales-green hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200"
               >
-                Daftar Tunggu
+                {t("nav.waitlist")}
               </Button>
             </div>
 
@@ -145,12 +149,15 @@ const Navbar = () => {
                   {item.label}
                 </button>
               ))}
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
+                <div className="flex justify-center">
+                  <LanguageSelector />
+                </div>
                 <Button
                   onClick={() => scrollToSection("waitlist-section")}
                   className="w-full bg-livales-green hover:bg-green-600 text-white py-2 rounded-lg font-medium"
                 >
-                  Daftar Tunggu
+                  {t("nav.waitlist")}
                 </Button>
               </div>
             </div>

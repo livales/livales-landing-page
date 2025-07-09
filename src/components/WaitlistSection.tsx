@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Instagram, Youtube } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const WaitlistSection = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [email, setEmail] = useState("");
@@ -43,9 +45,8 @@ const WaitlistSection = () => {
     // Simulate API call
     setTimeout(() => {
       toast({
-        title: "Berhasil bergabung!",
-        description:
-          "Kami akan menghubungi Anda saat Livales siap diluncurkan.",
+        title: t("waitlist.form.submit"),
+        description: t("waitlist.subtitle"),
         variant: "default",
       });
       setEmail("");
@@ -61,13 +62,12 @@ const WaitlistSection = () => {
     >
       <div className="max-w-4xl mx-auto text-center space-y-8">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-livales-dark leading-tight">
-          Siap Bawa Hubunganmu
-          <span className="text-gradient block">ke Level Selanjutnya?</span>
+          {t("waitlist.title1")}
+          <span className="text-gradient block">{t("waitlist.title2")}</span>
         </h2>
 
         <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-          Ikatan yang lebih kuat, lebih banyak kesenangan, dan pertumbuhan
-          bersama. Jadilah yang pertama merasakan pengalaman Livales.
+          {t("waitlist.subtitle")}
         </p>
 
         <form
@@ -78,7 +78,7 @@ const WaitlistSection = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <Input
               type="email"
-              placeholder="email@contoh.com"
+              placeholder={t("waitlist.form.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="flex-1 px-4 py-3 rounded-lg border-gray-300 focus:border-livales-green focus:ring-livales-green text-livales-dark placeholder:text-gray-500"
@@ -89,13 +89,13 @@ const WaitlistSection = () => {
               disabled={isSubmitting || !email}
               className="bg-livales-green hover:bg-livales-green/90 text-white px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all duration-300"
             >
-              {isSubmitting ? "Memproses..." : "Beri Tahu Saya!"}
+              {isSubmitting ? t("waitlist.form.submitting") : t("waitlist.form.submit")}
             </Button>
           </div>
         </form>
 
         <p className="text-gray-500 text-sm">
-          Jadilah bagian dari ribuan pasangan & sahabat yang menantikan Livales.
+          {t("waitlist.subtitle")}
         </p>
 
         <div className="flex justify-center space-x-6 pt-4">

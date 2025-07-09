@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Heart, Calendar, Mail, LucideProps } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Daftarkan plugin GSAP
 gsap.registerPlugin(ScrollTrigger);
@@ -16,6 +17,7 @@ interface Feature {
 }
 
 const MemoriesSection = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -70,23 +72,20 @@ const MemoriesSection = () => {
   const features: Feature[] = [
     {
       icon: Heart,
-      title: "Kenangan Bersama",
-      description:
-        "Simpan momen-momen spesial kalian dalam timeline yang indah. Dari foto pertama kali bertemu hingga anniversary terbaru.",
+      title: t("memories.feature1.title"),
+      description: t("memories.feature1.description"),
       color: "green",
     },
     {
       icon: Mail,
-      title: "Surat Digital",
-      description:
-        "Kirim surat digital yang penuh cinta untuk pasangan atau sahabat. Surprise mereka dengan pesan heartfelt kapan saja.",
+      title: t("memories.feature2.title"),
+      description: t("memories.feature2.description"),
       color: "emerald",
     },
     {
       icon: Calendar,
-      title: "Tanggal Penting",
-      description:
-        "Jangan pernah lupa anniversary, ulang tahun, atau moment spesial lainnya. Livales akan selalu mengingatkan kalian.",
+      title: t("memories.feature3.title"),
+      description: t("memories.feature3.description"),
       color: "teal",
     },
   ];
@@ -122,9 +121,9 @@ const MemoriesSection = () => {
             ref={titleRef}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-livales-dark leading-tight mb-6"
           >
-            Lebih dari Sekadar Aplikasi,
+            {t("memories.title1")}
             <span className="text-gradient block">
-              Ini Rumah Kenangan Kalian
+              {t("memories.title2")}
             </span>
           </h2>
         </div>
@@ -162,9 +161,8 @@ const MemoriesSection = () => {
 
         <div className="text-center mt-12">
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            <span className="font-semibold text-livales-green">Coming Soon:</span>{" "}
-            Fitur-fitur canggih untuk mengelola kenangan, mengirim surprise
-            letters, dan tracking tanggal-tanggal penting dalam hubungan kalian.
+            <span className="font-semibold text-livales-green">{t("memories.comingSoon")}</span>{" "}
+            {t("memories.comingSoonText")}
           </p>
         </div>
       </div>
