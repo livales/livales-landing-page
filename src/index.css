@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
@@ -8,82 +7,116 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
-    --foreground: 18 32 35;
+    /* Brand colors */
+    --livales-green: 138 63% 49%; /* #2ecc40 */
+    --livales-white: 0 0% 100%; /* #ffffff */
+    --livales-dark: 192 33% 10%; /* #122023 */
 
-    --card: 255 255 255;
-    --card-foreground: 18 32 35;
+    /* System colors - light mode */
+    --background: 0 0% 100%; /* putih */
+    --foreground: 192 33% 10%; /* #122023 */
 
-    --popover: 255 255 255;
-    --popover-foreground: 18 32 35;
+    --primary: 138 63% 49%; /* hijau Livales */
+    --primary-foreground: 0 0% 100%; /* putih */
 
-    --primary: 46 204 64;
-    --primary-foreground: 255 255 255;
+    --secondary: 210 20% 98%; /* #f8fafc (abu terang) */
+    --secondary-foreground: 192 33% 10%; /* #122023 */
 
-    --secondary: 248 250 252;
-    --secondary-foreground: 18 32 35;
+    --muted: 0 0% 96%; /* #f5f5f5 abu sangat terang */
+    --muted-foreground: 210 9% 50%; /* #6b7280 */
 
-    --muted: 245 245 245;
-    --muted-foreground: 107 114 128;
+    --accent: 210 20% 98%; /* sama dg secondary */
+    --accent-foreground: 192 33% 10%;
 
-    --accent: 248 250 252;
-    --accent-foreground: 18 32 35;
+    --destructive: 0 84% 60%; /* merah kontras */
+    --destructive-foreground: 210 40% 98%; /* hampir putih */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 210 16% 90%; /* #e5e7eb abu border */
+    --input: 210 16% 90%; /* sama dg border */
+    --ring: 138 63% 49%; /* hijau Livales */
 
-    --border: 229 231 235;
-    --input: 229 231 235;
-    --ring: 46 204 64;
+    --card: 0 0% 100%;
+    --card-foreground: 192 33% 10%;
+
+    --popover: 138 63% 49%; /* dropdown hijau Livales */
+    --popover-foreground: 0 0% 100%; /* putih teks */
 
     --radius: 0.75rem;
 
+    /* Custom design system colors */
+    --warmGray-600: 30 6% 40%; /* #6b625a */
+    --warmGray-700: 30 6% 30%; /* #49413b */
+    --warmGray-800: 30 6% 20%; /* #322d28 */
+    --blush-500: 340 65% 65%; /* pink aksen #ec6e8c */
+    --sage-500: 100 24% 58%; /* hijau sage #9caf88 */
+    --cream-500: 45 78% 80%; /* krem #f9e4b7 */
+    --cream-50: 45 78% 95%; /* very light cream */
+    --sage-50: 100 24% 95%; /* very light sage */
+    --sage-400: 100 24% 48%; /* border btn #8fa878 */
+    --sage-700: 100 24% 38%; /* teks btn #6e8c5f */
+
+    /* Sidebar (kalau kamu pakai) */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-foreground: 192 33% 10%;
+    --sidebar-primary: 192 33% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 210 20% 98%;
+    --sidebar-accent-foreground: 192 33% 10%;
+    --sidebar-border: 210 16% 90%;
+    --sidebar-ring: 138 63% 49%;
   }
 
   .dark {
-    --background: 18 32 35;
-    --foreground: 255 255 255;
+    /* System colors - dark mode */
+    --background: 192 33% 10%; /* #122023 dark */
+    --foreground: 0 0% 100%; /* putih */
 
-    --card: 18 32 35;
-    --card-foreground: 255 255 255;
+    --primary: 138 63% 49%;
+    --primary-foreground: 192 33% 10%;
 
-    --popover: 18 32 35;
-    --popover-foreground: 255 255 255;
+    --secondary: 215 21% 27%; /* #374151 abu gelap */
+    --secondary-foreground: 0 0% 100%;
 
-    --primary: 46 204 64;
-    --primary-foreground: 18 32 35;
+    --muted: 215 21% 27%;
+    --muted-foreground: 215 9% 65%; /* #9ca3af */
 
-    --secondary: 55 65 81;
-    --secondary-foreground: 255 255 255;
+    --accent: 215 21% 27%;
+    --accent-foreground: 0 0% 100%;
 
-    --muted: 55 65 81;
-    --muted-foreground: 156 163 175;
-
-    --accent: 55 65 81;
-    --accent-foreground: 255 255 255;
-
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62% 31%; /* dark red */
     --destructive-foreground: 210 40% 98%;
 
-    --border: 55 65 81;
-    --input: 55 65 81;
-    --ring: 46 204 64;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 215 21% 27%;
+    --input: 215 21% 27%;
+    --ring: 138 63% 49%;
+
+    --card: 192 33% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 138 63% 49%; /* dropdown hijau Livales juga di dark mode */
+    --popover-foreground: 0 0% 100%;
+
+    /* Custom design system colors tetap sama (biasanya) */
+    --warmGray-600: 30 6% 40%;
+    --warmGray-700: 30 6% 30%;
+    --warmGray-800: 30 6% 20%;
+    --blush-500: 340 65% 65%;
+    --sage-500: 100 24% 58%;
+    --cream-500: 45 78% 80%;
+    --cream-50: 45 78% 95%;
+    --sage-50: 100 24% 95%;
+    --sage-400: 100 24% 48%;
+    --sage-700: 100 24% 38%;
+
+    /* Sidebar dark */
+    --sidebar-background: 192 33% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 138 63% 49%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 215 21% 27%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 215 21% 27%;
+    --sidebar-ring: 138 63% 49%;
   }
 }
 
@@ -178,7 +211,8 @@
   }
 
   .card-shadow {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
   .interactive-mockup {
@@ -224,7 +258,8 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(46, 204, 64, 0.6);
   }
   50% {

@@ -52,7 +52,9 @@ const FeatureSection3 = () => {
           <div ref={textRef} className="order-1 lg:order-2 space-y-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-warmGray-800 leading-tight">
               {t("feature3.title1")}
-              <span className="text-gradient block">{t("feature3.title2")}</span>
+              <span className="text-gradient block">
+                {t("feature3.title2")}
+              </span>
             </h2>
 
             <p className="text-lg sm:text-xl text-warmGray-600 leading-relaxed">
@@ -84,7 +86,7 @@ const FeatureSection3 = () => {
               <div className="pt-4">
                 <Button
                   variant="outline"
-                  className="border-sage-400 text-sage-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#CD3D63] hover:text-white hover:border-[#CD3D63]"
+                  className="border-sage-400 text-sage-700 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-[#29b543] hover:text-white hover:border-blush-500"
                   onClick={() => window.open("https://instagram.com", "_blank")}
                 >
                   <Instagram className="w-4 h-4 mr-2" />

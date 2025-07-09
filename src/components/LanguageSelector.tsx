@@ -1,19 +1,19 @@
-import React from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import React from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Globe } from 'lucide-react';
+} from "@/components/ui/select";
+import { Globe } from "lucide-react";
 
 const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
 
   const handleLanguageChange = (value: string) => {
-    setLanguage(value as 'id' | 'en');
+    setLanguage(value as "id" | "en");
   };
 
   return (
