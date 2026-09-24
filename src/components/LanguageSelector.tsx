@@ -1,37 +1,37 @@
-import React from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Globe } from "lucide-react";
+import { useLanguage, type Language } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
 
-const LanguageSelector = () => {
+const options: Language[] = ["id", "en"];
+
+const LanguageSelector = ({ className }: { className?: string }) => {
   const { language, setLanguage } = useLanguage();
 
-  const handleLanguageChange = (value: string) => {
-    setLanguage(value as "id" | "en");
-  };
-
   return (
-    <div className="flex items-center space-x-2">
-      <Globe className="w-4 h-4 text-muted-foreground" />
-      <Select value={language} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-20 h-8 text-xs border-border bg-background">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent className="bg-popover border-border">
-          <SelectItem value="id" className="text-xs">
-            ID
-          </SelectItem>
-          <SelectItem value="en" className="text-xs">
-            EN
-          </SelectItem>
-        </SelectContent>
-      </Select>
+    <div
+      role="radiogroup"
+      aria-label="Language"
+      className={cn(
+        "inline-flex rounded-full border border-ink/10 bg-ink/[0.03] p-0.5",
+        className
+      )}
+    >
+      {options.map((opt) => (
+        <button
+          key={opt}
+          type="button"
+          role="radio"
+          aria-checked={language === opt}
+          onClick={() => setLanguage(opt)}
+          className={cn(
+            "rounded-full px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wider transition-colors",
+            language === opt
+              ? "bg-ink/10 text-foreground"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          {opt}
+        </button>
+      ))}
     </div>
   );
 };

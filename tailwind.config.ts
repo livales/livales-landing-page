@@ -1,14 +1,8 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -23,7 +17,7 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "255 255 255",
+        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -53,46 +47,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
-        // Livales brand colors based on logo
+        // Livales brand colors (from the logo)
+        ink: "#122023",
         livales: {
           green: "#2ecc40",
-          white: "#ffffff",
-          dark: "#122023",
-        },
-        // Supporting colors that work with the brand
-        gray: {
-          50: "#f9fafb",
-          100: "#f3f4f6",
-          200: "#e5e7eb",
-          300: "#d1d5db",
-          400: "#9ca3af",
-          500: "#6b7280",
-          600: "#4b5563",
-          700: "#374151",
-          800: "#1f2937",
-          900: "#111827",
-        },
-        green: {
-          50: "#f0fdf4",
-          100: "#dcfce7",
-          200: "#bbf7d0",
-          300: "#86efac",
-          400: "#4ade80",
-          500: "#22c55e",
-          600: "#16a34a",
-          700: "#15803d",
-          800: "#166534",
-          900: "#14532d",
+          "green-light": "#4fd95f",
+          "green-deep": "#168a2a", // green for text on light backgrounds
+          mint: "#effaf0",
+          rose: "#f07c8f",
+          blush: "#fff1f2",
+          cream: "#fdfbf7",
         },
       },
       borderRadius: {
@@ -102,72 +66,51 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "arc-draw": {
+          from: { strokeDashoffset: "1" },
+          to: { strokeDashoffset: "0" },
+        },
+        "slow-spin": {
+          to: { transform: "rotate(360deg)" },
+        },
+        "pulse-dot": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.35" },
         },
         float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
-        "fade-in-up": {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(30px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0)",
-          },
-        },
-        "fade-in-left": {
-          "0%": {
-            opacity: "0",
-            transform: "translateX(-30px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateX(0)",
-          },
-        },
-        "fade-in-right": {
-          "0%": {
-            opacity: "0",
-            transform: "translateX(30px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateX(0)",
-          },
+        shimmer: {
+          from: { backgroundPosition: "200% 0" },
+          to: { backgroundPosition: "-200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        float: "float 6s ease-in-out infinite",
-        "fade-in-up": "fade-in-up 0.6s ease-out",
-        "fade-in-left": "fade-in-left 0.6s ease-out",
-        "fade-in-right": "fade-in-right 0.6s ease-out",
+        "arc-draw": "arc-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) both",
+        "slow-spin": "slow-spin 60s linear infinite",
+        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
+        float: "float 7s ease-in-out infinite",
+        shimmer: "shimmer 3.5s linear infinite",
       },
       fontFamily: {
-        sans: [
-          "Urbanist",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "sans-serif",
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Urbanist", "Inter", "ui-sans-serif", "sans-serif"],
+        mono: [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Consolas",
+          "monospace",
         ],
       },
     },

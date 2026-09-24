@@ -1,122 +1,42 @@
-@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
-
+/*
+ * Livales design system — light & warm. Brand colors come from the logo
+ * (ink #122023, green #2ECC40); a soft rose accent adds warmth.
+ */
 @layer base {
   :root {
-    /* Brand colors */
-    --livales-green: 138 63% 49%; /* #2ecc40 */
-    --livales-white: 0 0% 100%; /* #ffffff */
-    --livales-dark: 192 33% 10%; /* #122023 */
-
-    /* System colors - light mode */
-    --background: 0 0% 100%; /* putih */
-    --foreground: 192 33% 10%; /* #122023 */
-
-    --primary: 138 63% 49%; /* hijau Livales */
-    --primary-foreground: 0 0% 100%; /* putih */
-
-    --secondary: 210 20% 98%; /* #f8fafc (abu terang) */
-    --secondary-foreground: 192 33% 10%; /* #122023 */
-
-    --muted: 0 0% 96%; /* #f5f5f5 abu sangat terang */
-    --muted-foreground: 210 9% 50%; /* #6b7280 */
-
-    --accent: 210 20% 98%; /* sama dg secondary */
-    --accent-foreground: 192 33% 10%;
-
-    --destructive: 0 84% 60%; /* merah kontras */
-    --destructive-foreground: 210 40% 98%; /* hampir putih */
-
-    --border: 210 16% 90%; /* #e5e7eb abu border */
-    --input: 210 16% 90%; /* sama dg border */
-    --ring: 138 63% 49%; /* hijau Livales */
+    --background: 36 50% 98%; /* #fdfbf7 warm ivory */
+    --foreground: 190 32% 10%; /* #122023 logo ink */
 
     --card: 0 0% 100%;
-    --card-foreground: 192 33% 10%;
+    --card-foreground: 190 32% 10%;
 
-    --popover: 138 63% 49%; /* dropdown hijau Livales */
-    --popover-foreground: 0 0% 100%; /* putih teks */
+    --popover: 0 0% 100%;
+    --popover-foreground: 190 32% 10%;
 
-    --radius: 0.75rem;
+    --primary: 128 63% 49%; /* #2ecc40 */
+    --primary-foreground: 190 32% 10%;
 
-    /* Custom design system colors */
-    --warmGray-600: 30 6% 40%; /* #6b625a */
-    --warmGray-700: 30 6% 30%; /* #49413b */
-    --warmGray-800: 30 6% 20%; /* #322d28 */
-    --blush-500: 340 65% 65%; /* pink aksen #ec6e8c */
-    --sage-500: 100 24% 58%; /* hijau sage #9caf88 */
-    --cream-500: 45 78% 80%; /* krem #f9e4b7 */
-    --cream-50: 45 78% 95%; /* very light cream */
-    --sage-50: 100 24% 95%; /* very light sage */
-    --sage-400: 100 24% 48%; /* border btn #8fa878 */
-    --sage-700: 100 24% 38%; /* teks btn #6e8c5f */
+    --secondary: 36 33% 95%;
+    --secondary-foreground: 190 32% 10%;
 
-    /* Sidebar (kalau kamu pakai) */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 192 33% 10%;
-    --sidebar-primary: 192 33% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 210 20% 98%;
-    --sidebar-accent-foreground: 192 33% 10%;
-    --sidebar-border: 210 16% 90%;
-    --sidebar-ring: 138 63% 49%;
-  }
+    --muted: 36 33% 95%;
+    --muted-foreground: 190 10% 38%; /* #57666a */
 
-  .dark {
-    /* System colors - dark mode */
-    --background: 192 33% 10%; /* #122023 dark */
-    --foreground: 0 0% 100%; /* putih */
+    --accent: 350 80% 96%;
+    --accent-foreground: 190 32% 10%;
 
-    --primary: 138 63% 49%;
-    --primary-foreground: 192 33% 10%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --secondary: 215 21% 27%; /* #374151 abu gelap */
-    --secondary-foreground: 0 0% 100%;
+    --border: 30 18% 89%;
+    --input: 30 18% 86%;
+    --ring: 128 63% 42%;
 
-    --muted: 215 21% 27%;
-    --muted-foreground: 215 9% 65%; /* #9ca3af */
-
-    --accent: 215 21% 27%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62% 31%; /* dark red */
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 215 21% 27%;
-    --input: 215 21% 27%;
-    --ring: 138 63% 49%;
-
-    --card: 192 33% 10%;
-    --card-foreground: 0 0% 100%;
-
-    --popover: 138 63% 49%; /* dropdown hijau Livales juga di dark mode */
-    --popover-foreground: 0 0% 100%;
-
-    /* Custom design system colors tetap sama (biasanya) */
-    --warmGray-600: 30 6% 40%;
-    --warmGray-700: 30 6% 30%;
-    --warmGray-800: 30 6% 20%;
-    --blush-500: 340 65% 65%;
-    --sage-500: 100 24% 58%;
-    --cream-500: 45 78% 80%;
-    --cream-50: 45 78% 95%;
-    --sage-50: 100 24% 95%;
-    --sage-400: 100 24% 48%;
-    --sage-700: 100 24% 38%;
-
-    /* Sidebar dark */
-    --sidebar-background: 192 33% 10%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 138 63% 49%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 21% 27%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 215 21% 27%;
-    --sidebar-ring: 138 63% 49%;
+    --radius: 0.875rem;
   }
 }
 
@@ -125,162 +45,117 @@
     @apply border-border;
   }
 
-  body {
-    background-color: white;
-    @apply text-foreground font-sans;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    overflow-x: hidden;
-  }
-
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
+    font-feature-settings: "cv11", "ss01";
   }
 
-  /* Ensure paragraph text is always readable */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+
   p {
-    @apply text-gray-600;
+    text-wrap: pretty;
   }
 
-  /* Dark text for better readability */
-  .text-readable {
-    @apply text-gray-700;
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+    color: hsl(var(--foreground));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @layer components {
-  .bg-background {
-    background-color: white;
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
-  .gradient-bg {
-    background: linear-gradient(
-      135deg,
-      rgb(255, 255, 255) 0%,
-      rgb(248, 250, 252) 25%,
-      rgb(240, 253, 244) 50%,
-      rgb(236, 253, 245) 75%,
-      rgb(255, 255, 255) 100%
-    );
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-livales-green-deep;
   }
 
-  .text-gradient {
-    background: linear-gradient(
-      135deg,
-      rgb(46, 204, 64) 0%,
-      rgb(34, 197, 94) 50%,
-      rgb(21, 128, 61) 100%
-    );
+  .surface {
+    @apply rounded-3xl border border-ink/[0.06] bg-white shadow-[0_1px_2px_rgba(18,32,35,0.04),0_12px_32px_-12px_rgba(18,32,35,0.10)];
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(
+        to right,
+        rgb(18 32 35 / 0.045) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgb(18 32 35 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(100deg, #2ecc40 0%, #1fae34 50%, #15803d 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: transparent;
   }
 
-  .floating-shape {
-    animation: float 8s ease-in-out infinite;
-  }
 
-  .floating-shape:nth-child(2) {
-    animation-delay: -2s;
+  /*
+   * Scroll reveal — toggled by useReveal. Content is only hidden once JS has
+   * set `reveal-ready` on <html>, so it stays visible if scripts fail.
+   * Uses an animation (not a transition) so utilities like
+   * `transition-transform` on the same element can't cancel the fade.
+   */
+  .reveal-ready .reveal:not(.is-visible) {
+    opacity: 0;
   }
-
-  .floating-shape:nth-child(3) {
-    animation-delay: -4s;
-  }
-
-  .floating-shape:nth-child(4) {
-    animation-delay: -6s;
-  }
-
-  .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
-  }
-
-  .parallax-bg {
-    transform-style: preserve-3d;
-  }
-
-  .parallax-layer {
-    transform-style: preserve-3d;
-  }
-
-  /* Enhanced readability styles */
-  .text-readable {
-    @apply text-livales-dark;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-  }
-
-  .card-shadow {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  .interactive-mockup {
-    cursor: none;
-    transition: all 0.3s ease;
-  }
-
-  .interactive-mockup:hover {
-    transform: translateY(-10px) scale(1.02);
-  }
-
-  .cursor-dot {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: linear-gradient(45deg, #2ecc40, #22c55e);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 50;
-    transition: all 0.1s ease;
-    box-shadow: 0 0 20px rgba(46, 204, 64, 0.6);
-  }
-
-  .cursor-trail {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(46, 204, 64, 0.4);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 49;
+  .reveal-ready .reveal.is-visible {
+    animation: reveal-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: var(--reveal-delay, 0ms);
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(46, 204, 64, 0.6);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(46, 204, 64, 0.8), 0 0 40px rgba(46, 204, 64, 0.4);
-  }
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
-
 ::-webkit-scrollbar-track {
-  background: rgb(245, 245, 245);
+  background: hsl(var(--background));
 }
-
 ::-webkit-scrollbar-thumb {
-  background: rgb(46, 204, 64);
-  border-radius: 4px;
+  background: hsl(var(--border));
+  border-radius: 10px;
+  border: 2px solid hsl(var(--background));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(34, 197, 94);
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
