@@ -1,7 +1,7 @@
 import { Lock, Plus } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SectionHeading from "./SectionHeading";
-import ArcField from "./ArcField";
+import BrandShape from "./BrandShape";
 
 /**
  * Product lineup. App 01 is in stealth — keep its card generic until launch.
@@ -22,11 +22,7 @@ const Product = () => {
         <div className="mt-14 grid gap-4 md:grid-cols-2">
           {/* App 01 — in development */}
           <article className="reveal surface relative isolate overflow-hidden p-7 sm:p-9">
-            <ArcField
-              animate={false}
-              rings={8}
-              className="absolute -bottom-40 -right-32 -z-10 w-[420px] opacity-[0.16]"
-            />
+            <BrandShape className="absolute -bottom-16 -right-10 -z-10 w-52 rotate-12 opacity-50" />
             <div className="flex items-center justify-between">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                 {t("product.p1.tag")}
