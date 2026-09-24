@@ -1,49 +1,30 @@
-
-import React, { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Navbar from '@/components/Navbar';
-import HeroSection from '@/components/HeroSection';
-import FeatureSection1 from '@/components/FeatureSection1';
-import FeatureSection2 from '@/components/FeatureSection2';
-import MemoriesSection from '@/components/MemoriesSection';
-import FeatureSection3 from '@/components/FeatureSection3';
-import WaitlistSection from '@/components/WaitlistSection';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useReveal } from "@/hooks/use-reveal";
+import Navbar from "@/components/landing/Navbar";
+import Hero from "@/components/landing/Hero";
+import About from "@/components/landing/About";
+import Audience from "@/components/landing/Audience";
+import Approach from "@/components/landing/Approach";
+import Product from "@/components/landing/Product";
+import Faq from "@/components/landing/Faq";
+import FinalCta from "@/components/landing/FinalCta";
+import Footer from "@/components/landing/Footer";
 
 const Index = () => {
-  useEffect(() => {
-    // Smooth scrolling setup
-    gsap.config({
-      autoSleep: 60,
-      force3D: false,
-      nullTargetWarn: false,
-    });
-
-    // Refresh ScrollTrigger on load
-    ScrollTrigger.refresh();
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  useReveal();
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-clip">
       <Navbar />
-      <div id="hero">
-        <HeroSection />
-      </div>
-      <div id="features">
-        <FeatureSection1 />
-        <FeatureSection2 />
-      </div>
-      <div id="memories">
-        <MemoriesSection />
-      </div>
-      <FeatureSection3 />
-      <WaitlistSection />
+      <main>
+        <Hero />
+        <About />
+        <Audience />
+        <Approach />
+        <Product />
+        <Faq />
+        <FinalCta />
+      </main>
+      <Footer />
     </div>
   );
 };

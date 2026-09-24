@@ -1,71 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/favicomatic/favicon.ico" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicomatic/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicomatic/favicon-16x16.png"
-    />
-    <title>Livales - Perdalam Koneksimu, Ciptakan Momen Bersama</title>
+    <meta name="theme-color" content="#fdfbf7" />
+
+    <title>Livales — Software yang Mempererat Hubungan</title>
     <meta
       name="description"
-      content="Livales adalah ruang digital eksklusif untuk pasangan dan sahabat terbaik untuk tumbuh, berbagi kenangan, dan memperkuat ikatan yang kalian miliki."
+      content="Livales adalah perusahaan teknologi asal Indonesia yang membangun software sendiri untuk mempererat hubungan — pasangan, sahabat, keluarga, dan orang-orang terdekat."
     />
     <meta name="author" content="Livales" />
-    <meta
-      name="keywords"
-      content="couples app, relationship app, pasangan, sahabat, kenangan bersama, tujuan bersama"
-    />
 
-    <!-- Open Graph Meta Tags -->
-    <meta
-      property="og:title"
-      content="Livales - Perdalam Koneksimu, Ciptakan Momen Bersama"
-    />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Livales — Software yang Mempererat Hubungan" />
     <meta
       property="og:description"
-      content="Ruang digital eksklusif untuk pasangan dan sahabat terbaik. Bergabunglah dengan daftar tunggu kami!"
+      content="Perusahaan teknologi asal Indonesia yang membangun software untuk mempererat hubungan — pasangan, sahabat, keluarga, dan lainnya."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://livales.app" />
-    <meta property="og:image" content="https://livales.app/og-image.jpg" />
+    <meta property="og:image" content="https://livales.app/og-image.png" />
     <meta property="og:locale" content="id_ID" />
 
-    <!-- Twitter Card Meta Tags -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Livales - Perdalam Koneksimu, Ciptakan Momen Bersama"
-    />
+    <meta name="twitter:title" content="Livales — Software yang Mempererat Hubungan" />
     <meta
       name="twitter:description"
-      content="Ruang digital eksklusif untuk pasangan dan sahabat terbaik. Bergabunglah dengan daftar tunggu kami!"
+      content="Perusahaan teknologi asal Indonesia yang membangun software untuk mempererat hubungan — pasangan, sahabat, keluarga, dan lainnya."
     />
-    <meta name="twitter:image" content="https://livales.app/og-image.jpg" />
+    <meta name="twitter:image" content="https://livales.app/og-image.png" />
 
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-    <!-- Preconnect to Google Fonts for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Urbanist Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
+    <script>
+      // Hide .reveal content before first paint; if the app never boots,
+      // show everything again so the page is never left blank.
+      document.documentElement.classList.add("reveal-ready");
+      setTimeout(function () {
+        if (!window.__revealReady) document.documentElement.classList.remove("reveal-ready");
+      }, 3000);
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
