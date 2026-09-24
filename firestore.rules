@@ -1,0 +1,30 @@
+rules_version = '2';
+
+// Firestore untuk project Firebase "livales" (website perusahaan).
+// Sebelum mengubahnya, jalankan dulu uji emulator: npm run test:rules
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Pendaftar kabar dari form "Ikuti Kabar" ───────────────────────────
+    // Ditulis oleh pengunjung anonim (tanpa login). Hanya boleh create dengan
+    // bentuk data yang ketat; tidak ada yang bisa membaca, mengubah, atau
+    // menghapus dari client — lihat datanya di Firebase Console.
+    match /landing_subscribers/{subId} {
+      allow create: if request.resource.data.keys().hasOnly(['email', 'lang', 'source', 'createdAt'])
+                    && request.resource.data.keys().hasAll(['email', 'lang', 'source', 'createdAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() <= 254
+                    && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+                    && request.resource.data.lang in ['id', 'en']
+                    && request.resource.data.source is string
+                    && request.resource.data.source.size() <= 32
+                    && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

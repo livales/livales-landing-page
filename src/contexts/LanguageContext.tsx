@@ -54,6 +54,7 @@ const translations: Record<Language, Record<string, string>> = {
     "form.success.body":
       "Kami akan mengabari setiap ada produk atau kabar baru dari Livales.",
     "form.error": "Masukkan alamat email yang valid.",
+    "form.failed": "Gagal mengirim. Periksa koneksi kamu lalu coba lagi.",
 
     // About
     "about.eyebrow": "Tentang Livales",
@@ -183,6 +184,7 @@ const translations: Record<Language, Record<string, string>> = {
     "form.success.body":
       "We'll let you know whenever there's a new product or update from Livales.",
     "form.error": "Please enter a valid email address.",
+    "form.failed": "Couldn't send that. Check your connection and try again.",
 
     // About
     "about.eyebrow": "About Livales",
