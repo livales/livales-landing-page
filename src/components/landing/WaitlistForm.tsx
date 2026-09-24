@@ -2,19 +2,20 @@ import { useId, useState } from "react";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
+import { subscribe } from "@/lib/subscribe";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success" | "error" | "failed";
 
-// TODO: connect to a real mailing-list backend (e.g. Firebase, Supabase, Loops).
-// Until then submissions are only acknowledged in the UI.
-async function submitToWaitlist(_email: string) {
-  await new Promise((r) => setTimeout(r, 900));
+interface WaitlistFormProps {
+  className?: string;
+  /** Where on the page the form lives; stored with the sign-up. */
+  source?: string;
 }
 
-const WaitlistForm = ({ className }: { className?: string }) => {
-  const { t } = useLanguage();
+const WaitlistForm = ({ className, source = "updates" }: WaitlistFormProps) => {
+  const { t, language } = useLanguage();
   const inputId = useId();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -26,9 +27,14 @@ const WaitlistForm = ({ className }: { className?: string }) => {
       return;
     }
     setStatus("submitting");
-    await submitToWaitlist(email.trim());
-    setStatus("success");
-    setEmail("");
+    try {
+      await subscribe(email, language, source);
+      setStatus("success");
+      setEmail("");
+    } catch (err) {
+      console.error("Subscribe failed", err);
+      setStatus("failed");
+    }
   };
 
   if (status === "success") {
@@ -56,7 +62,7 @@ const WaitlistForm = ({ className }: { className?: string }) => {
       <div
         className={cn(
           "flex flex-col gap-2 rounded-2xl border bg-white p-1.5 shadow-[0_10px_30px_-15px_rgba(18,32,35,0.25)] transition-colors sm:flex-row sm:rounded-full",
-          status === "error"
+          status === "error" || status === "failed"
             ? "border-destructive/60"
             : "border-ink/10 focus-within:border-primary/60"
         )}
@@ -73,7 +79,7 @@ const WaitlistForm = ({ className }: { className?: string }) => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (status === "error") setStatus("idle");
+            if (status === "error" || status === "failed") setStatus("idle");
           }}
           aria-invalid={status === "error"}
           className="h-11 min-w-0 flex-1 bg-transparent px-4 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
@@ -96,8 +102,10 @@ const WaitlistForm = ({ className }: { className?: string }) => {
           )}
         </button>
       </div>
-      {status === "error" && (
-        <p className="mt-2 px-4 text-sm text-destructive">{t("form.error")}</p>
+      {(status === "error" || status === "failed") && (
+        <p role="alert" className="mt-2 px-4 text-sm text-destructive">
+          {t(status === "error" ? "form.error" : "form.failed")}
+        </p>
       )}
     </form>
   );
