@@ -23,7 +23,7 @@ const Logo = ({ className, markOnly = false, inverted = false }: LogoProps) =>
       src={inverted ? "/brand/livales-logo-white.svg" : "/brand/livales-logo.svg"}
       alt="Livales"
       width={375}
-      height={92}
+      height={94}
       className={cn("h-8 w-auto", className)}
     />
   );
