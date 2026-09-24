@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import ArcField from "./ArcField";
+import BrandShape from "./BrandShape";
 import WaitlistForm from "./WaitlistForm";
 
 const FinalCta = () => {
@@ -12,10 +12,7 @@ const FinalCta = () => {
           <div className="absolute inset-0 -z-10 grid-bg [mask-image:radial-gradient(ellipse_60%_70%_at_50%_100%,black,transparent)]" />
           <div className="absolute -bottom-40 -left-20 -z-10 h-[380px] w-[480px] rounded-full bg-primary/20 blur-[120px]" />
           <div className="absolute -bottom-40 -right-20 -z-10 h-[380px] w-[480px] rounded-full bg-livales-rose/25 blur-[120px]" />
-          <ArcField
-            animate={false}
-            className="absolute -left-40 -top-40 -z-10 w-[520px] opacity-[0.14]"
-          />
+          <BrandShape className="absolute -left-12 -top-16 -z-10 w-56 -rotate-12 opacity-50" />
 
           <span className="eyebrow justify-center">{t("cta.eyebrow")}</span>
           <h2 className="mx-auto mt-4 max-w-2xl font-display text-4xl font-semibold leading-[1.05] text-foreground sm:text-5xl lg:text-6xl">

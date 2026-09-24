@@ -73,10 +73,6 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "arc-draw": {
-          from: { strokeDashoffset: "1" },
-          to: { strokeDashoffset: "0" },
-        },
         "slow-spin": {
           to: { transform: "rotate(360deg)" },
         },
@@ -96,7 +92,6 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "arc-draw": "arc-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) both",
         "slow-spin": "slow-spin 60s linear infinite",
         "pulse-dot": "pulse-dot 2s ease-in-out infinite",
         float: "float 7s ease-in-out infinite",

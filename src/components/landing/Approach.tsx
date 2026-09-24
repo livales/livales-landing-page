@@ -2,7 +2,7 @@ import { HeartHandshake, MousePointerClick, ShieldCheck, MapPin, type LucideIcon
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import SectionHeading from "./SectionHeading";
-import ArcField from "./ArcField";
+import BrandShape from "./BrandShape";
 
 const pillars: { key: string; icon: LucideIcon; span: string }[] = [
   { key: "p1", icon: HeartHandshake, span: "md:col-span-2" },
@@ -34,11 +34,7 @@ const Approach = () => {
               style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}
             >
               {i === 0 && (
-                <ArcField
-                  animate={false}
-                  rings={7}
-                  className="absolute -right-24 -top-24 w-80 opacity-[0.12] transition-opacity duration-500 group-hover:opacity-25"
-                />
+                <BrandShape className="absolute -right-10 -top-12 w-40 rotate-12 opacity-40 transition-opacity duration-500 group-hover:opacity-80" />
               )}
               <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-livales-mint text-livales-green-deep">
                 <Icon className="h-5 w-5" />

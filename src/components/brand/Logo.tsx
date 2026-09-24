@@ -2,26 +2,28 @@ import { cn } from "@/lib/utils";
 
 interface LogoProps {
   className?: string;
-  /** Show only the arc mark, without the "livales" wordmark. */
+  /** Show only the mark (the L embracing a dot), without the wordmark. */
   markOnly?: boolean;
+  /** Use the white wordmark, for dark backgrounds. */
+  inverted?: boolean;
 }
 
-/** Official Livales logo (green mark + ink wordmark), for light backgrounds. */
-const Logo = ({ className, markOnly = false }: LogoProps) =>
+/** Official Livales logo. Source files live in /public/brand. */
+const Logo = ({ className, markOnly = false, inverted = false }: LogoProps) =>
   markOnly ? (
     <img
-      src="/brand/livales-mark.png"
+      src="/brand/livales-mark.svg"
       alt="Livales"
-      width={509}
-      height={526}
+      width={80}
+      height={92}
       className={cn("h-8 w-auto", className)}
     />
   ) : (
     <img
-      src="/brand/livales-logo-dark.png"
+      src={inverted ? "/brand/livales-logo-white.svg" : "/brand/livales-logo.svg"}
       alt="Livales"
-      width={1476}
-      height={526}
+      width={375}
+      height={94}
       className={cn("h-8 w-auto", className)}
     />
   );

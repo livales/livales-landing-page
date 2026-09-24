@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import ArcField from "./ArcField";
+import BrandShape from "./BrandShape";
 import ConnectionVisual from "./ConnectionVisual";
 
 const Hero = () => {
@@ -12,7 +12,7 @@ const Hero = () => {
       <div className="absolute inset-0 -z-10 grid-bg [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
       <div className="absolute -left-40 top-[-10%] -z-10 h-[560px] w-[680px] rounded-full bg-primary/[0.16] blur-[140px]" />
       <div className="absolute -right-40 top-[10%] -z-10 h-[520px] w-[620px] rounded-full bg-livales-rose/[0.18] blur-[140px]" />
-      <ArcField className="absolute -left-60 top-24 -z-10 hidden w-[720px] opacity-[0.10] lg:block" />
+      <BrandShape className="absolute -left-24 top-32 -z-10 hidden w-[380px] rotate-[-12deg] opacity-40 lg:block" />
 
       <div className="container-page grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="text-center lg:text-left">
