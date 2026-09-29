@@ -1,23 +1,15 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import Logo from "@/components/brand/Logo";
 
 const NotFound = () => (
-  <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
-    <Logo markOnly className="h-14" />
-    <p className="mt-8 font-mono text-xs uppercase tracking-[0.2em] text-livales-green-deep">404</p>
-    <h1 className="mt-3 font-display text-4xl font-semibold text-foreground">
-      Halaman tidak ditemukan
-    </h1>
-    <p className="mt-3 text-muted-foreground">Page not found.</p>
-    <Link
-      to="/"
-      className="mt-8 inline-flex h-10 items-center gap-2 rounded-full border border-ink/10 px-5 text-sm text-foreground transition-colors hover:border-primary/50 hover:text-livales-green-deep"
-    >
-      <ArrowLeft className="h-4 w-4" />
-      Livales
+  <main className="page flex min-h-screen flex-col items-start justify-center py-20">
+    <Logo markOnly className="h-16" />
+    <h1 className="heading-lg mt-10 max-w-[18ch]">Halaman ini tidak ada.</h1>
+    <p className="mt-4 text-[1.1rem] text-ink/75">This page doesn't exist.</p>
+    <Link to="/" className="btn-ink mt-10">
+      Kembali ke beranda
     </Link>
-  </div>
+  </main>
 );
 
 export default NotFound;

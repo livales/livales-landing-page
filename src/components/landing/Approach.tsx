@@ -1,53 +1,22 @@
-import { HeartHandshake, MousePointerClick, ShieldCheck, MapPin, type LucideIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { cn } from "@/lib/utils";
-import SectionHeading from "./SectionHeading";
-import BrandShape from "./BrandShape";
 
-const pillars: { key: string; icon: LucideIcon; span: string }[] = [
-  { key: "p1", icon: HeartHandshake, span: "md:col-span-2" },
-  { key: "p2", icon: MousePointerClick, span: "" },
-  { key: "p3", icon: ShieldCheck, span: "" },
-  { key: "p4", icon: MapPin, span: "md:col-span-2" },
-];
+const principles = ["p1", "p2", "p3", "p4"];
 
 const Approach = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="approach" className="py-24 sm:py-32">
-      <div className="container-page">
-        <SectionHeading
-          eyebrow={t("approach.eyebrow")}
-          title={t("approach.title")}
-          className="max-w-2xl"
-        />
-
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
-          {pillars.map(({ key, icon: Icon, span }, i) => (
-            <article
-              key={key}
-              className={cn(
-                "reveal group surface relative overflow-hidden p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-8",
-                span
-              )}
-              style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}
-            >
-              {i === 0 && (
-                <BrandShape className="absolute -right-10 -top-12 w-40 rotate-12 opacity-40 transition-opacity duration-500 group-hover:opacity-80" />
-              )}
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-livales-mint text-livales-green-deep">
-                <Icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-6 font-display text-xl font-semibold text-foreground sm:text-2xl">
-                {t(`approach.${key}.title`)}
-              </h3>
-              <p className="mt-2 max-w-md text-[15px] leading-relaxed text-muted-foreground">
-                {t(`approach.${key}.body`)}
-              </p>
-            </article>
+    <section id="approach">
+      <div className="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+        <h2 className="heading-lg">{t("approach.title")}</h2>
+        <dl className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+          {principles.map((p) => (
+            <div key={p}>
+              <dt className="heading-md">{t(`approach.${p}.title`)}</dt>
+              <dd className="mt-3 text-[1.05rem] leading-relaxed text-ink/75">{t(`approach.${p}.body`)}</dd>
+            </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );

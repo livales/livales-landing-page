@@ -10,7 +10,7 @@ This README is also the main context file for AI coding assistants working on th
 
 1. **The page is about the company, not a product.** Livales is presented as a company with a growing product line. The first app is in development and gets only a short, generic mention ("Aplikasi 01", "Dalam pengembangan").
 2. **The first product is confidential.** Never name it or describe what it is or how it works, in copy, meta tags, alt text, comments, commit messages, or this README. This repo is public. Don't use words like "game"/"dimainkan", and avoid board or grid visuals that could hint at it.
-3. **Light and warm, never dark.** The brand is for couples and friends, so it should feel friendly and romantic. Use an ivory background, white cards, the brand green, and soft rose accents. A dark design was tried and rejected as feeling "menyeramkan" (creepy).
+3. **Light, never dark, and no generic "AI template" styling.** The brand is for couples and friends, so it should feel friendly. A dark design was rejected as creepy ("menyeramkan"). A later design full of stock patterns (eyebrow labels, gradient headline words, glows, identical shadowed cards, 01/02 numbering, stat rows, fade-up animations) was rejected as "AI slop". Follow the visual system in [Brand → Visual system](#visual-system).
 4. **Use the official logo files only** (see [Brand](#brand)). Don't redraw, recolor, rotate, stretch, or add effects to the mark. The old striped-arc logo was a stock design shared with another company, so never bring it or arc-stripe motifs back.
 5. **Bilingual copy.** Every user-facing string lives in `src/contexts/LanguageContext.tsx` with both `id` (default) and `en` values. Don't hard-code text in components.
 
@@ -22,7 +22,7 @@ This README is also the main context file for AI coding assistants working on th
 |---|---|
 | Framework | React 18 + TypeScript, built with Vite 5 |
 | Styling | Tailwind CSS 3 with CSS-variable tokens in `src/index.css`; shadcn/ui primitives in `src/components/ui` |
-| Fonts | Urbanist (display/headings, `font-display`) + Inter (body, `font-sans`) from Google Fonts |
+| Fonts | Unbounded (headings, `font-display`) + Figtree (body, `font-sans`) from Google Fonts. The logo wordmark is outlined Urbanist. |
 | Icons | lucide-react |
 | Backend | Firebase project **`livales`**: Firestore only, used for email sign-ups |
 | Hosting | Netlify site `livales.netlify.app` (`netlify.toml`: publishes `dist/`, SPA fallback to `index.html`), served at **https://livales.com** |
@@ -45,7 +45,7 @@ npm run deploy:rules # deploy firestore.rules to the livales project (needs `fir
 ## Project structure
 
 ```
-index.html                  Meta/OG/canonical tags, JSON-LD, favicons, fonts, inline reveal failsafe script
+index.html                  Meta/OG/canonical tags, JSON-LD, favicons, fonts
 scripts/prerender.mjs       Build step: injects the server-rendered home page into dist/index.html
 firebase.json / .firebaserc Firebase project "livales"; emulator on port 8085
 firestore.rules             Security rules (only landing_subscribers is writable)
@@ -57,13 +57,13 @@ src/
   main.tsx                  Hydrates the prerendered "/" (createRoot for other paths)
   entry-server.tsx          Build-time render of a route to HTML (used by prerender)
   App.tsx                   AppProviders + AppRoutes (shared by browser and prerender)
-  pages/Index.tsx           The landing page: composes all sections, calls useReveal()
+  pages/Index.tsx           The landing page: composes all sections
   pages/NotFound.tsx        404 page
   components/landing/       One file per section + shared pieces (see below)
   components/brand/Logo.tsx <Logo />, <Logo markOnly />, <Logo inverted />
+  components/brand/Embrace.tsx  <HeroMark /> (animated mark) and <Embrace group=… /> illustrations
   components/LanguageSelector.tsx  ID/EN toggle
   contexts/LanguageContext.tsx     All copy (id/en) + t() helper; choice saved in localStorage
-  hooks/use-reveal.ts       Scroll-reveal logic for .reveal elements
   lib/subscribe.ts          Writes a sign-up to Firestore (SDK lazy-loaded)
   index.css                 Design tokens + global/component styles
   components/ui/            shadcn/ui primitives (mostly unused; keep for future pages)
@@ -74,16 +74,16 @@ src/
 | Section | File | Anchor | Notes |
 |---|---|---|---|
 | Navbar | `Navbar.tsx` | – | Nav links, language toggle, CTA to `#updates` |
-| Hero | `Hero.tsx` + `ConnectionVisual.tsx` | `#top` | Company headline; the logo mark connected to "Pasangan / Sahabat / Keluarga / Dan lainnya" |
-| About | `About.tsx` | `#about` | Mission and 3 stats |
-| Who it's for | `Audience.tsx` | `#audience` | 4 cards, each with its own pastel tint |
-| Principles | `Approach.tsx` | `#approach` | 4 principles in a bento grid |
-| Products | `Product.tsx` | `#product` | "Aplikasi 01, in development" + "more to come". Keep it generic. |
+| Hero | `Hero.tsx` + `HeroMark` | `#top` | Headline, short company description, the animated mark |
+| About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
+| Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Rose field.** The logo's L embracing couples, friends, family, anyone |
+| How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
+| Product | `Product.tsx` | `#product` | **Green field.** A "shelf": one filled slot (Aplikasi 01) + empty slots. Keep it generic. |
 | FAQ | `Faq.tsx` | `#faq` | Radix accordion |
-| Updates CTA | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | Email sign-up form |
+| Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Blush field.** Email sign-up form |
 | Footer | `Footer.tsx` | – | Links + LinkedIn |
 
-`SectionHeading.tsx` renders the eyebrow + title used by most sections. `BrandShape.tsx` is a decorative outline of the logo mark used in backgrounds.
+Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`, and content sits in `.page` (the max-width container).
 
 ---
 
@@ -93,7 +93,7 @@ src/
 
 - Mark geometry (80 × 92 units): stem `30×92, r15` green; base `80×30, r15` rose, drawn *under* the stem; dot `ø30` centered at `(58, 32)`.
 - Full-logo canvas is 375 × 94. It's 2 units taller than the mark because round letters overshoot the baseline.
-- Wordmark: lowercase "livales" in Urbanist SemiBold, tracking −1.5%, outlined to paths in the SVGs.
+- Wordmark: lowercase "livales" in Urbanist SemiBold, tracking −1.5%, outlined to paths in the SVGs. (The site itself uses Unbounded + Figtree; see below.)
 - Clear space: at least one dot diameter (30 units) on every side. Minimum size: mark 16 px, full logo 96 px wide.
 
 | File (`public/brand/`) | Use |
@@ -107,16 +107,23 @@ src/
 
 | Token | Hex | Use |
 |---|---|---|
-| `livales-green` / `primary` | `#2ECC40` | Logo, primary buttons (with ink text) |
-| `livales-green-deep` | `#168A2A` | Green **text** on light backgrounds (brand green fails contrast for text) |
-| `livales-rose` | `#F07C8F` | Logo base, warm accents and glows |
-| `ink` / `foreground` | `#122023` | Text, wordmark |
-| `background` | `#FDFBF7` | Page background (warm ivory) |
-| `livales-mint` / `livales-blush` | `#EFFAF0` / `#FFF1F2` | Soft section tints |
+| `background` | `#FFFFFF` | Page (plain white) |
+| `ink` / `foreground` | `#122023` | Text, primary buttons (`.btn-ink`), wordmark |
+| `livales-green` / `primary` | `#2ECC40` | Logo; full-width **field** behind the Product section (ink text on it) |
+| `livales-rose` | `#F07C8F` | Logo; full-width **field** behind Who it's for; link underlines |
+| `livales-blush` | `#FFE9EC` | Field behind the Updates form |
+| `livales-green-deep` | `#168A2A` | Green **text** on white, if ever needed (brand green fails contrast as text) |
 
-Tokens live in `src/index.css` (`:root` HSL variables for shadcn) and `tailwind.config.ts` (`ink`, `livales.*`). Use `border-ink/[0.06]`-style alphas for hairlines, not `white/*`.
+Tokens live in `src/index.css` (`:root` HSL variables for shadcn) and `tailwind.config.ts` (`ink`, `livales.*`). Never put white text on green or rose, because the contrast is too low. Use ink.
 
-Pastel tints per relationship (hero chips + audience cards): couples = rose, friends = amber, family = emerald, others = sky.
+### Visual system
+
+- **Colour comes in flat fields**, whole sections of green, rose, or blush, never as gradients, glows, blurred blobs, or shadows. Hairlines are `border-ink/10`–`/15`.
+- **Shapes come from the logo:** pills (fully rounded rectangles) and dots. Illustrations are the logo's gesture, an L embracing dots (`Embrace.tsx`). Buttons and inputs are pills.
+- **Type:** Unbounded for headings (sentence case, tight tracking), Figtree for everything else. No uppercase labels above headings, no single highlighted word in a headline, no monospace captions, no "→" on buttons.
+- **Motion:** only one orchestrated moment, where the hero dot settles into the L's embrace on load (`embrace-dot` / `embrace-arm` keyframes). No scroll-triggered animations. Interaction feedback (accordion open, button hover) is fine.
+- **Structure means something:** no decorative numbering, stat rows, or bento grids. Lists are lists; the product shelf is literally a lineup that will grow.
+- **Copy voice:** plain, warm Indonesian ("kami" talking to "kamu"), specific rather than salesy.
 
 ---
 
@@ -131,14 +138,6 @@ Pastel tints per relationship (hero chips + audience cards): couples = rose, fri
 - `npm run build` runs `vite build`, then an SSR build of `src/entry-server.tsx`, then `scripts/prerender.mjs`, which writes the rendered home page into `dist/index.html`. Crawlers and link previews get real HTML, and `main.tsx` hydrates it.
 - **Keep the first render deterministic.** Anything that differs between the build-time render and the browser's first render causes a hydration mismatch, for example reading `localStorage`, `window`, dates, or random values during render. Read those in `useEffect` instead. Example: `LanguageProvider` always starts in `id` and restores a saved `en` choice after mount.
 - SEO tags live in `index.html`: canonical `https://livales.com/`, Open Graph/Twitter tags, and JSON-LD (`Organization` + `WebSite`). `public/sitemap.xml` lists the URL; update its `<lastmod>` when content changes meaningfully. `public/robots.txt` points to the sitemap.
-
-### Scroll reveal
-
-Add `className="reveal"` (and optionally `style={{ "--reveal-delay": "80ms" }}`) to animate an element in.
-
-- `useReveal()` (called once in `Index.tsx`) marks any `.reveal` element whose top is above 92% of the viewport as `.is-visible`. It re-checks on every scroll, resize, and hash change, so elements skipped by fast scrolling or anchor jumps are still revealed.
-- Hidden state only applies under `html.reveal-ready`. An inline script in `index.html` sets that class and removes it after 3 s if the app never boots, so content can't stay invisible.
-- The fade is a CSS **animation**, not a transition, so utilities like `transition-transform` on the same element don't cancel it.
 
 ### Email sign-ups (Firebase)
 

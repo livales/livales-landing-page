@@ -1,7 +1,5 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Plus } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import SectionHeading from "./SectionHeading";
 
 const items = ["1", "2", "3", "4", "5"];
 
@@ -9,25 +7,25 @@ const Faq = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="faq" className="py-24 sm:py-32">
-      <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-        <SectionHeading eyebrow={t("faq.eyebrow")} title={t("faq.title")} />
+    <section id="faq">
+      <div className="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+        <h2 className="heading-lg">{t("faq.title")}</h2>
 
-        <AccordionPrimitive.Root type="single" collapsible defaultValue="1" className="reveal">
+        <AccordionPrimitive.Root type="single" collapsible className="border-t border-ink/15">
           {items.map((n) => (
-            <AccordionPrimitive.Item key={n} value={n} className="border-b border-ink/[0.08] first:border-t">
+            <AccordionPrimitive.Item key={n} value={n} className="border-b border-ink/15">
               <AccordionPrimitive.Header>
-                <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between gap-6 py-6 text-left font-display text-lg font-semibold text-foreground transition-colors hover:text-livales-green-deep sm:text-xl">
+                <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between gap-6 py-6 text-left text-[1.15rem] font-semibold sm:text-[1.25rem]">
                   {t(`faq.q${n}`)}
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white transition-transform duration-300 group-data-[state=open]:rotate-45 group-data-[state=open]:border-primary/50 group-data-[state=open]:text-livales-green-deep">
-                    <Plus className="h-4 w-4" />
+                  {/* Plus that turns into a minus: two pills, the vertical one collapses. */}
+                  <span aria-hidden="true" className="relative h-4 w-4 shrink-0">
+                    <span className="absolute left-0 top-1/2 h-[3px] w-4 -translate-y-1/2 rounded-full bg-ink" />
+                    <span className="absolute left-1/2 top-0 h-4 w-[3px] -translate-x-1/2 rounded-full bg-ink transition-transform duration-200 group-data-[state=open]:scale-y-0" />
                   </span>
                 </AccordionPrimitive.Trigger>
               </AccordionPrimitive.Header>
               <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                <p className="max-w-xl pb-6 pr-12 text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-                  {t(`faq.a${n}`)}
-                </p>
+                <p className="max-w-[40rem] pb-7 pr-10 text-[1.05rem] leading-relaxed text-ink/75">{t(`faq.a${n}`)}</p>
               </AccordionPrimitive.Content>
             </AccordionPrimitive.Item>
           ))}
