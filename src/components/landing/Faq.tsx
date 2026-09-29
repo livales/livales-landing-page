@@ -25,11 +25,11 @@ const Faq = () => {
                 </AccordionPrimitive.Trigger>
               </AccordionPrimitive.Header>
               {/* forceMount keeps closed answers in the (prerendered) HTML so search
-                  engines can read them; CSS hides them while closed. */}
-              <AccordionPrimitive.Content
-                forceMount
-                className="overflow-hidden data-[state=closed]:hidden data-[state=open]:animate-accordion-down"
-              >
+                  engines can read them; CSS hides them while closed. Open and
+                  close are both instant: a close can't animate once content is
+                  force-mounted, and animating only the open made the page
+                  shrink then grow (the footer jumped) when switching questions. */}
+              <AccordionPrimitive.Content forceMount className="data-[state=closed]:hidden">
                 <p className="max-w-[40rem] pb-7 pr-10 text-[1.05rem] leading-relaxed text-ink/75">{t(`faq.a${n}`)}</p>
               </AccordionPrimitive.Content>
             </AccordionPrimitive.Item>
