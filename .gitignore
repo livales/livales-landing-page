@@ -26,3 +26,7 @@ dist-ssr
 # Firebase
 .firebase/
 *-debug.log
+
+# Local-only assistant notes (may contain confidential context)
+CLAUDE.local.md
+.claude/
