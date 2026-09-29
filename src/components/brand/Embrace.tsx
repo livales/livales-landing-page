@@ -2,17 +2,28 @@ import { cn } from "@/lib/utils";
 
 /*
  * Illustrations built from the logo's own parts: an L (stem + base) that
- * embraces one or more dots. The brand mark embraces one dot; each kind of
- * relationship is the same gesture around a different group.
+ * embraces something. The brand mark embraces one dot; each audience is the
+ * same gesture around a different group (people are dots, lessons are pills).
  */
 
 type Dot = { cx: number; cy: number; r: number; fill: string };
+type Pill = { x: number; y: number; w: number; fill: string };
 
 const INK = "#122023";
 const GREEN = "#2ecc40";
 const WHITE = "#ffffff";
 
-const groups: Record<"couple" | "friends" | "family" | "anyone", { width: number; dots: Dot[] }> = {
+const groups: Record<"learner" | "couple" | "family" | "anyone", { width: number; dots: Dot[]; pills?: Pill[] }> = {
+  // Lessons stacked up, step by step.
+  learner: {
+    width: 150,
+    dots: [],
+    pills: [
+      { x: 44, y: 22, w: 100, fill: GREEN },
+      { x: 44, y: 44, w: 74, fill: WHITE },
+      { x: 44, y: 66, w: 48, fill: INK },
+    ],
+  },
   // Two people close enough to overlap.
   couple: {
     width: 118,
@@ -21,15 +32,7 @@ const groups: Record<"couple" | "friends" | "family" | "anyone", { width: number
       { cx: 88, cy: 60, r: 19, fill: WHITE },
     ],
   },
-  // Two people with room between them, still held together.
-  friends: {
-    width: 150,
-    dots: [
-      { cx: 56, cy: 62, r: 17, fill: GREEN },
-      { cx: 118, cy: 62, r: 17, fill: WHITE },
-    ],
-  },
-  // Two grown-ups and a little one.
+  // Friends and family: two grown-ups and a little one.
   family: {
     width: 158,
     dots: [
@@ -56,13 +59,16 @@ const groups: Record<"couple" | "friends" | "family" | "anyone", { width: number
 export type EmbraceGroup = keyof typeof groups;
 
 export const Embrace = ({ group, className }: { group: EmbraceGroup; className?: string }) => {
-  const { width, dots } = groups[group];
+  const { width, dots, pills = [] } = groups[group];
   return (
     <svg viewBox="0 0 164 112" className={cn("h-auto w-full", className)} aria-hidden="true">
       <rect x="0" y="86" width={width} height="26" rx="13" fill={WHITE} />
       <rect x="0" y="0" width="26" height="112" rx="13" fill={INK} />
+      {pills.map((p, i) => (
+        <rect key={`p${i}`} x={p.x} y={p.y} width={p.w} height="14" rx="7" fill={p.fill} />
+      ))}
       {dots.map((d, i) => (
-        <circle key={i} {...d} />
+        <circle key={`d${i}`} {...d} />
       ))}
     </svg>
   );

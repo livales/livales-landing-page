@@ -1,6 +1,6 @@
 # Livales — company website
 
-The public landing page for **Livales**, an Indonesian technology company that designs and builds its own software to strengthen relationships between couples, best friends (*besti*), family, and others.
+The public landing page for **Livales**, an Indonesian technology company that designs and builds its own software that **brings people closer**: to the people they love, and to new languages and cultures.
 
 This README is also the main context file for AI coding assistants working on the repo. Read the **Rules** section before changing copy, visuals, or the logo.
 
@@ -8,8 +8,10 @@ This README is also the main context file for AI coding assistants working on th
 
 ## Rules (read first)
 
-1. **The page is about the company, not a product.** Livales is presented as a company with a growing product line. The first app is in development and gets only a short, generic mention ("Aplikasi 01", "Dalam pengembangan").
-2. **The first product is confidential.** Never name it or describe what it is or how it works, in copy, meta tags, alt text, comments, commit messages, or this README. This repo is public. Don't use words like "game"/"dimainkan", and avoid board or grid visuals that could hint at it.
+1. **The page is about the company, not one product.** Positioning: "software yang mendekatkan", meaning closer to people you love, and closer to new languages and cultures. Products are shown as a growing shelf:
+   - **Kana Speed** (live, public): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked.
+   - **An app for couples** (in development): only its category may be mentioned ("aplikasi untuk pasangan", "sedang dibuat").
+2. **The couples app is confidential.** Never write its name or describe its concept or how it works: not in copy, meta tags, alt text, comments, commit messages, or this README. This repo is public. Don't use words like "game"/"dimainkan", and avoid board or grid visuals that could hint at it.
 3. **Light, never dark, and no generic "AI template" styling.** The brand is for couples and friends, so it should feel friendly. A dark design was rejected as creepy ("menyeramkan"). A later design full of stock patterns (eyebrow labels, gradient headline words, glows, identical shadowed cards, 01/02 numbering, stat rows, fade-up animations) was rejected as "AI slop". Follow the visual system in [Brand → Visual system](#visual-system).
 4. **Use the official logo files only** (see [Brand](#brand)). Don't redraw, recolor, rotate, stretch, or add effects to the mark. The old striped-arc logo was a stock design shared with another company, so never bring it or arc-stripe motifs back.
 5. **Bilingual copy.** Every user-facing string lives in `src/contexts/LanguageContext.tsx` with both `id` (default) and `en` values. Don't hard-code text in components.
@@ -78,7 +80,7 @@ src/
 | About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
 | Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Rose field.** The logo's L embracing couples, friends, family, anyone |
 | How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
-| Product | `Product.tsx` | `#product` | **Green field.** A "shelf": one filled slot (Aplikasi 01) + empty slots. Keep it generic. |
+| Products | `Product.tsx` | `#product` | **Green field.** A "shelf": Kana Speed (links to `KANA_URL[language]`), the app for couples (category only), and empty slots |
 | FAQ | `Faq.tsx` | `#faq` | Radix accordion |
 | Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Blush field.** Email sign-up form |
 | Footer | `Footer.tsx` | – | Links + LinkedIn |

@@ -10,11 +10,11 @@ const Hero = () => {
         <h1 className="heading-xl max-w-[15ch]">{t("hero.title")}</h1>
         <p className="prose-copy mt-7 text-ink/80">{t("hero.body")}</p>
         <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
-          <a href="#updates" className="btn-ink">
+          <a href="#product" className="btn-ink">
             {t("hero.cta.primary")}
           </a>
           <a
-            href="#product"
+            href="#updates"
             className="text-[1rem] font-semibold underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink"
           >
             {t("hero.cta.secondary")}

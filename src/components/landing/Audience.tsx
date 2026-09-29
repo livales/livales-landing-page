@@ -1,9 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Embrace, type EmbraceGroup } from "@/components/brand/Embrace";
 
-const groups: EmbraceGroup[] = ["couple", "friends", "family", "anyone"];
+const groups: EmbraceGroup[] = ["learner", "couple", "family", "anyone"];
 
-/** Rose field: the same embrace from the logo, around different groups. */
+/** Rose field: the same embrace from the logo, around different audiences. */
 const Audience = () => {
   const { t } = useLanguage();
 

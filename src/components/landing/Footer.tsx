@@ -1,14 +1,14 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, KANA_URL } from "@/contexts/LanguageContext";
 import Logo from "@/components/brand/Logo";
 import { sections } from "./Navbar";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-ink/10">
-      <div className="page grid gap-12 py-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
+      <div className="page grid gap-12 py-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <div>
           <Logo className="h-8" />
           <p className="mt-5 max-w-[20rem] text-[1rem] text-ink/75">{t("footer.tagline")}</p>
@@ -26,6 +26,17 @@ const Footer = () => {
             ))}
           </ul>
         </nav>
+
+        <div>
+          <p className="text-[0.95rem] font-semibold">{t("footer.products")}</p>
+          <ul className="mt-4 space-y-3 text-[1rem]">
+            <li>
+              <a href={KANA_URL[language]} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
+                Kana Speed
+              </a>
+            </li>
+          </ul>
+        </div>
 
         <div>
           <p className="text-[0.95rem] font-semibold">{t("footer.social")}</p>

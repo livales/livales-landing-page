@@ -3,8 +3,8 @@
 Livales company website: React 18 + Vite + TypeScript + Tailwind, live at https://livales.com (Netlify, DNS on Cloudflare; keep DNS records grey-cloud). Full context is in `README.md`. Read only the section you need.
 
 ## Hard rules
-- **Company-first.** Livales is presented as a company that builds relationship software (couples, friends, family). The first app appears only as "Aplikasi 01, in development".
-- **The first product is confidential and this repo is public.** Never write its name or describe it anywhere: copy, meta, alt text, comments, commits, PRs. Don't use "game"/"dimainkan", and avoid board or grid visuals.
+- **Company-first.** Livales = "software yang mendekatkan" (closer to people you love, and to new languages and cultures). Products: **Kana Speed** (live Japanese-learning web app, `KANA_URL` in LanguageContext; may be named and linked) and **an app for couples** (in development).
+- **The couples app is confidential and this repo is public.** Only say "aplikasi untuk pasangan / an app for couples". Never write its name or describe its concept anywhere: copy, meta, alt text, comments, commits, PRs. Don't use "game"/"dimainkan", and avoid board or grid visuals.
 - **Light, flat, logo-derived; never dark, never "AI template".** White page, ink text, whole sections in flat green `#2ECC40` / rose `#F07C8F` / blush fields; shapes are the logo's pills and dots. No gradients, glows, shadows, eyebrow labels, highlighted headline words, 01/02 numbering, stat rows, or scroll animations. Headings Unbounded, body Figtree. See README → Brand → Visual system.
 - **Logo** = "L Memeluk". Use `<Logo />` or the files in `public/brand/`. Never redraw it, and never bring back the old striped-arc logo or arc motifs.
 - **All copy is bilingual.** Add both `id` and `en` keys in `src/contexts/LanguageContext.tsx` and use `t()`. Never hard-code strings.

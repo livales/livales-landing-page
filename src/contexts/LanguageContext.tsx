@@ -20,9 +20,17 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 const STORAGE_KEY = "livales.lang";
 
-// NOTE: the landing page is about Livales the company. The first app is
-// confidential — mention only that it exists; never its name or mechanics.
+// NOTE: the page is about Livales the company: software that brings you
+// closer, to the people you love and to new languages and cultures.
+// Products: Kana Speed (live, public) and an app for couples in development.
+// The couples app may only be described as "an app for couples": never its
+// name, concept or mechanics.
 // Voice: warm and plain, first person plural ("kami"), talking to "kamu".
+export const KANA_URL: Record<Language, string> = {
+  id: "https://kana.livales.com/id/",
+  en: "https://kana.livales.com/en/",
+};
+
 const translations: Record<Language, Record<string, string>> = {
   id: {
     // Navbar
@@ -36,68 +44,72 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.close": "Tutup menu",
 
     // Hero
-    "hero.title": "Kami bikin software buat kamu dan orang yang kamu sayang.",
+    "hero.title": "Kami bikin software yang mendekatkan.",
     "hero.body":
-      "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri untuk pasangan, sahabat, keluarga, dan siapa pun yang ingin tetap dekat.",
-    "hero.cta.primary": "Ikuti kabar dari kami",
-    "hero.cta.secondary": "Lihat yang sedang kami buat",
+      "Dekat dengan orang yang kamu sayang, dan dengan bahasa serta budaya baru. Livales adalah perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri.",
+    "hero.cta.primary": "Lihat produk kami",
+    "hero.cta.secondary": "Ikuti kabar dari kami",
     "hero.markLabel": "Simbol Livales: huruf L yang merangkul sebuah titik",
 
     // About — written as a short note from the team
     "about.title": "Kenapa Livales ada",
     "about.p1":
-      "Kebanyakan aplikasi di ponsel kita dibuat untuk dipakai sendirian. Kita scroll, kita nonton, kita lupa waktu. Sering kali sambil duduk di sebelah orang yang kita sayang.",
+      "Kebanyakan aplikasi di ponsel kita dibuat supaya kita terus scroll. Waktu habis, tapi kita tidak jadi lebih dekat dengan siapa pun, atau lebih pandai dalam apa pun.",
     "about.p2":
-      "Kami ingin membuat yang sebaliknya: aplikasi yang mengajak dua orang, atau lebih, melakukan sesuatu bersama. Ngobrol lebih dalam, tertawa lebih sering, dan punya cerita baru untuk diingat.",
+      "Kami ingin membuat yang sebaliknya: aplikasi yang membawa kamu lebih dekat. Ke orang-orang yang kamu sayang, dan ke bahasa, budaya, serta dunia yang ingin kamu kenal.",
     "about.p3":
-      "Semua produk Livales kami rancang dan bangun sendiri, di Indonesia, untuk cara kita berhubungan satu sama lain.",
+      "Semua produk Livales kami rancang dan bangun sendiri, di Indonesia. Yang pertama sudah bisa kamu coba hari ini.",
     "about.sign": "Tim Livales",
 
     // Audience
     "audience.title": "Untuk siapa",
+    "audience.learner.title": "Pembelajar",
+    "audience.learner.body": "Yang ingin menguasai bahasa baru, satu langkah setiap hari.",
     "audience.couple.title": "Pasangan",
     "audience.couple.body": "Yang ingin tetap hangat, bahkan setelah bertahun-tahun bersama.",
-    "audience.friends.title": "Sahabat",
-    "audience.friends.body": "Yang jarang ketemu, tapi tetap ingin nyambung.",
-    "audience.family.title": "Keluarga",
-    "audience.family.body": "Yang tinggal serumah, tapi jarang benar-benar ngobrol.",
+    "audience.family.title": "Sahabat & keluarga",
+    "audience.family.body": "Yang ingin tetap nyambung, meski sibuk atau tinggal berjauhan.",
     "audience.anyone.title": "Siapa saja",
-    "audience.anyone.body": "Teman, komunitas, rekan kerja. Hubungan apa pun yang layak dijaga.",
+    "audience.anyone.body": "Siapa pun yang ingin lebih dekat dengan orang dan hal yang mereka pedulikan.",
 
     // Approach / principles
     "approach.title": "Cara kami bekerja",
-    "approach.p1.title": "Dibuat untuk dipakai bersama",
+    "approach.p1.title": "Mendekatkan, bukan menjauhkan",
     "approach.p1.body":
-      "Setiap fitur kami uji dengan satu pertanyaan: apakah ini membuat orang-orang lebih dekat?",
-    "approach.p2.title": "Mengajak, bukan menahan",
+      "Setiap fitur kami uji dengan satu pertanyaan: apakah ini membuatmu lebih dekat dengan orang atau hal yang kamu pedulikan?",
+    "approach.p2.title": "Sebentar, tapi berarti",
     "approach.p2.body":
-      "Kami tidak mengejar waktu layar. Aplikasi yang baik membuatmu menaruh ponsel dan kembali ke orangnya.",
+      "Kami tidak mengejar waktu layar. Sesi singkat yang terasa berguna lebih baik daripada berjam-jam scroll.",
     "approach.p3.title": "Privasi sejak awal",
     "approach.p3.body":
-      "Momen kalian milik kalian. Privasi kami pikirkan sejak rancangan pertama, bukan ditambahkan belakangan.",
+      "Data dan momenmu milikmu. Privasi kami pikirkan sejak rancangan pertama, bukan ditambahkan belakangan.",
     "approach.p4.title": "Terasa dekat",
     "approach.p4.body":
-      "Bahasa, candaan, dan kebiasaan yang akrab untuk orang Indonesia.",
+      "Bahasa, contoh, dan kebiasaan yang akrab untuk orang Indonesia.",
 
     // Product — a shelf that will keep filling up
-    "product.title": "Aplikasi pertama kami sedang dibuat.",
+    "product.title": "Satu sudah bisa dicoba. Satu lagi sedang dibuat.",
     "product.body":
-      "Kami belum bisa cerita banyak. Yang pasti, ini baru yang pertama. Rak ini akan terus terisi.",
-    "product.slot1.name": "Aplikasi 01",
-    "product.slot1.status": "Sedang dibuat",
+      "Kana Speed membantu kamu belajar bahasa Jepang lewat kuis singkat, gratis. Aplikasi untuk pasangan sedang kami siapkan. Rak ini akan terus terisi.",
+    "product.kana.name": "Kana Speed",
+    "product.kana.desc": "Belajar bahasa Jepang",
+    "product.kana.cta": "Coba Kana Speed",
+    "product.kana.newTab": "(terbuka di tab baru)",
+    "product.couple.name": "Aplikasi untuk pasangan",
+    "product.couple.status": "Sedang dibuat",
     "product.slotNext": "Berikutnya",
 
     // FAQ
     "faq.title": "Pertanyaan yang sering muncul",
     "faq.q1": "Livales itu apa?",
     "faq.a1":
-      "Perusahaan teknologi dari Indonesia yang merancang dan membangun software sendiri untuk mempererat hubungan: pasangan, sahabat, keluarga, dan orang-orang terdekat.",
-    "faq.q2": "Apakah hanya untuk pasangan?",
+      "Perusahaan teknologi dari Indonesia yang merancang dan membangun software sendiri: software yang mendekatkan kamu dengan orang yang kamu sayang, dan dengan bahasa serta budaya baru.",
+    "faq.q2": "Apa saja produk Livales?",
     "faq.a2":
-      "Tidak. Kami membuat produk untuk berbagai jenis hubungan, dari pasangan dan sahabat sampai keluarga dan komunitas.",
-    "faq.q3": "Apa yang sedang kalian buat?",
+      "Saat ini ada Kana Speed, aplikasi gratis untuk belajar bahasa Jepang di kana.livales.com. Aplikasi untuk pasangan sedang kami kembangkan, dan produk lain akan menyusul.",
+    "faq.q3": "Kapan aplikasi untuk pasangan rilis?",
     "faq.a3":
-      "Aplikasi pertama kami sedang dalam pengembangan. Detailnya kami umumkan saat sudah siap, dan setelah itu akan ada produk lain yang menyusul.",
+      "Masih dalam pengembangan. Detailnya kami umumkan saat sudah siap. Daftarkan email kamu di bawah supaya jadi yang pertama tahu.",
     "faq.q4": "Bagaimana cara mengikuti kabar Livales?",
     "faq.a4":
       "Daftarkan email kamu di bagian bawah halaman ini, atau ikuti kami di LinkedIn.",
@@ -106,7 +118,7 @@ const translations: Record<Language, Record<string, string>> = {
       "Hanya untuk mengirim kabar dari Livales. Kami tidak menjual atau membagikannya, dan kamu bisa berhenti berlangganan kapan saja.",
 
     // Updates
-    "cta.title": "Mau dikabari waktu aplikasi pertama kami rilis?",
+    "cta.title": "Mau dikabari waktu aplikasi berikutnya rilis?",
     "cta.body": "Satu email saat ada kabar penting. Tidak lebih.",
 
     // Updates form
@@ -120,8 +132,9 @@ const translations: Record<Language, Record<string, string>> = {
     "form.failed": "Belum terkirim. Cek koneksi internetmu, lalu coba lagi.",
 
     // Footer
-    "footer.tagline": "Software buat kamu dan orang yang kamu sayang.",
+    "footer.tagline": "Software yang mendekatkan.",
     "footer.company": "Perusahaan",
+    "footer.products": "Produk",
     "footer.social": "Sosial",
     "footer.rights": "Hak cipta dilindungi.",
     "footer.made": "Dibuat di Indonesia.",
@@ -131,75 +144,79 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "About",
     "nav.audience": "Who it's for",
     "nav.approach": "How we work",
-    "nav.product": "Product",
+    "nav.product": "Products",
     "nav.faq": "FAQ",
     "nav.cta": "Get updates",
     "nav.menu": "Menu",
     "nav.close": "Close menu",
 
     // Hero
-    "hero.title": "We make software for you and the people you love.",
+    "hero.title": "We make software that brings you closer.",
     "hero.body":
-      "Livales is a technology company from Indonesia. We design and build our own apps for couples, best friends, families, and anyone who wants to stay close.",
-    "hero.cta.primary": "Get updates from us",
-    "hero.cta.secondary": "See what we're building",
+      "Closer to the people you love, and to new languages and cultures. Livales is a technology company from Indonesia that designs and builds its own apps.",
+    "hero.cta.primary": "See our products",
+    "hero.cta.secondary": "Get updates from us",
     "hero.markLabel": "The Livales mark: a letter L embracing a dot",
 
     // About
     "about.title": "Why Livales exists",
     "about.p1":
-      "Most apps on our phones are made to be used alone. We scroll, we watch, we lose track of time. Often while sitting right next to someone we love.",
+      "Most apps on our phones are built to keep us scrolling. The time goes, but we don't end up closer to anyone, or better at anything.",
     "about.p2":
-      "We want to build the opposite: apps that invite two people, or more, to do something together. Talk a little deeper, laugh a little more, and make new stories worth remembering.",
+      "We want to build the opposite: apps that bring you closer. To the people you love, and to the languages, cultures, and world you want to know.",
     "about.p3":
-      "We design and build every Livales product ourselves, in Indonesia, for the way we relate to each other.",
+      "We design and build every Livales product ourselves, in Indonesia. The first one is ready to try today.",
     "about.sign": "The Livales team",
 
     // Audience
     "audience.title": "Who it's for",
+    "audience.learner.title": "Learners",
+    "audience.learner.body": "Who want to pick up a new language, one step a day.",
     "audience.couple.title": "Couples",
     "audience.couple.body": "Who want to stay warm, even after years together.",
-    "audience.friends.title": "Best friends",
-    "audience.friends.body": "Who rarely meet up, but still want to stay in sync.",
-    "audience.family.title": "Families",
-    "audience.family.body": "Who share a home, but rarely really talk.",
+    "audience.family.title": "Friends & family",
+    "audience.family.body": "Who want to stay in touch, however busy or far apart.",
     "audience.anyone.title": "Anyone",
-    "audience.anyone.body": "Friends, communities, colleagues. Any relationship worth keeping.",
+    "audience.anyone.body": "Anyone who wants to be closer to the people and things they care about.",
 
     // Approach / principles
     "approach.title": "How we work",
-    "approach.p1.title": "Made to be used together",
+    "approach.p1.title": "Closer, not further apart",
     "approach.p1.body":
-      "We test every feature with one question: does this bring people closer?",
-    "approach.p2.title": "Inviting, not addictive",
+      "We test every feature with one question: does this bring you closer to the people or things you care about?",
+    "approach.p2.title": "Short, but worth it",
     "approach.p2.body":
-      "We don't chase screen time. A good app makes you put your phone down and turn back to the person.",
+      "We don't chase screen time. A short session that actually helps beats hours of scrolling.",
     "approach.p3.title": "Private from the start",
     "approach.p3.body":
-      "Your moments belong to you. We think about privacy from the first sketch, not as an afterthought.",
+      "Your data and your moments belong to you. We think about privacy from the first sketch, not as an afterthought.",
     "approach.p4.title": "Close to home",
     "approach.p4.body":
-      "Language, humour, and habits that feel familiar to people in Indonesia.",
+      "Language, examples, and habits that feel familiar to people in Indonesia.",
 
     // Product
-    "product.title": "Our first app is being built.",
+    "product.title": "One you can try today. One in the works.",
     "product.body":
-      "We can't say much yet. What we can say: it's only the first. This shelf will keep filling up.",
-    "product.slot1.name": "App 01",
-    "product.slot1.status": "In the works",
+      "Kana Speed helps you learn Japanese through short quizzes, for free. An app for couples is on its way. This shelf will keep filling up.",
+    "product.kana.name": "Kana Speed",
+    "product.kana.desc": "Learn Japanese",
+    "product.kana.cta": "Try Kana Speed",
+    "product.kana.newTab": "(opens in a new tab)",
+    "product.couple.name": "An app for couples",
+    "product.couple.status": "In the works",
     "product.slotNext": "Next",
 
     // FAQ
     "faq.title": "Questions people ask",
     "faq.q1": "What is Livales?",
     "faq.a1":
-      "A technology company from Indonesia that designs and builds its own software to strengthen relationships: couples, best friends, families, and the people closest to you.",
-    "faq.q2": "Is it only for couples?",
+      "A technology company from Indonesia that designs and builds its own software: software that brings you closer to the people you love, and to new languages and cultures.",
+    "faq.q2": "What products does Livales make?",
     "faq.a2":
-      "No. We build for many kinds of relationships, from couples and friends to families and communities.",
-    "faq.q3": "What are you building?",
+      "Right now there's Kana Speed, a free app for learning Japanese at kana.livales.com. An app for couples is in development, and more will follow.",
+    "faq.q3": "When does the app for couples launch?",
     "faq.a3":
-      "Our first app is in development. We'll share the details when it's ready, and more products will follow.",
+      "It's still in development. We'll share the details when it's ready. Leave your email below to be the first to know.",
     "faq.q4": "How can I follow Livales?",
     "faq.a4": "Leave your email at the bottom of this page, or follow us on LinkedIn.",
     "faq.q5": "What will you use my email for?",
@@ -207,7 +224,7 @@ const translations: Record<Language, Record<string, string>> = {
       "Only to send news from Livales. We never sell or share it, and you can unsubscribe anytime.",
 
     // Updates
-    "cta.title": "Want to hear when our first app launches?",
+    "cta.title": "Want to hear when our next app launches?",
     "cta.body": "One email when there's real news. Nothing more.",
 
     // Updates form
@@ -221,8 +238,9 @@ const translations: Record<Language, Record<string, string>> = {
     "form.failed": "Not sent yet. Check your internet connection and try again.",
 
     // Footer
-    "footer.tagline": "Software for you and the people you love.",
+    "footer.tagline": "Software that brings you closer.",
     "footer.company": "Company",
+    "footer.products": "Products",
     "footer.social": "Social",
     "footer.rights": "All rights reserved.",
     "footer.made": "Made in Indonesia.",
