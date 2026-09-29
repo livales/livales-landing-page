@@ -1,67 +1,65 @@
-import { Linkedin } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, KANA_URL } from "@/contexts/LanguageContext";
 import Logo from "@/components/brand/Logo";
-
-const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/livales/", icon: Linkedin },
-];
+import { sections } from "./Navbar";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-ink/[0.06] bg-white/60 pt-16 pb-10">
-      <div className="container-page">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
-          <div>
-            <Logo className="h-8" />
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">{t("footer.tagline")}</p>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {t("footer.company")}
-            </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {["about", "audience", "approach", "product", "faq"].map((id) => (
-                <li key={id}>
-                  <a href={`#${id}`} className="text-foreground/80 transition-colors hover:text-livales-green-deep">
-                    {t(`nav.${id}`)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              {t("footer.social")}
-            </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {socials.map(({ label, href, icon: Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-foreground/80 transition-colors hover:text-livales-green-deep"
-                  >
-                    <Icon className="h-4 w-4" />
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <footer className="border-t border-ink/10">
+      <div className="page grid gap-12 py-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div>
+          <Logo className="h-8" />
+          <p className="mt-5 max-w-[20rem] text-[1rem] text-ink/75">{t("footer.tagline")}</p>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-ink/[0.06] pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} Livales. {t("footer.rights")}
-          </p>
-          <p>{t("footer.made")}</p>
+        <nav aria-label={t("footer.company")}>
+          <p className="text-[0.95rem] font-semibold">{t("footer.company")}</p>
+          <ul className="mt-4 space-y-3 text-[1rem]">
+            {sections.map((id) => (
+              <li key={id}>
+                <a href={`#${id}`} className="text-ink/75 hover:text-ink">
+                  {t(`nav.${id}`)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <p className="text-[0.95rem] font-semibold">{t("footer.products")}</p>
+          <ul className="mt-4 space-y-3 text-[1rem]">
+            <li>
+              <a href={KANA_URL[language]} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
+                Kana Speed
+              </a>
+            </li>
+          </ul>
         </div>
+
+        <div>
+          <p className="text-[0.95rem] font-semibold">{t("footer.social")}</p>
+          <ul className="mt-4 space-y-3 text-[1rem]">
+            <li>
+              <a
+                href="https://www.linkedin.com/company/livales/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink/75 hover:text-ink"
+              >
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="page flex flex-col gap-2 border-t border-ink/10 py-6 text-[0.9rem] text-ink/60 sm:flex-row sm:justify-between">
+        <p>
+          © {year} Livales. {t("footer.rights")}
+        </p>
+        <p>{t("footer.made")}</p>
       </div>
     </footer>
   );

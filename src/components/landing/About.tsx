@@ -1,41 +1,19 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import SectionHeading from "./SectionHeading";
 
-const stats = ["stat1", "stat2", "stat3"] as const;
-
+/** A short note from the team — the company's reason for existing. */
 const About = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="py-24 sm:py-32">
-      <div className="container-page">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-          <SectionHeading eyebrow={t("about.eyebrow")} title={t("about.title")} />
-          <div className="reveal space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg lg:pt-10">
-            <p>{t("about.body1")}</p>
-            <p className="text-foreground/90">{t("about.body2")}</p>
-          </div>
+    <section id="about" className="border-t border-ink/10">
+      <div className="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+        <h2 className="heading-lg">{t("about.title")}</h2>
+        <div className="space-y-6 text-[1.15rem] leading-[1.75] sm:text-[1.3rem]">
+          <p className="max-w-[38rem]">{t("about.p1")}</p>
+          <p className="max-w-[38rem]">{t("about.p2")}</p>
+          <p className="max-w-[38rem] text-ink/75">{t("about.p3")}</p>
+          <p className="pt-2 font-display text-[1rem] font-semibold">{t("about.sign")}</p>
         </div>
-
-        <dl className="surface mt-16 grid overflow-hidden sm:grid-cols-3">
-          {stats.map((s, i) => (
-            <div
-              key={s}
-              className="reveal border-ink/[0.06] p-7 [&:not(:first-child)]:border-t sm:[&:not(:first-child)]:border-l sm:[&:not(:first-child)]:border-t-0"
-              style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
-            >
-              <dt className="sr-only">{t(`about.${s}.label`)}</dt>
-              <dd>
-                <span className="font-display text-5xl font-semibold text-livales-green-deep">
-                  {t(`about.${s}.value`)}
-                </span>
-                <p className="mt-3 max-w-[16rem] text-sm text-muted-foreground">
-                  {t(`about.${s}.label`)}
-                </p>
-              </dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

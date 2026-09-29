@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 /*
- * Livales design system — light & warm. Brand colors come from the logo
- * (ink #122023, green #2ECC40); a soft rose accent adds warmth.
+ * Livales design system. White paper, ink text, and the logo's green and
+ * rose used as flat colour fields. Shapes come from the logo: pills and dots.
+ * No gradients, glows, shadows or scroll animations; see README → Brand.
  */
 @layer base {
   :root {
-    --background: 36 50% 98%; /* #fdfbf7 warm ivory */
-    --foreground: 190 32% 10%; /* #122023 logo ink */
+    --background: 0 0% 100%;
+    --foreground: 190 32% 10%; /* #122023 ink */
 
     --card: 0 0% 100%;
     --card-foreground: 190 32% 10%;
@@ -20,23 +21,23 @@
     --primary: 128 63% 49%; /* #2ecc40 */
     --primary-foreground: 190 32% 10%;
 
-    --secondary: 36 33% 95%;
+    --secondary: 351 100% 96%; /* blush */
     --secondary-foreground: 190 32% 10%;
 
-    --muted: 36 33% 95%;
-    --muted-foreground: 190 10% 38%; /* #57666a */
+    --muted: 351 100% 96%;
+    --muted-foreground: 190 12% 32%; /* #48585b */
 
-    --accent: 350 80% 96%;
+    --accent: 351 100% 96%;
     --accent-foreground: 190 32% 10%;
 
-    --destructive: 0 72% 50%;
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 18% 89%;
-    --input: 30 18% 86%;
-    --ring: 128 63% 42%;
+    --border: 190 12% 88%;
+    --input: 190 12% 80%;
+    --ring: 190 32% 10%;
 
-    --radius: 0.875rem;
+    --radius: 1rem;
   }
 }
 
@@ -54,14 +55,12 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     overflow-x: hidden;
-    font-feature-settings: "cv11", "ss01";
   }
 
   h1,
   h2,
-  h3,
-  h4 {
-    @apply font-display tracking-tight;
+  h3 {
+    @apply font-display;
     text-wrap: balance;
   }
 
@@ -70,8 +69,13 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.25);
-    color: hsl(var(--foreground));
+    background: #f07c8f;
+    color: #122023;
+  }
+
+  :focus-visible {
+    outline: 3px solid #122023;
+    outline-offset: 3px;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -82,6 +86,7 @@
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
@@ -89,73 +94,27 @@
 }
 
 @layer components {
-  .container-page {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  .page {
+    @apply mx-auto w-full max-w-[76rem] px-5 sm:px-8 lg:px-12;
   }
 
-  .eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-livales-green-deep;
+  /* Section headings: set in Unbounded, sentence case. */
+  .heading-xl {
+    @apply font-display text-[2.4rem] font-semibold leading-[1.08] tracking-[-0.02em] sm:text-[3.4rem] lg:text-[4.25rem];
+  }
+  .heading-lg {
+    @apply font-display text-[1.9rem] font-semibold leading-[1.12] tracking-[-0.015em] sm:text-[2.6rem];
+  }
+  .heading-md {
+    @apply font-display text-[1.15rem] font-semibold leading-snug tracking-[-0.01em] sm:text-[1.3rem];
   }
 
-  .surface {
-    @apply rounded-3xl border border-ink/[0.06] bg-white shadow-[0_1px_2px_rgba(18,32,35,0.04),0_12px_32px_-12px_rgba(18,32,35,0.10)];
+  /* Body copy stays within ~65 characters. */
+  .prose-copy {
+    @apply max-w-[36rem] text-[1.075rem] leading-[1.7] sm:text-[1.15rem];
   }
 
-  .grid-bg {
-    background-image: linear-gradient(
-        to right,
-        rgb(18 32 35 / 0.045) 1px,
-        transparent 1px
-      ),
-      linear-gradient(to bottom, rgb(18 32 35 / 0.045) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-
-  .text-gradient-brand {
-    background: linear-gradient(100deg, #2ecc40 0%, #1fae34 50%, #15803d 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-
-  /*
-   * Scroll reveal — toggled by useReveal. Content is only hidden once JS has
-   * set `reveal-ready` on <html>, so it stays visible if scripts fail.
-   * Uses an animation (not a transition) so utilities like
-   * `transition-transform` on the same element can't cancel the fade.
-   */
-  .reveal-ready .reveal:not(.is-visible) {
-    opacity: 0;
-  }
-  .reveal-ready .reveal.is-visible {
-    animation: reveal-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-    animation-delay: var(--reveal-delay, 0ms);
-  }
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 10px;
-  border: 2px solid hsl(var(--background));
-}
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.5);
-}
-
-@keyframes reveal-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
+  .btn-ink {
+    @apply inline-flex h-12 items-center justify-center rounded-full bg-ink px-6 text-[1rem] font-semibold text-white transition-colors hover:bg-[#223a3e];
   }
 }

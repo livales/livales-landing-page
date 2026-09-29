@@ -47,16 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Livales brand colors (from the logo)
+        // Livales brand colors (from the logo). Used as flat fields, never gradients.
         ink: "#122023",
         livales: {
           green: "#2ecc40",
-          "green-light": "#4fd95f",
-          "green-deep": "#168a2a", // green for text on light backgrounds
-          mint: "#effaf0",
+          "green-deep": "#168a2a", // green for text on white
           rose: "#f07c8f",
-          blush: "#fff1f2",
-          cream: "#fdfbf7",
+          blush: "#ffe9ec",
         },
       },
       borderRadius: {
@@ -73,40 +70,27 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "slow-spin": {
-          to: { transform: "rotate(360deg)" },
+        // The page's one orchestrated motion: the dot settles into the L's embrace.
+        "embrace-dot": {
+          "0%": { transform: "translate(34px, -46px) scale(0.55)", opacity: "0" },
+          "35%": { opacity: "1" },
+          "75%": { transform: "translate(-3px, 3px) scale(1.04)" },
+          "100%": { transform: "none", opacity: "1" },
         },
-        "pulse-dot": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.35" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        shimmer: {
-          from: { backgroundPosition: "200% 0" },
-          to: { backgroundPosition: "-200% 0" },
+        "embrace-arm": {
+          from: { transform: "scaleX(0.38)" },
+          to: { transform: "none" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "slow-spin": "slow-spin 60s linear infinite",
-        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
-        float: "float 7s ease-in-out infinite",
-        shimmer: "shimmer 3.5s linear infinite",
+        "embrace-dot": "embrace-dot 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both",
+        "embrace-arm": "embrace-arm 0.7s cubic-bezier(0.3, 0.7, 0.2, 1) 0.9s both",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Urbanist", "Inter", "ui-sans-serif", "sans-serif"],
-        mono: [
-          "ui-monospace",
-          "SFMono-Regular",
-          "Menlo",
-          "Consolas",
-          "monospace",
-        ],
+        sans: ["Figtree", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Unbounded", "Figtree", "ui-sans-serif", "sans-serif"],
       },
     },
   },

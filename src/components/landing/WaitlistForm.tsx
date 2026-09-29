@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import { subscribe } from "@/lib/subscribe";
@@ -17,6 +17,7 @@ interface WaitlistFormProps {
 const WaitlistForm = ({ className, source = "updates" }: WaitlistFormProps) => {
   const { t, language } = useLanguage();
   const inputId = useId();
+  const messageId = useId();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
@@ -39,71 +40,54 @@ const WaitlistForm = ({ className, source = "updates" }: WaitlistFormProps) => {
 
   if (status === "success") {
     return (
-      <div
-        role="status"
-        className={cn(
-          "flex w-full max-w-md items-start gap-3 rounded-2xl border border-primary/30 bg-livales-mint p-4 text-left",
-          className
-        )}
-      >
-        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-          <Check className="h-3.5 w-3.5" strokeWidth={3} />
-        </span>
+      <div role="status" className={cn("flex items-start gap-4", className)}>
+        {/* The mark's dot, now inside the embrace: you're in. */}
+        <svg viewBox="0 0 80 92" className="h-12 w-auto shrink-0" aria-hidden="true">
+          <rect x="0" y="62" width="80" height="30" rx="15" fill="#f07c8f" />
+          <rect x="0" y="0" width="30" height="92" rx="15" fill="#2ecc40" />
+          <circle cx="58" cy="32" r="15" fill="#2ecc40" />
+        </svg>
         <div>
-          <p className="font-semibold text-foreground">{t("form.success.title")}</p>
-          <p className="text-sm text-muted-foreground">{t("form.success.body")}</p>
+          <p className="font-display text-[1.15rem] font-semibold">{t("form.success.title")}</p>
+          <p className="mt-1 text-[1rem] text-ink/75">{t("form.success.body")}</p>
         </div>
       </div>
     );
   }
 
+  const hasError = status === "error" || status === "failed";
+
   return (
-    <form onSubmit={handleSubmit} noValidate className={cn("w-full max-w-md", className)}>
-      <div
-        className={cn(
-          "flex flex-col gap-2 rounded-2xl border bg-white p-1.5 shadow-[0_10px_30px_-15px_rgba(18,32,35,0.25)] transition-colors sm:flex-row sm:rounded-full",
-          status === "error" || status === "failed"
-            ? "border-destructive/60"
-            : "border-ink/10 focus-within:border-primary/60"
-        )}
-      >
-        <label htmlFor={inputId} className="sr-only">
-          {t("form.email")}
-        </label>
+    <form onSubmit={handleSubmit} noValidate className={cn("w-full", className)}>
+      <label htmlFor={inputId} className="mb-2 block text-[0.95rem] font-semibold">
+        {t("form.email")}
+      </label>
+      <div className="flex flex-col gap-3 sm:flex-row">
         <input
           id={inputId}
           type="email"
           inputMode="email"
           autoComplete="email"
-          placeholder={t("form.email")}
+          placeholder={t("form.placeholder")}
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (status === "error" || status === "failed") setStatus("idle");
+            if (hasError) setStatus("idle");
           }}
-          aria-invalid={status === "error"}
-          className="h-11 min-w-0 flex-1 bg-transparent px-4 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
-        />
-        <button
-          type="submit"
-          disabled={status === "submitting"}
-          className="group inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-[15px] font-semibold text-primary-foreground transition-colors hover:bg-livales-green-light disabled:opacity-70 sm:rounded-full"
-        >
-          {status === "submitting" ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              {t("form.submitting")}
-            </>
-          ) : (
-            <>
-              {t("form.submit")}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </>
+          aria-invalid={hasError}
+          aria-describedby={hasError ? messageId : undefined}
+          className={cn(
+            "h-12 w-full min-w-0 rounded-full border-2 sm:flex-1 bg-white px-5 text-[1rem] text-ink placeholder:text-ink/40 focus:outline-none focus-visible:outline-offset-2",
+            hasError ? "border-destructive" : "border-ink/20 focus:border-ink"
           )}
+        />
+        <button type="submit" disabled={status === "submitting"} className="btn-ink gap-2 disabled:opacity-70">
+          {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
+          {status === "submitting" ? t("form.submitting") : t("form.submit")}
         </button>
       </div>
-      {(status === "error" || status === "failed") && (
-        <p role="alert" className="mt-2 px-4 text-sm text-destructive">
+      {hasError && (
+        <p id={messageId} role="alert" className="mt-3 text-[0.95rem] font-medium text-destructive">
           {t(status === "error" ? "form.error" : "form.failed")}
         </p>
       )}
