@@ -15,7 +15,7 @@ const Footer = () => {
         </div>
 
         <nav aria-label={t("footer.company")}>
-          <h2 className="text-[0.95rem] font-semibold">{t("footer.company")}</h2>
+          <p className="text-[0.95rem] font-semibold">{t("footer.company")}</p>
           <ul className="mt-4 space-y-3 text-[1rem]">
             {sections.map((id) => (
               <li key={id}>
@@ -28,7 +28,7 @@ const Footer = () => {
         </nav>
 
         <div>
-          <h2 className="text-[0.95rem] font-semibold">{t("footer.social")}</h2>
+          <p className="text-[0.95rem] font-semibold">{t("footer.social")}</p>
           <ul className="mt-4 space-y-3 text-[1rem]">
             <li>
               <a

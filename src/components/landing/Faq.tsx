@@ -24,7 +24,12 @@ const Faq = () => {
                   </span>
                 </AccordionPrimitive.Trigger>
               </AccordionPrimitive.Header>
-              <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+              {/* forceMount keeps closed answers in the (prerendered) HTML so search
+                  engines can read them; CSS hides them while closed. */}
+              <AccordionPrimitive.Content
+                forceMount
+                className="overflow-hidden data-[state=closed]:hidden data-[state=open]:animate-accordion-down"
+              >
                 <p className="max-w-[40rem] pb-7 pr-10 text-[1.05rem] leading-relaxed text-ink/75">{t(`faq.a${n}`)}</p>
               </AccordionPrimitive.Content>
             </AccordionPrimitive.Item>
