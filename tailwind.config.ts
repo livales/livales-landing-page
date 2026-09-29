@@ -47,13 +47,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Livales brand colors (from the logo). Used as flat fields, never gradients.
+        // Livales brand colors (from the logo). Saturated green/rose are for the
+        // logo, illustrations and small accents only; section backgrounds use
+        // the soft tints. Flat colour, never gradients.
         ink: "#122023",
         livales: {
           green: "#2ecc40",
           "green-deep": "#168a2a", // green for text on white
+          "green-soft": "#e6f5e3", // section background
           rose: "#f07c8f",
-          blush: "#ffe9ec",
+          "rose-soft": "#fce8eb", // section background
         },
       },
       borderRadius: {

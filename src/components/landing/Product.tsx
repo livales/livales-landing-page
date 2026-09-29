@@ -1,7 +1,7 @@
 import { useLanguage, KANA_URL } from "@/contexts/LanguageContext";
 
 /**
- * Green field with a "shelf" of products: Kana Speed (live), the app for
+ * Soft green field with a "shelf" of products: Kana Speed (live), the app for
  * couples (in development — only its category may be named, never its name
  * or concept), and empty slots still to be filled.
  */
@@ -9,7 +9,7 @@ const Product = () => {
   const { t, language } = useLanguage();
 
   return (
-    <section id="product" className="bg-livales-green">
+    <section id="product" className="bg-livales-green-soft">
       <div className="page py-20 sm:py-28">
         <h2 className="heading-lg max-w-[20ch]">{t("product.title")}</h2>
         <p className="prose-copy mt-6">{t("product.body")}</p>
@@ -38,7 +38,7 @@ const Product = () => {
               </span>
             </a>
           </li>
-          <li className="flex min-h-[15rem] flex-col justify-between rounded-[2rem] bg-white/55 p-6">
+          <li className="flex min-h-[15rem] flex-col justify-between rounded-[2rem] bg-white/70 p-6">
             <span aria-hidden="true" className="block h-12 w-12 rounded-full bg-livales-rose" />
             <span>
               <span className="block font-display text-[1.25rem] font-semibold">{t("product.couple.name")}</span>
