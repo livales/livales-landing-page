@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Livales company website: React 18 + Vite + TypeScript + Tailwind, deployed on Netlify. Full context is in `README.md`. Read only the section you need.
+Livales company website: React 18 + Vite + TypeScript + Tailwind, live at https://livales.com (Netlify, DNS on Cloudflare; keep DNS records grey-cloud). Full context is in `README.md`. Read only the section you need.
 
 ## Hard rules
 - **Company-first.** Livales is presented as a company that builds relationship software (couples, friends, family). The first app appears only as "Aplikasi 01, in development".

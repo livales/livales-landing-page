@@ -25,7 +25,7 @@ This README is also the main context file for AI coding assistants working on th
 | Fonts | Urbanist (display/headings, `font-display`) + Inter (body, `font-sans`) from Google Fonts |
 | Icons | lucide-react |
 | Backend | Firebase project **`livales`**: Firestore only, used for email sign-ups |
-| Hosting | Netlify (`netlify.toml`: publishes `dist/`, SPA fallback to `index.html`) |
+| Hosting | Netlify site `livales.netlify.app` (`netlify.toml`: publishes `dist/`, SPA fallback to `index.html`), served at **https://livales.com** |
 
 ## Getting started
 
@@ -152,12 +152,27 @@ Add `className="reveal"` (and optionally `style={{ "--reveal-delay": "80ms" }}`)
 
 ## Status and TODO
 
-- **Domain:** `livales.com` (registered at Cloudflare Registrar, DNS on Cloudflare). All SEO tags already use it. Connect it to Netlify with DNS-only (grey cloud) records so Netlify can issue HTTPS, and redirect `www` to the apex.
-- SEO backlog: verify the domain in Google Search Console and submit `sitemap.xml`; add a separate `/en` URL + `hreflang` if English should be indexed; add content pages or a blog for non-brand keywords.
+- **Live** at https://livales.com (HTTPS, `www` → apex), verified in Google Search Console, with `sitemap.xml` submitted. See [Domain, DNS and Search Console](#domain-dns-and-search-console).
+- SEO backlog: add a separate `/en` URL + `hreflang` if English should be indexed; add content pages or a blog for non-brand keywords; bump `<lastmod>` in `public/sitemap.xml` after meaningful content changes.
 - Social: only LinkedIn (`linkedin.com/company/livales`) exists so far. Add others to `Footer.tsx` when they're created.
 - Optional: Firebase App Check if the sign-up form gets spammed.
 - Housekeeping: `package.json` still has the scaffold name `vite_react_shadcn_ts`. `gsap` is no longer used, `@tanstack/react-query` only wraps the app with a provider (no queries), and packages like `recharts` or `embla-carousel-react` are only pulled in by unused shadcn/ui components.
 
 ## Deployment
 
-The site deploys through Netlify: `npm run build`, publishing `dist/` (see `netlify.toml`), with `main` as the production branch. Firestore rules are **not** deployed by Netlify; run `npm run deploy:rules` separately.
+The site deploys through Netlify: `npm run build`, publishing `dist/` (see `netlify.toml`), with `main` as the production branch. Merging to `main` redeploys https://livales.com in about 1–2 minutes. Firestore rules are **not** deployed by Netlify; run `npm run deploy:rules` separately.
+
+### Domain, DNS and Search Console
+
+- **Registrar and DNS:** `livales.com` is registered at Cloudflare Registrar (auto-renew on), with DNS hosted on Cloudflare.
+- **DNS records** (Cloudflare → DNS → Records):
+
+  | Type | Name | Content | Proxy |
+  |---|---|---|---|
+  | `A` | `@` | `75.2.60.5` (Netlify load balancer) | **DNS only** |
+  | `CNAME` | `www` | `livales.netlify.app` | **DNS only** |
+  | `TXT` | `@` | `google-site-verification=…` | – |
+
+- **Keep both web records on DNS only (grey cloud).** Turning on the Cloudflare proxy (orange cloud) stops Netlify from renewing its Let's Encrypt certificate and breaks HTTPS. Netlify already serves the site through its own CDN.
+- **Netlify** (Domain management): `livales.com` is the primary domain, and `www.livales.com` redirects to it automatically. The HTTPS certificate is issued by Let's Encrypt and auto-renews.
+- **Google Search Console:** a *Domain* property verified by the `TXT` record above. **Don't delete that record**, or verification is lost. The sitemap is submitted as the full URL `https://livales.com/sitemap.xml`, because Domain properties require the full URL.
