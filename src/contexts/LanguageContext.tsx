@@ -285,29 +285,40 @@ const translations: Record<Language, Record<string, string>> = {
   },
 };
 
-const getInitialLanguage = (): Language => {
+const readStoredLanguage = (): Language | null => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === "id" || stored === "en") return stored;
   } catch {
-    // storage unavailable — fall through to default
+    // storage unavailable (private mode, blocked, or prerendering on the server)
   }
-  return "id";
+  return null;
 };
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>(getInitialLanguage);
+  // Always start in Indonesian: the page is prerendered in "id", and the
+  // first client render must match it for hydration. A saved preference is
+  // applied right after mount.
+  const [language, setLanguage] = useState<Language>("id");
+  const [restored, setRestored] = useState(false);
+
+  useEffect(() => {
+    const stored = readStoredLanguage();
+    if (stored) setLanguage(stored);
+    setRestored(true);
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
+    if (!restored) return; // don't overwrite the saved choice before reading it
     try {
       localStorage.setItem(STORAGE_KEY, language);
     } catch {
       // ignore
     }
-  }, [language]);
+  }, [language, restored]);
 
   const t = (key: string): string => translations[language][key] ?? key;
 

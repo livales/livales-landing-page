@@ -32,7 +32,7 @@ This README is also the main context file for AI coding assistants working on th
 ```sh
 npm install
 npm run dev          # Vite dev server
-npm run build        # production build → dist/
+npm run build        # production build → dist/, then prerenders "/" into dist/index.html
 npm run lint
 npm run test:rules   # Firestore rules tests in the emulator (needs Java)
 npm run deploy:rules # deploy firestore.rules to the livales project (needs `firebase login`)
@@ -45,7 +45,8 @@ npm run deploy:rules # deploy firestore.rules to the livales project (needs `fir
 ## Project structure
 
 ```
-index.html                  Meta/OG tags, favicons, fonts, inline reveal failsafe script
+index.html                  Meta/OG/canonical tags, JSON-LD, favicons, fonts, inline reveal failsafe script
+scripts/prerender.mjs       Build step: injects the server-rendered home page into dist/index.html
 firebase.json / .firebaserc Firebase project "livales"; emulator on port 8085
 firestore.rules             Security rules (only landing_subscribers is writable)
 tests/                      Firestore rules tests (@firebase/rules-unit-testing)
@@ -53,6 +54,9 @@ public/
   brand/                    Official logo files (SVG + PNG) and app icons
   favicon.* / apple-touch-icon.png / site.webmanifest / og-image.png
 src/
+  main.tsx                  Hydrates the prerendered "/" (createRoot for other paths)
+  entry-server.tsx          Build-time render of a route to HTML (used by prerender)
+  App.tsx                   AppProviders + AppRoutes (shared by browser and prerender)
   pages/Index.tsx           The landing page: composes all sections, calls useReveal()
   pages/NotFound.tsx        404 page
   components/landing/       One file per section + shared pieces (see below)
@@ -122,6 +126,12 @@ Pastel tints per relationship (hero chips + audience cards): couples = rose, fri
 
 `t("section.key")` reads from `translations[language]` in `LanguageContext.tsx`. Missing keys render the key itself, so add both `id` and `en` values for every new string. The selected language is stored in `localStorage` (`livales.lang`) and sets `<html lang>`.
 
+### Prerendering and SEO
+
+- `npm run build` runs `vite build`, then an SSR build of `src/entry-server.tsx`, then `scripts/prerender.mjs`, which writes the rendered home page into `dist/index.html`. Crawlers and link previews get real HTML, and `main.tsx` hydrates it.
+- **Keep the first render deterministic.** Anything that differs between the build-time render and the browser's first render causes a hydration mismatch, for example reading `localStorage`, `window`, dates, or random values during render. Read those in `useEffect` instead. Example: `LanguageProvider` always starts in `id` and restores a saved `en` choice after mount.
+- SEO tags live in `index.html`: canonical `https://livales.com/`, Open Graph/Twitter tags, and JSON-LD (`Organization` + `WebSite`). `public/sitemap.xml` lists the URL; update its `<lastmod>` when content changes meaningfully. `public/robots.txt` points to the sitemap.
+
 ### Scroll reveal
 
 Add `className="reveal"` (and optionally `style={{ "--reveal-delay": "80ms" }}`) to animate an element in.
@@ -142,8 +152,8 @@ Add `className="reveal"` (and optionally `style={{ "--reveal-delay": "80ms" }}`)
 
 ## Status and TODO
 
-- **Domain not purchased yet.** `index.html` still points `og:url` / `og:image` / `twitter:image` at the placeholder `https://livales.app`, so link previews won't show an image until the real domain is set. After buying the domain, update those URLs, and add a canonical tag and `sitemap.xml`.
-- SEO backlog: Organization JSON-LD (name, logo, LinkedIn); prerender the page to static HTML; separate `/en` URL + `hreflang` if English should be indexed; Google Search Console.
+- **Domain:** `livales.com` (registered at Cloudflare Registrar, DNS on Cloudflare). All SEO tags already use it. Connect it to Netlify with DNS-only (grey cloud) records so Netlify can issue HTTPS, and redirect `www` to the apex.
+- SEO backlog: verify the domain in Google Search Console and submit `sitemap.xml`; add a separate `/en` URL + `hreflang` if English should be indexed; add content pages or a blog for non-brand keywords.
 - Social: only LinkedIn (`linkedin.com/company/livales`) exists so far. Add others to `Footer.tsx` when they're created.
 - Optional: Firebase App Check if the sign-up form gets spammed.
 - Housekeeping: `package.json` still has the scaffold name `vite_react_shadcn_ts`. `gsap` is no longer used, `@tanstack/react-query` only wraps the app with a provider (no queries), and packages like `recharts` or `embla-carousel-react` are only pulled in by unused shadcn/ui components.

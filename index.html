@@ -11,6 +11,8 @@
       content="Livales adalah perusahaan teknologi asal Indonesia yang membangun software sendiri untuk mempererat hubungan — pasangan, sahabat, keluarga, dan orang-orang terdekat."
     />
     <meta name="author" content="Livales" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://livales.com/" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -26,9 +28,14 @@
       content="Perusahaan teknologi asal Indonesia yang membangun software untuk mempererat hubungan — pasangan, sahabat, keluarga, dan lainnya."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://livales.app" />
-    <meta property="og:image" content="https://livales.app/og-image.png" />
+    <meta property="og:site_name" content="Livales" />
+    <meta property="og:url" content="https://livales.com/" />
+    <meta property="og:image" content="https://livales.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logo Livales" />
     <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale:alternate" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -37,7 +44,40 @@
       name="twitter:description"
       content="Perusahaan teknologi asal Indonesia yang membangun software untuk mempererat hubungan — pasangan, sahabat, keluarga, dan lainnya."
     />
-    <meta name="twitter:image" content="https://livales.app/og-image.png" />
+    <meta name="twitter:image" content="https://livales.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Logo Livales" />
+
+    <!-- Structured data: lets search engines identify the company, its logo and profiles -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://livales.com/#organization",
+            "name": "Livales",
+            "url": "https://livales.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://livales.com/brand/icon-512.png",
+              "width": 512,
+              "height": 512
+            },
+            "description": "Perusahaan teknologi asal Indonesia yang merancang dan membangun software sendiri untuk mempererat hubungan antara pasangan, sahabat, keluarga, dan orang-orang terdekat.",
+            "areaServed": "ID",
+            "sameAs": ["https://www.linkedin.com/company/livales/"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://livales.com/#website",
+            "name": "Livales",
+            "url": "https://livales.com/",
+            "inLanguage": ["id", "en"],
+            "publisher": { "@id": "https://livales.com/#organization" }
+          }
+        ]
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

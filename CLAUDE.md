@@ -11,12 +11,14 @@ Livales company website: React 18 + Vite + TypeScript + Tailwind, deployed on Ne
 - **Firebase = project `livales` only** (collection `landing_subscribers`). After editing `firestore.rules`, run `npm run test:rules` before `npm run deploy:rules`.
 
 ## Commands
-`npm run dev` · `npm run build` · `npm run lint` · `npm run test:rules` (emulator on port 8085)
+`npm run dev` · `npm run build` (includes prerender of "/") · `npm run lint` · `npm run test:rules` (emulator on port 8085)
 
 ## Where things are
 - Page sections: `src/components/landing/*`, composed in `src/pages/Index.tsx`
 - Tokens: `src/index.css` + `tailwind.config.ts`. Hairlines use `border-ink/[0.06]`.
 - Scroll animation: add `className="reveal"` (see README → Scroll reveal)
+- The home page is prerendered and hydrated, so never read `localStorage`/`window` during render; use `useEffect` (see README → Prerendering and SEO)
+- SEO tags + JSON-LD live in `index.html`; the canonical domain is `https://livales.com/`
 - `src/components/ui/` is shadcn scaffold. Mostly unused, so don't restyle it.
 
 ## README sections

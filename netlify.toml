@@ -1,7 +1,7 @@
 [build]
-  # Pastikan ini sesuai dengan folder output build Anda
-  # Umumnya "dist" untuk Vite, atau "build" untuk Create React App
-  publish = "dist" 
+  # `npm run build` also prerenders the home page into dist/index.html (SEO).
+  command = "npm run build"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
