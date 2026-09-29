@@ -78,11 +78,11 @@ src/
 | Navbar | `Navbar.tsx` | – | Nav links, language toggle, CTA to `#updates` |
 | Hero | `Hero.tsx` + `HeroMark` | `#top` | Headline, short company description, the animated mark |
 | About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
-| Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Rose field.** The logo's L embracing couples, friends, family, anyone |
+| Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Soft rose field.** The logo's L embracing couples, friends, family, anyone |
 | How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
-| Products | `Product.tsx` | `#product` | **Green field.** A "shelf": Kana Speed (links to `KANA_URL[language]`), the app for couples (category only), and empty slots |
+| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": Kana Speed (links to `KANA_URL[language]`), the app for couples (category only), and empty slots |
 | FAQ | `Faq.tsx` | `#faq` | Radix accordion |
-| Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Blush field.** Email sign-up form |
+| Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Soft rose field.** Email sign-up form |
 | Footer | `Footer.tsx` | – | Links + LinkedIn |
 
 Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`, and content sits in `.page` (the max-width container).
@@ -111,16 +111,17 @@ Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`,
 |---|---|---|
 | `background` | `#FFFFFF` | Page (plain white) |
 | `ink` / `foreground` | `#122023` | Text, primary buttons (`.btn-ink`), wordmark |
-| `livales-green` / `primary` | `#2ECC40` | Logo; full-width **field** behind the Product section (ink text on it) |
-| `livales-rose` | `#F07C8F` | Logo; full-width **field** behind Who it's for; link underlines |
-| `livales-blush` | `#FFE9EC` | Field behind the Updates form |
+| `livales-green` / `primary` | `#2ECC40` | Logo, illustrations, small accents only, **never a section background** |
+| `livales-rose` | `#F07C8F` | Logo, illustrations, link underlines, small accents only, **never a section background** |
+| `livales-green-soft` | `#E6F5E3` | Section field behind Products |
+| `livales-rose-soft` | `#FCE8EB` | Section fields behind Who it's for and Updates |
 | `livales-green-deep` | `#168A2A` | Green **text** on white, if ever needed (brand green fails contrast as text) |
 
 Tokens live in `src/index.css` (`:root` HSL variables for shadcn) and `tailwind.config.ts` (`ink`, `livales.*`). Never put white text on green or rose, because the contrast is too low. Use ink.
 
 ### Visual system
 
-- **Colour comes in flat fields**, whole sections of green, rose, or blush, never as gradients, glows, blurred blobs, or shadows. Hairlines are `border-ink/10`–`/15`.
+- **Colour comes in flat fields**: whole sections in the *soft* tints (`green-soft`, `rose-soft`), never as gradients, glows, blurred blobs, or shadows. Full-strength green and rose as section backgrounds were rejected as too high-contrast, so keep saturated colour for the logo, illustrations, and small accents. Hairlines are `border-ink/10`–`/15`.
 - **Shapes come from the logo:** pills (fully rounded rectangles) and dots. Illustrations are the logo's gesture, an L embracing dots (`Embrace.tsx`). Buttons and inputs are pills.
 - **Type:** Unbounded for headings (sentence case, tight tracking), Figtree for everything else. No uppercase labels above headings, no single highlighted word in a headline, no monospace captions, no "→" on buttons.
 - **Motion:** only one orchestrated moment, where the hero dot settles into the L's embrace on load (`embrace-dot` / `embrace-arm` keyframes). No scroll-triggered animations. Interaction feedback (accordion open, button hover) is fine.
