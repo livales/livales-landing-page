@@ -12,7 +12,7 @@ const Hero = () => {
         <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
           <a href="#product" className="btn-ink">
             {t("hero.cta.primary")}
-          </a>
+          </a>{" "}
           <a
             href="#updates"
             className="text-[1rem] font-semibold underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink"

@@ -29,8 +29,8 @@ const Product = () => {
                 か
               </span>
               <span>
-                <span className="block font-display text-[1.25rem] font-semibold">{t("product.kana.name")}</span>
-                <span className="mt-1 block text-[1rem] text-ink/70">{t("product.kana.desc")}</span>
+                <span className="block font-display text-[1.25rem] font-semibold">{t("product.kana.name")}</span>{" "}
+                <span className="mt-1 block text-[1rem] text-ink/70">{t("product.kana.desc")}</span>{" "}
                 <span className="mt-4 inline-block font-semibold underline decoration-livales-rose decoration-[3px] underline-offset-[6px] group-hover:decoration-ink">
                   {t("product.kana.cta")}
                 </span>
@@ -41,7 +41,7 @@ const Product = () => {
           <li className="flex min-h-[15rem] flex-col justify-between rounded-[2rem] bg-white/70 p-6">
             <span aria-hidden="true" className="block h-12 w-12 rounded-full bg-livales-rose" />
             <span>
-              <span className="block font-display text-[1.25rem] font-semibold">{t("product.couple.name")}</span>
+              <span className="block font-display text-[1.25rem] font-semibold">{t("product.couple.name")}</span>{" "}
               <span className="mt-1 block text-[1rem] text-ink/70">{t("product.couple.status")}</span>
             </span>
           </li>
