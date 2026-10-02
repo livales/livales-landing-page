@@ -3,6 +3,16 @@
   command = "npm run build"
   publish = "dist"
 
+# Send the default Netlify address to the real domain, so search engines see
+# one site instead of a duplicate at livales.netlify.app. Deploy previews
+# (deploy-preview-N--livales.netlify.app) use other hostnames and are unaffected;
+# Netlify already marks them noindex.
+[[redirects]]
+  from = "https://livales.netlify.app/*"
+  to = "https://livales.com/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
