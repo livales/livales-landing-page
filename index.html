@@ -8,7 +8,7 @@
     <title>Livales — Software yang Mendekatkan</title>
     <meta
       name="description"
-      content="Livales membuat software yang mendekatkan: dengan orang tersayang, dan dengan bahasa baru. Coba Kana Speed, belajar bahasa Jepang gratis."
+      content="Livales membuat software yang mendekatkan: Kana Speed untuk belajar bahasa Jepang, dan Kado Livales untuk mencari kado yang beneran disukai."
     />
     <meta name="author" content="Livales" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -69,7 +69,7 @@
             "description": "Perusahaan teknologi dari Indonesia yang merancang dan membangun software sendiri: software yang mendekatkan dengan orang tersayang, dan dengan bahasa serta budaya baru.",
             "areaServed": "ID",
             "sameAs": ["https://www.linkedin.com/company/livales/"],
-            "owns": { "@id": "https://kana.livales.com/#app" }
+            "owns": [{ "@id": "https://kana.livales.com/#app" }, { "@id": "https://kado.livales.com/#app" }]
           },
           {
             "@type": "WebApplication",
@@ -80,6 +80,18 @@
             "operatingSystem": "Web",
             "inLanguage": ["id", "en"],
             "description": "Belajar bahasa Jepang gratis dengan kuis interaktif: hiragana, katakana, salam, perkenalan diri, angka, dan waktu.",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+            "publisher": { "@id": "https://livales.com/#organization" }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://kado.livales.com/#app",
+            "name": "Kado Livales",
+            "url": "https://kado.livales.com/",
+            "applicationCategory": "LifestyleApplication",
+            "operatingSystem": "Web",
+            "inLanguage": "id",
+            "description": "Cari kado untuk ibu, ayah, pasangan, sahabat, atau rekan kerja: produk nyata dari marketplace Indonesia yang dipilih manual, plus wishlist dan patungan kado.",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
             "publisher": { "@id": "https://livales.com/#organization" }
           },

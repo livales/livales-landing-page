@@ -10,6 +10,7 @@ This README is also the main context file for AI coding assistants working on th
 
 1. **The page is about the company, not one product.** Positioning: "software yang mendekatkan", meaning closer to people you love, and closer to new languages and cultures. Products are shown as a growing shelf:
    - **Kana Speed** (live, public): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked.
+   - **Kado Livales** (live, public, Indonesian only): gift recommendations from Indonesian marketplaces, plus wishlists and group gifts ("patungan"), at [kado.livales.com](https://kado.livales.com/). It can be named, described, and linked.
    - **An app for couples** (in development): only its category may be mentioned ("aplikasi untuk pasangan", "sedang dibuat").
 2. **The couples app is confidential.** Never write its name or describe its concept or how it works: not in copy, meta tags, alt text, comments, commit messages, or this README. This repo is public. Don't use words like "game"/"dimainkan", and avoid board or grid visuals that could hint at it.
 3. **Light, never dark, and no generic "AI template" styling.** The brand is for couples and friends, so it should feel friendly. A dark design was rejected as creepy ("menyeramkan"). A later design full of stock patterns (eyebrow labels, gradient headline words, glows, identical shadowed cards, 01/02 numbering, stat rows, fade-up animations) was rejected as "AI slop". Follow the visual system in [Brand → Visual system](#visual-system).
@@ -80,7 +81,7 @@ src/
 | About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
 | Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Soft rose field.** The logo's L embracing couples, friends, family, anyone |
 | How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
-| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": Kana Speed (links to `KANA_URL[language]`), the app for couples (category only), and empty slots |
+| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": live products (Kana Speed → `KANA_URL[language]`, Kado Livales → `KADO_URL`; add new ones to the `live` array), the app for couples (category only), and an empty slot |
 | FAQ | `Faq.tsx` | `#faq` | Radix accordion |
 | Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Soft rose field.** Email sign-up form |
 | Footer | `Footer.tsx` | – | Links + LinkedIn |
