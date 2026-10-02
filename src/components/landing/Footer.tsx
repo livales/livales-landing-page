@@ -1,4 +1,4 @@
-import { useLanguage, KANA_URL } from "@/contexts/LanguageContext";
+import { useLanguage, KANA_URL, KADO_URL } from "@/contexts/LanguageContext";
 import Logo from "@/components/brand/Logo";
 import { sections } from "./Navbar";
 
@@ -33,6 +33,11 @@ const Footer = () => {
             <li>
               <a href={KANA_URL[language]} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
                 Kana Speed
+              </a>
+            </li>
+            <li>
+              <a href={KADO_URL} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
+                Kado Livales
               </a>
             </li>
           </ul>
