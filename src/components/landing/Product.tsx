@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Gift } from "lucide-react";
 import { useLanguage, KANA_URL, KADO_URL } from "@/contexts/LanguageContext";
 
 /**
@@ -23,11 +22,8 @@ const Product = () => {
     {
       key: "kado",
       href: KADO_URL,
-      mark: (
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-livales-rose text-ink">
-          <Gift className="h-6 w-6" strokeWidth={2.25} />
-        </span>
-      ),
+      // Temporary icon supplied by the Kado team; swap the file to update it.
+      mark: <img src="/products/kado-livales.svg" alt="" width={48} height={48} className="h-12 w-12" />,
     },
   ];
 
