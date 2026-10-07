@@ -18,10 +18,11 @@ Livales company website: React 18 + Vite + TypeScript + Tailwind, live at https:
 - Tokens: `src/index.css` + `tailwind.config.ts`; layout helpers `.page`, `.heading-lg`, `.heading-md`, `.btn-ink`
 - Illustrations: `src/components/brand/Embrace.tsx` (the L embracing dots)
 - The home page is prerendered and hydrated, so never read `localStorage`/`window` during render; use `useEffect` (see README → Prerendering and SEO)
-- SEO tags + JSON-LD live in `index.html`; the canonical domain is `https://livales.com/`
+- SEO tags + JSON-LD live in `index.html`; the canonical domain is `https://livales.com/`. SEO gotchas (force-mounted FAQ answers, `{" "}` between inline phrases, square ≥48 px favicons) are in README → Prerendering and SEO
+- New live product? Follow README → Adding a product to the shelf (6 places)
 - `src/components/ui/` is shadcn scaffold. Mostly unused, so don't restyle it.
 
 ## README sections
-Rules · Project structure (section map + anchors) · Brand (logo geometry, colors) · How things work (i18n, prerender, Firebase) · Status and TODO (domain, SEO)
+Rules · Project structure (section map, adding a product) · Brand (logo geometry, colors, visual system) · How things work (i18n, prerender + SEO, Firebase) · Status and TODO · Deployment (previews, domain, DNS, Search Console)
 
 Private notes that must not be committed go in `CLAUDE.local.md` (gitignored).
