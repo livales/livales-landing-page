@@ -1,6 +1,6 @@
 # Livales — company website
 
-The public landing page for **Livales**, an Indonesian technology company that designs and builds its own software that **brings people closer**: to the people they love, and to new languages and cultures.
+The public landing page for **Livales**, an Indonesian technology company that designs and builds its own apps. Tagline: **"Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal."** / **"Closer to the people you love, and the world you want to know."** (the world = new languages and cultures).
 
 This README is also the main context file for AI coding assistants working on the repo. Read the **Rules** section before changing copy, visuals, or the logo.
 
@@ -8,7 +8,7 @@ This README is also the main context file for AI coding assistants working on th
 
 ## Rules (read first)
 
-1. **The page is about the company, not one product.** Positioning: "software yang mendekatkan", meaning closer to people you love, and closer to new languages and cultures. Products are shown as a growing shelf:
+1. **The page is about the company, not one product.** Positioning follows the tagline shared with Instagram and Threads: closer to the people you love, and to the world you want to know (new languages and cultures). Say "aplikasi / apps" rather than "software" in copy. Products are shown as a growing shelf:
    - **Kana Speed** (live, public): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked.
    - **Kado Livales** (live, public, Indonesian only): gift recommendations from Indonesian marketplaces, plus wishlists and group gifts ("patungan"), at [kado.livales.com](https://kado.livales.com/). It can be named, described, and linked.
    - **An app for couples** (in development): only its category may be mentioned ("aplikasi untuk pasangan", "sedang dibuat").

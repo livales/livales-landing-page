@@ -20,8 +20,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 const STORAGE_KEY = "livales.lang";
 
-// NOTE: the page is about Livales the company: software that brings you
-// closer, to the people you love and to new languages and cultures.
+// NOTE: the page is about Livales the company. Tagline: "Lebih dekat dengan
+// orang tersayang, dan dunia yang ingin kamu kenal." / "Closer to the people
+// you love, and the world you want to know." (shared with Instagram and Threads).
+// The world you want to know = new languages and cultures.
 // Products: Kana Speed and Kado Livales (live, public) and an app for couples
 // in development.
 // The couples app may only be described as "an app for couples": never its
@@ -47,9 +49,9 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.close": "Tutup menu",
 
     // Hero
-    "hero.title": "Kami bikin software yang mendekatkan.",
+    "hero.title": "Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
     "hero.body":
-      "Dekat dengan orang yang kamu sayang, dan dengan bahasa serta budaya baru. Livales adalah perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri.",
+      "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri, untuk belajar bahasa dan budaya baru, dan untuk merawat hubungan dengan orang-orang terdekatmu.",
     "hero.cta.primary": "Lihat produk kami",
     "hero.cta.secondary": "Ikuti kabar dari kami",
     "hero.markLabel": "Simbol Livales: huruf L yang merangkul sebuah titik",
@@ -77,7 +79,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Approach / principles
     "approach.title": "Cara kami bekerja",
-    "approach.p1.title": "Mendekatkan, bukan menjauhkan",
+    "approach.p1.title": "Lebih dekat, bukan lebih jauh",
     "approach.p1.body":
       "Setiap fitur kami uji dengan satu pertanyaan: apakah ini membuatmu lebih dekat dengan orang atau hal yang kamu pedulikan?",
     "approach.p2.title": "Sebentar, tapi berarti",
@@ -109,7 +111,7 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.title": "Pertanyaan yang sering muncul",
     "faq.q1": "Livales itu apa?",
     "faq.a1":
-      "Perusahaan teknologi dari Indonesia yang merancang dan membangun software sendiri: software yang mendekatkan kamu dengan orang yang kamu sayang, dan dengan bahasa serta budaya baru.",
+      "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang, dan dengan dunia yang ingin kamu kenal: bahasa serta budaya baru.",
     "faq.q2": "Apa saja produk Livales?",
     "faq.a2":
       "Saat ini ada Kana Speed, aplikasi gratis untuk belajar bahasa Jepang (kana.livales.com), dan Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com). Aplikasi untuk pasangan sedang kami kembangkan, dan produk lain akan menyusul.",
@@ -138,7 +140,7 @@ const translations: Record<Language, Record<string, string>> = {
     "form.failed": "Belum terkirim. Cek koneksi internetmu, lalu coba lagi.",
 
     // Footer
-    "footer.tagline": "Software yang mendekatkan.",
+    "footer.tagline": "Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
     "footer.company": "Perusahaan",
     "footer.products": "Produk",
     "footer.social": "Sosial",
@@ -157,9 +159,9 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.close": "Close menu",
 
     // Hero
-    "hero.title": "We make software that brings you closer.",
+    "hero.title": "Closer to the people you love, and the world you want to know.",
     "hero.body":
-      "Closer to the people you love, and to new languages and cultures. Livales is a technology company from Indonesia that designs and builds its own apps.",
+      "Livales is a technology company from Indonesia. We design and build our own apps, for learning new languages and cultures, and for staying close to the people who matter to you.",
     "hero.cta.primary": "See our products",
     "hero.cta.secondary": "Get updates from us",
     "hero.markLabel": "The Livales mark: a letter L embracing a dot",
@@ -219,7 +221,7 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.title": "Questions people ask",
     "faq.q1": "What is Livales?",
     "faq.a1":
-      "A technology company from Indonesia that designs and builds its own software: software that brings you closer to the people you love, and to new languages and cultures.",
+      "A technology company from Indonesia that designs and builds its own apps, to bring you closer to the people you love, and to the world you want to know: new languages and cultures.",
     "faq.q2": "What products does Livales make?",
     "faq.a2":
       "Right now there's Kana Speed, a free app for learning Japanese (kana.livales.com), and Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian). An app for couples is in development, and more will follow.",
@@ -247,7 +249,7 @@ const translations: Record<Language, Record<string, string>> = {
     "form.failed": "Not sent yet. Check your internet connection and try again.",
 
     // Footer
-    "footer.tagline": "Software that brings you closer.",
+    "footer.tagline": "Closer to the people you love, and the world you want to know.",
     "footer.company": "Company",
     "footer.products": "Products",
     "footer.social": "Social",
