@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Embrace, type EmbraceGroup } from "@/components/brand/Embrace";
 
-const groups: EmbraceGroup[] = ["couple", "family", "learner", "anyone"];
+const groups: EmbraceGroup[] = ["couple", "family", "anyone"];
 
 /** Soft rose field: the same embrace from the logo, around different audiences. */
 const Audience = () => {
@@ -11,7 +11,7 @@ const Audience = () => {
     <section id="audience" className="bg-livales-rose-soft">
       <div className="page py-20 sm:py-28">
         <h2 className="heading-lg">{t("audience.title")}</h2>
-        <ul className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-3">
           {groups.map((g) => (
             <li key={g}>
               <Embrace group={g} className="max-w-[11rem]" />

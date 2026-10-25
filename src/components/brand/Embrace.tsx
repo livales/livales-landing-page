@@ -3,28 +3,17 @@ import { cn } from "@/lib/utils";
 /*
  * Illustrations built from the logo's own parts: an L (stem + base) that
  * embraces something. The brand mark embraces one dot; each audience is the
- * same gesture around a different group (people are dots, lessons are pills).
+ * same gesture around a different group of people (dots).
  * Colours are the logo's own (ink, green, rose), drawn on soft tinted fields.
  */
 
 type Dot = { cx: number; cy: number; r: number; fill: string };
-type Pill = { x: number; y: number; w: number; fill: string };
 
 const INK = "#122023";
 const GREEN = "#2ecc40";
 const ROSE = "#f07c8f";
 
-const groups: Record<"learner" | "couple" | "family" | "anyone", { width: number; dots: Dot[]; pills?: Pill[] }> = {
-  // Lessons stacked up, step by step.
-  learner: {
-    width: 150,
-    dots: [],
-    pills: [
-      { x: 44, y: 22, w: 100, fill: GREEN },
-      { x: 44, y: 44, w: 74, fill: ROSE },
-      { x: 44, y: 66, w: 48, fill: INK },
-    ],
-  },
+const groups: Record<"couple" | "family" | "anyone", { width: number; dots: Dot[] }> = {
   // Two people close enough to overlap.
   couple: {
     width: 118,
@@ -60,14 +49,11 @@ const groups: Record<"learner" | "couple" | "family" | "anyone", { width: number
 export type EmbraceGroup = keyof typeof groups;
 
 export const Embrace = ({ group, className }: { group: EmbraceGroup; className?: string }) => {
-  const { width, dots, pills = [] } = groups[group];
+  const { width, dots } = groups[group];
   return (
     <svg viewBox="0 0 164 112" className={cn("h-auto w-full", className)} aria-hidden="true">
       <rect x="0" y="86" width={width} height="26" rx="13" fill={ROSE} />
       <rect x="0" y="0" width="26" height="112" rx="13" fill={INK} />
-      {pills.map((p, i) => (
-        <rect key={`p${i}`} x={p.x} y={p.y} width={p.w} height="14" rx="7" fill={p.fill} />
-      ))}
       {dots.map((d, i) => (
         <circle key={`d${i}`} {...d} />
       ))}

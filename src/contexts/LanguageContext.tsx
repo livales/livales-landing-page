@@ -23,9 +23,9 @@ const STORAGE_KEY = "livales.lang";
 // NOTE: the page is about Livales the company. Tagline: "Lebih dekat dengan
 // orang tersayang, dan dunia yang ingin kamu kenal." / "Closer to the people
 // you love, and the world you want to know." (shared with Instagram and Threads).
-// The world you want to know = new languages and cultures.
-// Products: Kana Speed and Kado Livales (live, public) and an app for couples
-// in development.
+// The main focus is relationships: couples, family and friends (Kado Livales
+// and the app for couples in development). Kana Speed (learning Japanese) is a
+// side project: keep it last and labelled as one, never as a second pillar.
 // The couples app may only be described as "an app for couples": never its
 // name, concept or mechanics.
 // Voice: warm and plain, first person plural ("kami"), talking to "kamu".
@@ -53,7 +53,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.title": "Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
     "hero.body":
-      "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri, untuk merawat hubungan dengan orang-orang terdekatmu, dan untuk belajar bahasa serta budaya baru.",
+      "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri, untuk merawat hubungan dengan orang-orang terdekatmu: pasangan, keluarga, dan teman.",
     "hero.cta.primary": "Lihat produk kami",
     "hero.cta.secondary": "Ikuti kabar dari kami",
     "hero.markLabel": "Simbol Livales: huruf L yang merangkul sebuah titik",
@@ -67,27 +67,25 @@ const translations: Record<Language, Record<string, string>> = {
     "about.p1":
       "Kebanyakan aplikasi di ponsel kita dibuat supaya kita terus scroll. Waktu habis, tapi kita tidak jadi lebih dekat dengan siapa pun, atau lebih pandai dalam apa pun.",
     "about.p2":
-      "Kami ingin membuat yang sebaliknya: aplikasi yang membawa kamu lebih dekat. Ke orang-orang yang kamu sayang, dan ke bahasa, budaya, serta dunia yang ingin kamu kenal.",
+      "Kami ingin membuat yang sebaliknya: aplikasi yang membawa kamu lebih dekat. Ke pasangan, keluarga, dan teman yang kamu sayang.",
     "about.p3":
-      "Semua produk Livales kami rancang dan bangun sendiri, di Indonesia. Yang pertama sudah bisa kamu coba hari ini.",
+      "Semua produk Livales kami rancang dan bangun sendiri, di Indonesia. Kado Livales sudah bisa kamu coba hari ini, dan aplikasi untuk pasangan sedang kami siapkan.",
     "about.sign": "Tim Livales",
 
     // Audience
     "audience.title": "Untuk siapa",
-    "audience.learner.title": "Pembelajar",
-    "audience.learner.body": "Yang ingin menguasai bahasa baru, satu langkah setiap hari.",
     "audience.couple.title": "Pasangan",
     "audience.couple.body": "Yang ingin tetap hangat, bahkan setelah bertahun-tahun bersama.",
     "audience.family.title": "Keluarga & teman",
     "audience.family.body": "Yang ingin tetap nyambung, meski sibuk atau tinggal berjauhan.",
     "audience.anyone.title": "Siapa saja",
-    "audience.anyone.body": "Siapa pun yang ingin lebih dekat dengan orang dan hal yang mereka pedulikan.",
+    "audience.anyone.body": "Siapa pun yang ingin lebih dekat dengan orang-orang yang mereka sayang.",
 
     // Approach / principles
     "approach.title": "Cara kami bekerja",
     "approach.p1.title": "Lebih dekat, bukan lebih jauh",
     "approach.p1.body":
-      "Setiap fitur kami uji dengan satu pertanyaan: apakah ini membuatmu lebih dekat dengan orang atau hal yang kamu pedulikan?",
+      "Setiap fitur kami uji dengan satu pertanyaan: apakah ini membuatmu lebih dekat dengan orang yang kamu sayang?",
     "approach.p2.title": "Sebentar, tapi berarti",
     "approach.p2.body":
       "Kami tidak mengejar waktu layar. Sesi singkat yang terasa berguna lebih baik daripada berjam-jam scroll.",
@@ -101,11 +99,12 @@ const translations: Record<Language, Record<string, string>> = {
     // Product — a shelf that will keep filling up
     "product.title": "Dua sudah bisa dicoba. Satu lagi sedang dibuat.",
     "product.body":
-      "Kado Livales membantu kamu menemukan kado yang beneran disukai orang tersayang. Kana Speed membantu kamu belajar bahasa Jepang lewat kuis singkat. Aplikasi untuk pasangan sedang kami siapkan. Rak ini akan terus terisi.",
+      "Kado Livales membantu kamu menemukan kado yang beneran disukai orang tersayang. Aplikasi untuk pasangan sedang kami siapkan. Di sela itu, ada juga Kana Speed, proyek sampingan kami untuk belajar bahasa Jepang lewat kuis singkat.",
     "product.kana.name": "Kana Speed",
     "product.kana.desc": "Belajar bahasa Jepang",
     "product.kana.cta": "Coba Kana Speed",
     "product.kana.newTab": "(terbuka di tab baru)",
+    "product.kana.side": "Proyek sampingan",
     "product.kado.name": "Kado Livales",
     "product.kado.desc": "Cari kado yang beneran dia suka",
     "product.kado.cta": "Coba Kado Livales",
@@ -117,10 +116,10 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.title": "Pertanyaan yang sering muncul",
     "faq.q1": "Livales itu apa?",
     "faq.a1":
-      "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang, dan dengan dunia yang ingin kamu kenal: bahasa serta budaya baru.",
+      "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang: pasangan, keluarga, dan teman.",
     "faq.q2": "Apa saja produk Livales?",
     "faq.a2":
-      "Saat ini ada Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com), dan Kana Speed, aplikasi gratis untuk belajar bahasa Jepang (kana.livales.com). Aplikasi untuk pasangan sedang kami kembangkan, dan produk lain akan menyusul.",
+      "Saat ini ada Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com), dan aplikasi untuk pasangan yang sedang kami kembangkan. Ada juga Kana Speed, proyek sampingan kami: aplikasi gratis untuk belajar bahasa Jepang (kana.livales.com).",
     "faq.q3": "Kapan aplikasi untuk pasangan rilis?",
     "faq.a3":
       "Masih dalam pengembangan. Detailnya kami umumkan saat sudah siap. Daftarkan email kamu di bawah supaya jadi yang pertama tahu.",
@@ -169,7 +168,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.title": "Closer to the people you love, and the world you want to know.",
     "hero.body":
-      "Livales is a technology company from Indonesia. We design and build our own apps, for staying close to the people who matter to you, and for learning new languages and cultures.",
+      "Livales is a technology company from Indonesia. We design and build our own apps, for staying close to the people who matter to you: your partner, your family, and your friends.",
     "hero.cta.primary": "See our products",
     "hero.cta.secondary": "Get updates from us",
     "hero.markLabel": "The Livales mark: a letter L embracing a dot",
@@ -183,27 +182,25 @@ const translations: Record<Language, Record<string, string>> = {
     "about.p1":
       "Most apps on our phones are built to keep us scrolling. The time goes, but we don't end up closer to anyone, or better at anything.",
     "about.p2":
-      "We want to build the opposite: apps that bring you closer. To the people you love, and to the languages, cultures, and world you want to know.",
+      "We want to build the opposite: apps that bring you closer. To the partner, family, and friends you love.",
     "about.p3":
-      "We design and build every Livales product ourselves, in Indonesia. The first one is ready to try today.",
+      "We design and build every Livales product ourselves, in Indonesia. Kado Livales is ready to try today, and an app for couples is on its way.",
     "about.sign": "The Livales team",
 
     // Audience
     "audience.title": "Who it's for",
-    "audience.learner.title": "Learners",
-    "audience.learner.body": "Who want to pick up a new language, one step a day.",
     "audience.couple.title": "Couples",
     "audience.couple.body": "Who want to stay warm, even after years together.",
     "audience.family.title": "Family & friends",
     "audience.family.body": "Who want to stay in touch, however busy or far apart.",
     "audience.anyone.title": "Anyone",
-    "audience.anyone.body": "Anyone who wants to be closer to the people and things they care about.",
+    "audience.anyone.body": "Anyone who wants to be closer to the people they love.",
 
     // Approach / principles
     "approach.title": "How we work",
     "approach.p1.title": "Closer, not further apart",
     "approach.p1.body":
-      "We test every feature with one question: does this bring you closer to the people or things you care about?",
+      "We test every feature with one question: does this bring you closer to the people you love?",
     "approach.p2.title": "Short, but worth it",
     "approach.p2.body":
       "We don't chase screen time. A short session that actually helps beats hours of scrolling.",
@@ -217,11 +214,12 @@ const translations: Record<Language, Record<string, string>> = {
     // Product
     "product.title": "Two you can try today. One in the works.",
     "product.body":
-      "Kado Livales helps you find a gift the people you love will actually like. Kana Speed helps you learn Japanese through short quizzes. An app for couples is on its way. This shelf will keep filling up.",
+      "Kado Livales helps you find a gift the people you love will actually like. An app for couples is on its way. On the side, there's also Kana Speed, our side project for learning Japanese through short quizzes.",
     "product.kana.name": "Kana Speed",
     "product.kana.desc": "Learn Japanese",
     "product.kana.cta": "Try Kana Speed",
     "product.kana.newTab": "(opens in a new tab)",
+    "product.kana.side": "Side project",
     "product.kado.name": "Kado Livales",
     "product.kado.desc": "Find a gift they'll love (in Indonesian)",
     "product.kado.cta": "Try Kado Livales",
@@ -233,10 +231,10 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.title": "Questions people ask",
     "faq.q1": "What is Livales?",
     "faq.a1":
-      "A technology company from Indonesia that designs and builds its own apps, to bring you closer to the people you love, and to the world you want to know: new languages and cultures.",
+      "A technology company from Indonesia that designs and builds its own apps, to bring you closer to the people you love: your partner, your family, and your friends.",
     "faq.q2": "What products does Livales make?",
     "faq.a2":
-      "Right now there's Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian), and Kana Speed, a free app for learning Japanese (kana.livales.com). An app for couples is in development, and more will follow.",
+      "Right now there's Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian), and an app for couples that's in development. There's also Kana Speed, our side project: a free app for learning Japanese (kana.livales.com).",
     "faq.q3": "When does the app for couples launch?",
     "faq.a3":
       "It's still in development. We'll share the details when it's ready. Leave your email below to be the first to know.",
