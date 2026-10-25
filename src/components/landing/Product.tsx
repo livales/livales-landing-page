@@ -11,6 +11,12 @@ const Product = () => {
 
   const live: { key: string; href: string; mark: ReactNode }[] = [
     {
+      key: "kado",
+      href: KADO_URL,
+      // Temporary icon supplied by the Kado team; swap the file to update it.
+      mark: <img src="/products/kado-livales.svg" alt="" width={48} height={48} className="h-12 w-12" />,
+    },
+    {
       key: "kana",
       href: KANA_URL[language],
       mark: (
@@ -18,12 +24,6 @@ const Product = () => {
           か
         </span>
       ),
-    },
-    {
-      key: "kado",
-      href: KADO_URL,
-      // Temporary icon supplied by the Kado team; swap the file to update it.
-      mark: <img src="/products/kado-livales.svg" alt="" width={48} height={48} className="h-12 w-12" />,
     },
   ];
 

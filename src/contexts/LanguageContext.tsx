@@ -35,6 +35,8 @@ export const KANA_URL: Record<Language, string> = {
 };
 // Kado Livales is Indonesian-only, so both languages link to the same page.
 export const KADO_URL = "https://kado.livales.com/";
+export const THREADS_URL = "https://www.threads.com/@livalesofficial";
+export const LINKEDIN_URL = "https://www.linkedin.com/company/livales/";
 
 const translations: Record<Language, Record<string, string>> = {
   id: {
@@ -51,10 +53,14 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.title": "Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
     "hero.body":
-      "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri, untuk belajar bahasa dan budaya baru, dan untuk merawat hubungan dengan orang-orang terdekatmu.",
+      "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri, untuk merawat hubungan dengan orang-orang terdekatmu, dan untuk belajar bahasa serta budaya baru.",
     "hero.cta.primary": "Lihat produk kami",
     "hero.cta.secondary": "Ikuti kabar dari kami",
     "hero.markLabel": "Simbol Livales: huruf L yang merangkul sebuah titik",
+
+    // Couples: the only thing we say about the app is this line
+    "couples.title": "Aplikasi untuk pasangan, segera hadir.",
+    "couples.body": "Tinggalkan email kamu. Kami kabari begitu sudah bisa dicoba.",
 
     // About — written as a short note from the team
     "about.title": "Kenapa Livales ada",
@@ -72,7 +78,7 @@ const translations: Record<Language, Record<string, string>> = {
     "audience.learner.body": "Yang ingin menguasai bahasa baru, satu langkah setiap hari.",
     "audience.couple.title": "Pasangan",
     "audience.couple.body": "Yang ingin tetap hangat, bahkan setelah bertahun-tahun bersama.",
-    "audience.family.title": "Sahabat & keluarga",
+    "audience.family.title": "Keluarga & teman",
     "audience.family.body": "Yang ingin tetap nyambung, meski sibuk atau tinggal berjauhan.",
     "audience.anyone.title": "Siapa saja",
     "audience.anyone.body": "Siapa pun yang ingin lebih dekat dengan orang dan hal yang mereka pedulikan.",
@@ -95,7 +101,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Product — a shelf that will keep filling up
     "product.title": "Dua sudah bisa dicoba. Satu lagi sedang dibuat.",
     "product.body":
-      "Kana Speed membantu kamu belajar bahasa Jepang lewat kuis singkat. Kado Livales membantu kamu menemukan kado yang beneran disukai orang tersayang. Aplikasi untuk pasangan sedang kami siapkan. Rak ini akan terus terisi.",
+      "Kado Livales membantu kamu menemukan kado yang beneran disukai orang tersayang. Kana Speed membantu kamu belajar bahasa Jepang lewat kuis singkat. Aplikasi untuk pasangan sedang kami siapkan. Rak ini akan terus terisi.",
     "product.kana.name": "Kana Speed",
     "product.kana.desc": "Belajar bahasa Jepang",
     "product.kana.cta": "Coba Kana Speed",
@@ -114,7 +120,7 @@ const translations: Record<Language, Record<string, string>> = {
       "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang, dan dengan dunia yang ingin kamu kenal: bahasa serta budaya baru.",
     "faq.q2": "Apa saja produk Livales?",
     "faq.a2":
-      "Saat ini ada Kana Speed, aplikasi gratis untuk belajar bahasa Jepang (kana.livales.com), dan Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com). Aplikasi untuk pasangan sedang kami kembangkan, dan produk lain akan menyusul.",
+      "Saat ini ada Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com), dan Kana Speed, aplikasi gratis untuk belajar bahasa Jepang (kana.livales.com). Aplikasi untuk pasangan sedang kami kembangkan, dan produk lain akan menyusul.",
     "faq.q3": "Kapan aplikasi untuk pasangan rilis?",
     "faq.a3":
       "Masih dalam pengembangan. Detailnya kami umumkan saat sudah siap. Daftarkan email kamu di bawah supaya jadi yang pertama tahu.",
@@ -128,6 +134,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Updates
     "cta.title": "Mau dikabari waktu aplikasi berikutnya rilis?",
     "cta.body": "Satu email saat ada kabar penting. Tidak lebih.",
+    "cta.follow": "Atau ikuti kami di",
+    "cta.and": "dan",
 
     // Updates form
     "form.email": "Alamat email",
@@ -161,10 +169,14 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.title": "Closer to the people you love, and the world you want to know.",
     "hero.body":
-      "Livales is a technology company from Indonesia. We design and build our own apps, for learning new languages and cultures, and for staying close to the people who matter to you.",
+      "Livales is a technology company from Indonesia. We design and build our own apps, for staying close to the people who matter to you, and for learning new languages and cultures.",
     "hero.cta.primary": "See our products",
     "hero.cta.secondary": "Get updates from us",
     "hero.markLabel": "The Livales mark: a letter L embracing a dot",
+
+    // Couples: the only thing we say about the app is this line
+    "couples.title": "An app for couples, coming soon.",
+    "couples.body": "Leave your email. We'll let you know as soon as you can try it.",
 
     // About
     "about.title": "Why Livales exists",
@@ -182,7 +194,7 @@ const translations: Record<Language, Record<string, string>> = {
     "audience.learner.body": "Who want to pick up a new language, one step a day.",
     "audience.couple.title": "Couples",
     "audience.couple.body": "Who want to stay warm, even after years together.",
-    "audience.family.title": "Friends & family",
+    "audience.family.title": "Family & friends",
     "audience.family.body": "Who want to stay in touch, however busy or far apart.",
     "audience.anyone.title": "Anyone",
     "audience.anyone.body": "Anyone who wants to be closer to the people and things they care about.",
@@ -205,7 +217,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Product
     "product.title": "Two you can try today. One in the works.",
     "product.body":
-      "Kana Speed helps you learn Japanese through short quizzes. Kado Livales helps you find a gift the people you love will actually like. An app for couples is on its way. This shelf will keep filling up.",
+      "Kado Livales helps you find a gift the people you love will actually like. Kana Speed helps you learn Japanese through short quizzes. An app for couples is on its way. This shelf will keep filling up.",
     "product.kana.name": "Kana Speed",
     "product.kana.desc": "Learn Japanese",
     "product.kana.cta": "Try Kana Speed",
@@ -224,7 +236,7 @@ const translations: Record<Language, Record<string, string>> = {
       "A technology company from Indonesia that designs and builds its own apps, to bring you closer to the people you love, and to the world you want to know: new languages and cultures.",
     "faq.q2": "What products does Livales make?",
     "faq.a2":
-      "Right now there's Kana Speed, a free app for learning Japanese (kana.livales.com), and Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian). An app for couples is in development, and more will follow.",
+      "Right now there's Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian), and Kana Speed, a free app for learning Japanese (kana.livales.com). An app for couples is in development, and more will follow.",
     "faq.q3": "When does the app for couples launch?",
     "faq.a3":
       "It's still in development. We'll share the details when it's ready. Leave your email below to be the first to know.",
@@ -237,6 +249,8 @@ const translations: Record<Language, Record<string, string>> = {
     // Updates
     "cta.title": "Want to hear when our next app launches?",
     "cta.body": "One email when there's real news. Nothing more.",
+    "cta.follow": "Or follow us on",
+    "cta.and": "and",
 
     // Updates form
     "form.email": "Email address",

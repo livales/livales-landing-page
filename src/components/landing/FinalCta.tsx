@@ -1,4 +1,4 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, THREADS_URL, LINKEDIN_URL } from "@/contexts/LanguageContext";
 import WaitlistForm from "./WaitlistForm";
 
 const FinalCta = () => {
@@ -10,6 +10,17 @@ const FinalCta = () => {
         <div>
           <h2 className="heading-lg max-w-[20ch]">{t("cta.title")}</h2>
           <p className="mt-5 text-[1.1rem] text-ink/75">{t("cta.body")}</p>
+          <p className="mt-5 text-[1.05rem] text-ink/75">
+            {t("cta.follow")}{" "}
+            <a href={THREADS_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink text-ink">
+              Threads
+            </a>{" "}
+            {t("cta.and")}{" "}
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink text-ink">
+              LinkedIn
+            </a>
+            .
+          </p>
         </div>
         <WaitlistForm />
       </div>

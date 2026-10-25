@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Embrace, type EmbraceGroup } from "@/components/brand/Embrace";
 
-const groups: EmbraceGroup[] = ["learner", "couple", "family", "anyone"];
+const groups: EmbraceGroup[] = ["couple", "family", "learner", "anyone"];
 
 /** Soft rose field: the same embrace from the logo, around different audiences. */
 const Audience = () => {

@@ -1,4 +1,4 @@
-import { useLanguage, KANA_URL, KADO_URL } from "@/contexts/LanguageContext";
+import { useLanguage, KANA_URL, KADO_URL, THREADS_URL, LINKEDIN_URL } from "@/contexts/LanguageContext";
 import Logo from "@/components/brand/Logo";
 import { sections } from "./Navbar";
 
@@ -31,13 +31,13 @@ const Footer = () => {
           <p className="text-[0.95rem] font-semibold">{t("footer.products")}</p>
           <ul className="mt-4 space-y-3 text-[1rem]">
             <li>
-              <a href={KANA_URL[language]} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
-                Kana Speed
+              <a href={KADO_URL} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
+                Kado Livales
               </a>
             </li>
             <li>
-              <a href={KADO_URL} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
-                Kado Livales
+              <a href={KANA_URL[language]} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
+                Kana Speed
               </a>
             </li>
           </ul>
@@ -47,12 +47,12 @@ const Footer = () => {
           <p className="text-[0.95rem] font-semibold">{t("footer.social")}</p>
           <ul className="mt-4 space-y-3 text-[1rem]">
             <li>
-              <a
-                href="https://www.linkedin.com/company/livales/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink/75 hover:text-ink"
-              >
+              <a href={THREADS_URL} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
+                Threads
+              </a>
+            </li>
+            <li>
+              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="text-ink/75 hover:text-ink">
                 LinkedIn
               </a>
             </li>
