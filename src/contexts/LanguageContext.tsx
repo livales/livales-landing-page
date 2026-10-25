@@ -25,7 +25,8 @@ const STORAGE_KEY = "livales.lang";
 // you love, and the world you want to know." (shared with Instagram and Threads).
 // The main focus is relationships: couples, family and friends (Kado Livales
 // and the app for couples in development). Kana Speed (learning Japanese) is a
-// side project: keep it last and labelled as one, never as a second pillar.
+// live product shown after Kado, without a "side project" label, but language
+// is never presented as a second pillar in the hero, About, audience or FAQ.
 // The couples app may only be described as "an app for couples": never its
 // name, concept or mechanics.
 // Voice: warm and plain, first person plural ("kami"), talking to "kamu".
@@ -99,12 +100,11 @@ const translations: Record<Language, Record<string, string>> = {
     // Product — a shelf that will keep filling up
     "product.title": "Dua sudah bisa dicoba. Satu lagi sedang dibuat.",
     "product.body":
-      "Kado Livales membantu kamu menemukan kado yang beneran disukai orang tersayang. Aplikasi untuk pasangan sedang kami siapkan. Di sela itu, ada juga Kana Speed, proyek sampingan kami untuk belajar bahasa Jepang lewat kuis singkat.",
+      "Kado Livales membantu kamu menemukan kado yang beneran disukai orang tersayang. Kana Speed membantu kamu belajar huruf Jepang lewat kuis singkat. Aplikasi untuk pasangan sedang kami siapkan.",
     "product.kana.name": "Kana Speed",
     "product.kana.desc": "Belajar bahasa Jepang",
     "product.kana.cta": "Coba Kana Speed",
     "product.kana.newTab": "(terbuka di tab baru)",
-    "product.kana.side": "Proyek sampingan",
     "product.kado.name": "Kado Livales",
     "product.kado.desc": "Cari kado yang beneran dia suka",
     "product.kado.cta": "Coba Kado Livales",
@@ -119,7 +119,7 @@ const translations: Record<Language, Record<string, string>> = {
       "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang: pasangan, keluarga, dan teman.",
     "faq.q2": "Apa saja produk Livales?",
     "faq.a2":
-      "Saat ini ada Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com), dan aplikasi untuk pasangan yang sedang kami kembangkan. Ada juga Kana Speed, proyek sampingan kami: aplikasi gratis untuk belajar bahasa Jepang (kana.livales.com).",
+      "Saat ini ada Kado Livales, untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com), dan Kana Speed, aplikasi gratis untuk belajar huruf Jepang (kana.livales.com). Aplikasi untuk pasangan sedang kami kembangkan.",
     "faq.q3": "Kapan aplikasi untuk pasangan rilis?",
     "faq.a3":
       "Masih dalam pengembangan. Detailnya kami umumkan saat sudah siap. Daftarkan email kamu di bawah supaya jadi yang pertama tahu.",
@@ -214,12 +214,11 @@ const translations: Record<Language, Record<string, string>> = {
     // Product
     "product.title": "Two you can try today. One in the works.",
     "product.body":
-      "Kado Livales helps you find a gift the people you love will actually like. An app for couples is on its way. On the side, there's also Kana Speed, our side project for learning Japanese through short quizzes.",
+      "Kado Livales helps you find a gift the people you love will actually like. Kana Speed helps you learn the Japanese alphabets through short quizzes. An app for couples is on its way.",
     "product.kana.name": "Kana Speed",
     "product.kana.desc": "Learn Japanese",
     "product.kana.cta": "Try Kana Speed",
     "product.kana.newTab": "(opens in a new tab)",
-    "product.kana.side": "Side project",
     "product.kado.name": "Kado Livales",
     "product.kado.desc": "Find a gift they'll love (in Indonesian)",
     "product.kado.cta": "Try Kado Livales",
@@ -234,7 +233,7 @@ const translations: Record<Language, Record<string, string>> = {
       "A technology company from Indonesia that designs and builds its own apps, to bring you closer to the people you love: your partner, your family, and your friends.",
     "faq.q2": "What products does Livales make?",
     "faq.a2":
-      "Right now there's Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian), and an app for couples that's in development. There's also Kana Speed, our side project: a free app for learning Japanese (kana.livales.com).",
+      "Right now there's Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com, in Indonesian), and Kana Speed, a free app for learning the Japanese alphabets (kana.livales.com). An app for couples is in development.",
     "faq.q3": "When does the app for couples launch?",
     "faq.a3":
       "It's still in development. We'll share the details when it's ready. Leave your email below to be the first to know.",

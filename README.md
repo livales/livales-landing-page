@@ -8,10 +8,10 @@ This README is also the main context file for AI coding assistants working on th
 
 ## Rules (read first)
 
-1. **The page is about the company, not one product.** Positioning follows the tagline shared with Instagram and Threads: closer to the people you love, and to the world you want to know (new languages and cultures). **Relationships are the main focus** (couples, family, friends). Language learning is only a side project, so don't present it as a second pillar in the hero, About, Who it's for, FAQ, or meta tags. Say "aplikasi / apps" rather than "software" in copy. Products are shown as a growing shelf, in this order:
+1. **The page is about the company, not one product.** Positioning follows the tagline shared with Instagram and Threads: closer to the people you love, and to the world you want to know (new languages and cultures). **Relationships are the main focus** (couples, family, friends). Language learning is not a second pillar, so don't present it as one in the hero, About, Who it's for, FAQ, or meta tags. Say "aplikasi / apps" rather than "software" in copy. Products are shown as a growing shelf, in this order:
    - **Kado Livales** (live, public, Indonesian only): gift recommendations from Indonesian marketplaces, plus wishlists and group gifts ("patungan"), at [kado.livales.com](https://kado.livales.com/). It can be named, described, and linked.
-   - **An app for couples** (in development): only its category may be mentioned ("aplikasi untuk pasangan", "sedang dibuat").
-   - **Kana Speed** (live, public, side project): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked, but always comes last and carries the "Proyek sampingan / Side project" label.
+   - **Kana Speed** (live, public): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked. Don't label it a "side project": every live product counts.
+   - **An app for couples** (in development): only its category may be mentioned ("aplikasi untuk pasangan", "sedang dibuat"). Live products come before it.
 2. **The couples app is confidential.** Never write its name or describe its concept or how it works: not in copy, meta tags, alt text, comments, commit messages, or this README. This repo is public. Don't use words like "game"/"dimainkan", and avoid board or grid visuals that could hint at it.
 3. **Light, never dark, and no generic "AI template" styling.** The brand is about people and the things they care about (couples, family, friends), so it should feel friendly. A dark design was rejected as creepy ("menyeramkan"). A later design full of stock patterns (eyebrow labels, gradient headline words, glows, identical shadowed cards, 01/02 numbering, stat rows, fade-up animations) was rejected as "AI slop". Follow the visual system in [Brand → Visual system](#visual-system).
 4. **Use the official logo files only** (see [Brand](#brand)). Don't redraw, recolor, rotate, stretch, or add effects to the mark. The old striped-arc logo was a stock design shared with another company, so never bring it or arc-stripe motifs back.
@@ -85,7 +85,7 @@ src/
 | About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
 | Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Soft rose field.** The logo's L embracing couples, family & friends, and anyone (dots) |
 | How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
-| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf", relationships first: Kado Livales (`KADO_URL`), the app for couples (category only), Kana Speed (`KANA_URL[language]`, with the "side project" tag), and an empty slot |
+| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": live products first (Kado Livales → `KADO_URL`, Kana Speed → `KANA_URL[language]`), then the app for couples (category only), and an empty slot |
 | FAQ | `Faq.tsx` | `#faq` | Radix accordion; answers stay in the HTML (see [Prerendering and SEO](#prerendering-and-seo)) |
 | Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Soft rose field.** Email sign-up form, plus Threads and LinkedIn links |
 | Footer | `Footer.tsx` | – | Section links, product links, Threads and LinkedIn (`THREADS_URL`, `LINKEDIN_URL`) |
@@ -97,7 +97,7 @@ Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`,
 When a new Livales product goes live, update all of these in one PR:
 
 1. `src/contexts/LanguageContext.tsx`: a URL constant (like `KADO_URL`), and `product.<key>.name` / `.desc` / `.cta` in **both** `id` and `en`. Update `product.title`, `product.body`, and the products FAQ answer (`faq.a2`) too.
-2. `src/components/landing/Product.tsx`: add an `<li>` using the `card()` helper with its `mark` (put image files in `public/products/`). Relationship products go before Kana Speed.
+2. `src/components/landing/Product.tsx`: add an `<li>` using the `card()` helper with its `mark` (put image files in `public/products/`). Live products go before the app for couples.
 3. `src/components/landing/Footer.tsx`: add the link under Products.
 4. `index.html`: add a `WebApplication` to the JSON-LD and its `@id` to the Organization's `owns`. Update the meta description if the product changes how Livales is described.
 5. `public/sitemap.xml`: bump `<lastmod>`.
