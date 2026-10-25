@@ -81,13 +81,14 @@ src/
 |---|---|---|---|
 | Navbar | `Navbar.tsx` | – | Nav links, language toggle, CTA to `#updates` |
 | Hero | `Hero.tsx` + `HeroMark` | `#top` | Headline, short company description, the animated mark |
+| Couples | `Couples.tsx` + `WaitlistForm.tsx` | `#couples` | **Soft rose field.** "An app for couples, coming soon" (nothing more) with its own sign-up (`source: "couples"`) |
 | About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
-| Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Soft rose field.** The logo's L embracing learners (lesson pills), couples, friends & family, anyone (dots) |
+| Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Soft rose field.** The logo's L embracing couples, family & friends, learners (lesson pills), anyone (dots) |
 | How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
-| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": live products (Kana Speed → `KANA_URL[language]`, Kado Livales → `KADO_URL`; add new ones to the `live` array), the app for couples (category only), and an empty slot |
+| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": live products (Kado Livales → `KADO_URL`, Kana Speed → `KANA_URL[language]`; add new ones to the `live` array), the app for couples (category only), and an empty slot |
 | FAQ | `Faq.tsx` | `#faq` | Radix accordion; answers stay in the HTML (see [Prerendering and SEO](#prerendering-and-seo)) |
-| Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Soft rose field.** Email sign-up form |
-| Footer | `Footer.tsx` | – | Section links, product links, LinkedIn |
+| Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Soft rose field.** Email sign-up form, plus Threads and LinkedIn links |
+| Footer | `Footer.tsx` | – | Section links, product links, Threads and LinkedIn (`THREADS_URL`, `LINKEDIN_URL`) |
 
 Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`, and content sits in `.page` (the max-width container).
 

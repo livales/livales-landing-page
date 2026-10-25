@@ -1,5 +1,6 @@
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
+import Couples from "@/components/landing/Couples";
 import About from "@/components/landing/About";
 import Audience from "@/components/landing/Audience";
 import Approach from "@/components/landing/Approach";
@@ -13,6 +14,7 @@ const Index = () => (
     <Navbar />
     <main>
       <Hero />
+      <Couples />
       <About />
       <Audience />
       <Approach />
