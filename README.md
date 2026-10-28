@@ -56,7 +56,7 @@ firestore.rules             Security rules (only landing_subscribers is writable
 tests/                      Firestore rules tests (@firebase/rules-unit-testing)
 public/
   brand/                    Official Livales logo files (SVG + PNG) and app icons
-  products/                 Product marks shown on the shelf (kado-livales.svg is temporary)
+  products/                 Product marks shown on the shelf (kado-livales.svg = Kado's gift-tag logo, from livales-kado)
   favicon.* (svg, ico, 16–192 px png) / apple-touch-icon.png / site.webmanifest / og-image.png
   sitemap.xml / robots.txt
 src/
@@ -176,7 +176,6 @@ Tokens live in `src/index.css` (`:root` HSL variables for shadcn) and `tailwind.
 - **Live** at https://livales.com (HTTPS, `www` → apex), verified in Google Search Console, with `sitemap.xml` submitted. See [Domain, DNS and Search Console](#domain-dns-and-search-console).
 - SEO backlog: add a separate `/en` URL + `hreflang` if English should be indexed; add content pages or a blog for non-brand keywords; bump `<lastmod>` in `public/sitemap.xml` after meaningful content changes.
 - **Open Graph image** (`public/og-image.png`) still uses the earlier style (blurred green/rose glow behind the logo), which the current visual system rules out. Redraw it flat: white or a soft tint, the full logo, and maybe the tagline.
-- **Kado Livales icon** (`public/products/kado-livales.svg`) is a temporary mark from the Kado team. Replace the file when the final one is ready; no code change needed.
 - **Google Search favicon:** Google's favicon service already has the new mark, but search results showed the default globe right after launch. They update on Google's schedule; Search Console → URL Inspection → Request indexing can speed it up.
 - Social: only LinkedIn (`linkedin.com/company/livales`) exists so far. Add others to `Footer.tsx` when they're created.
 - Optional: Firebase App Check if the sign-up form gets spammed.

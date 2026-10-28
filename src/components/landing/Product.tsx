@@ -35,7 +35,7 @@ const Product = () => {
         <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label={t("nav.product")}>
           <li>
             <a href={KADO_URL} target="_blank" rel="noopener noreferrer" className={linkCard}>
-              {/* Temporary icon supplied by the Kado team; swap the file to update it. */}
+              {/* Kado's gift-tag logo, copied from the livales-kado repo; swap the file to update it. */}
               {card("kado", <img src="/products/kado-livales.svg" alt="" width={48} height={48} className="h-12 w-12" />)}
             </a>
           </li>
