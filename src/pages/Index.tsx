@@ -1,29 +1,17 @@
-import Navbar from "@/components/landing/Navbar";
-import Hero from "@/components/landing/Hero";
-import Couples from "@/components/landing/Couples";
-import About from "@/components/landing/About";
-import Audience from "@/components/landing/Audience";
-import Approach from "@/components/landing/Approach";
-import Product from "@/components/landing/Product";
-import Faq from "@/components/landing/Faq";
-import FinalCta from "@/components/landing/FinalCta";
-import Footer from "@/components/landing/Footer";
+import Hero from "@/components/home/Hero";
+import HeartsAndLadders from "@/components/home/HeartsAndLadders";
+import { Lineup, Why, BlogTeaser } from "@/components/home/Sections";
+import Faq from "@/components/home/Faq";
 
 const Index = () => (
-  <div className="min-h-screen overflow-x-clip">
-    <Navbar />
-    <main>
-      <Hero />
-      <Couples />
-      <About />
-      <Audience />
-      <Approach />
-      <Product />
-      <Faq />
-      <FinalCta />
-    </main>
-    <Footer />
-  </div>
+  <>
+    <Hero />
+    <HeartsAndLadders />
+    <Lineup />
+    <Why />
+    <BlogTeaser />
+    <Faq />
+  </>
 );
 
 export default Index;

@@ -1,6 +1,6 @@
 # Livales — company website
 
-The public landing page for **Livales**, an Indonesian technology company that designs and builds its own apps. Tagline: **"Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal."** / **"Closer to the people you love, and the world you want to know."** (the world = new languages and cultures).
+The public website for **Livales**, an Indonesian technology company that designs and builds its own apps. Tagline: **"Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal."** / **"Closer to the people you love, and the world you want to know."** (the world = new languages and cultures).
 
 This README is also the main context file for AI coding assistants working on the repo. Read the **Rules** section before changing copy, visuals, or the logo.
 
@@ -9,10 +9,10 @@ This README is also the main context file for AI coding assistants working on th
 ## Rules (read first)
 
 1. **The page is about the company, not one product.** Positioning follows the tagline shared with Instagram and Threads: closer to the people you love, and to the world you want to know (new languages and cultures). **Relationships are the main focus** (couples, family, friends). Language learning is not a second pillar, so don't present it as one in the hero, About, Who it's for, FAQ, or meta tags. Say "aplikasi / apps" rather than "software" in copy. Products are shown as a growing shelf, in this order:
-   - **Kado Livales** (live, public, Indonesian only): gift recommendations from Indonesian marketplaces, plus wishlists and group gifts ("patungan"), at [kado.livales.com](https://kado.livales.com/). It can be named, described, and linked.
+   - **Kado Livales** (live, public, Indonesian with an English version at `/en`): gift recommendations from Indonesian marketplaces, plus wishlists and group gifts ("patungan"), at [kado.livales.com](https://kado.livales.com/). It can be named, described, and linked.
    - **Kana Speed** (live, public): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked. Don't label it a "side project": every live product counts.
-   - **An app for couples** (in development): only its category may be mentioned ("aplikasi untuk pasangan", "sedang dibuat"). Live products come before it.
-2. **The couples app is confidential.** Never write its name or describe its concept or how it works: not in copy, meta tags, alt text, comments, commit messages, or this README. This repo is public. Don't use words like "game"/"dimainkan", and avoid board or grid visuals that could hint at it.
+   - **Hearts & Ladders** (public, in Android testing): snakes and ladders for couples, at [heartsandladders.livales.com](https://heartsandladders.livales.com/) (`/en` for English). Testers sign up on its own site (`#gabung`). Live products come before it.
+2. **Describe Hearts & Ladders only with what its own site says.** It was confidential until its site launched (Nov 2026). Never mention its private repository, its Firebase project, or features its site doesn't announce. The screenshots in `public/products/hearts-and-ladders/` are copied from its site.
 3. **Light, never dark, and no generic "AI template" styling.** The brand is about people and the things they care about (couples, family, friends), so it should feel friendly. A dark design was rejected as creepy ("menyeramkan"). A later design full of stock patterns (eyebrow labels, gradient headline words, glows, identical shadowed cards, 01/02 numbering, stat rows, fade-up animations) was rejected as "AI slop". Follow the visual system in [Brand → Visual system](#visual-system).
 4. **Use the official logo files only** (see [Brand](#brand)). Don't redraw, recolor, rotate, stretch, or add effects to the mark. The old striped-arc logo was a stock design shared with another company, so never bring it or arc-stripe motifs back.
 5. **Bilingual copy.** Every user-facing string lives in `src/contexts/LanguageContext.tsx` with both `id` (default) and `en` values. Don't hard-code text in components.
@@ -48,26 +48,32 @@ npm run deploy:rules # deploy firestore.rules to the livales project (needs `fir
 ## Project structure
 
 ```
-index.html                  Meta/OG/canonical tags, JSON-LD, favicons, fonts
-netlify.toml                Build command, livales.netlify.app → livales.com redirect, SPA fallback
-scripts/prerender.mjs       Build step: injects the server-rendered home page into dist/index.html
+index.html                  HTML template: meta/OG tags (rewritten per page), Organization JSON-LD, favicons, fonts
+netlify.toml                Build command, livales.netlify.app → livales.com redirect (no SPA fallback)
+scripts/prerender.mjs       Build step: writes every page, 404.html and sitemap.xml into dist/
 firebase.json / .firebaserc Firebase project "livales"; emulator on port 8085
 firestore.rules             Security rules (only landing_subscribers is writable)
 tests/                      Firestore rules tests (@firebase/rules-unit-testing)
 public/
   brand/                    Official Livales logo files (SVG + PNG) and app icons
-  products/                 Product marks shown on the shelf (kado-livales.svg = Kado's gift-tag logo, from livales-kado)
+  products/                 Product marks (kado-livales.svg = Kado's gift-tag logo) and hearts-and-ladders/ (icon + screenshots from its site)
   favicon.* (svg, ico, 16–192 px png) / apple-touch-icon.png / site.webmanifest / og-image.png
-  sitemap.xml / robots.txt
+  robots.txt                (sitemap.xml is generated by the prerender)
 src/
-  main.tsx                  Hydrates the prerendered "/" (createRoot for other paths)
-  entry-server.tsx          Build-time render of a route to HTML (used by prerender)
+  main.tsx                  Hydrates the prerendered page (createRoot in dev, where the root is empty)
+  entry-server.tsx          Build-time render of a route to HTML, plus the SEO data the prerender needs
   App.tsx                   AppProviders + AppRoutes (shared by browser and prerender)
-  pages/Index.tsx           The landing page: composes all sections
-  pages/NotFound.tsx        404 page
-  components/landing/       One file per section + shared pieces (see below)
+  pages/                    Index (/), Products (/produk), About (/tentang), Blog (/blog), BlogPost (/blog/:slug), NotFound
+  components/layout/        SiteLayout (Navbar + page + Updates sign-up + Footer), PageHeader
+  components/home/          Home page sections
+  components/               ProductList, PostList, PhoneShot, TextLink, WaitlistForm, LanguageSelector
   components/brand/Logo.tsx <Logo />, <Logo markOnly />, <Logo inverted />
-  components/brand/Embrace.tsx  <HeroMark /> (animated mark) and <Embrace group=… /> illustrations
+  components/brand/Embrace.tsx  <HeroLineup /> (home hero), <HeroMark /> (animated mark), <Embrace group=… />
+  components/brand/ProductMark.tsx  Each product as a dot (Kado tag, Kana か, Hearts & Ladders icon)
+  content/products.ts       The product shelf (order, URLs, live or testing)
+  content/posts.ts          Blog articles (id + en)
+  lib/seo.ts                ROUTES, per-page title/description, BlogPosting + breadcrumb JSON-LD
+  hooks/usePageMeta.ts      Updates title/description/canonical on client navigation and language change
   components/LanguageSelector.tsx  ID/EN toggle
   contexts/LanguageContext.tsx     All copy (id/en) + t() helper; choice saved in localStorage
   lib/subscribe.ts          Writes a sign-up to Firestore (SDK lazy-loaded)
@@ -75,32 +81,33 @@ src/
   components/ui/            shadcn/ui primitives (mostly unused; keep for future pages)
 ```
 
-### Page sections (in order)
+### Pages
 
-| Section | File | Anchor | Notes |
-|---|---|---|---|
-| Navbar | `Navbar.tsx` | – | Nav links, language toggle, CTA to `#updates` |
-| Hero | `Hero.tsx` + `HeroMark` | `#top` | Headline, short company description, the animated mark |
-| Couples | `Couples.tsx` + `WaitlistForm.tsx` | `#couples` | **Soft rose field.** "An app for couples, coming soon" (nothing more) with its own sign-up (`source: "couples"`) |
-| About | `About.tsx` | `#about` | "Kenapa Livales ada": a short note signed by the team |
-| Who it's for | `Audience.tsx` + `Embrace` | `#audience` | **Soft rose field.** The logo's L embracing couples, family & friends, and anyone (dots) |
-| How we work | `Approach.tsx` | `#approach` | 4 principles as a definition list |
-| Products | `Product.tsx` | `#product` | **Soft green field.** A "shelf": live products first (Kado Livales → `KADO_URL`, Kana Speed → `KANA_URL[language]`), then the app for couples (category only), and an empty slot |
-| FAQ | `Faq.tsx` | `#faq` | Radix accordion; answers stay in the HTML (see [Prerendering and SEO](#prerendering-and-seo)) |
-| Updates | `FinalCta.tsx` + `WaitlistForm.tsx` | `#updates` | **Soft rose field.** Email sign-up form, plus Threads and LinkedIn links |
-| Footer | `Footer.tsx` | – | Section links, product links, Threads and LinkedIn (`THREADS_URL`, `LINKEDIN_URL`) |
+Every page shares the layout: Navbar (Produk, Blog, Tentang, language toggle, "Ikuti kabar" → `#updates`), the page, the **Updates** sign-up (soft rose field, `#updates`), and the Footer.
 
-Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`, and content sits in `.page` (the max-width container).
+| Path | File | Contents |
+|---|---|---|
+| `/` | `pages/Index.tsx` + `components/home/*` | Hero (the logo's L embracing the three apps as dots, the home page's one animation) → Hearts & Ladders (**soft rose**, screenshots, tester CTA to its site) → Lineup (**soft green**, `ProductList`) → Why Livales → latest blog posts → FAQ |
+| `/produk` | `pages/Products.tsx` | One section per app (white, **soft green**, **soft rose**): description, features, platform/language/price facts, link |
+| `/tentang` | `pages/About.tsx` | Why we exist (note from the team), Who it's for (**soft rose**, `Embrace`), How we work, Contact |
+| `/blog` | `pages/Blog.tsx` | All articles, newest first |
+| `/blog/:slug` | `pages/BlogPost.tsx` | Article, a callout for the related Livales app, more articles |
+
+Section headings use the `.heading-lg` / `.heading-md` classes from `index.css`, content sits in `.page` (the max-width container), and article bodies use `.article`.
+
+### Adding a blog post
+
+Add an entry to `src/content/posts.ts` with both `id` and `en` copy, a `date`, `readMinutes`, and optionally the `product` it leads to. The route, prerendered HTML, sitemap entry, and `BlogPosting` JSON-LD all come from that list. Keep slugs in Indonesian and never change a published slug.
 
 ### Adding a product to the shelf
 
 When a new Livales product goes live, update all of these in one PR:
 
-1. `src/contexts/LanguageContext.tsx`: a URL constant (like `KADO_URL`), and `product.<key>.name` / `.desc` / `.cta` in **both** `id` and `en`. Update `product.title`, `product.body`, and the products FAQ answer (`faq.a2`) too.
-2. `src/components/landing/Product.tsx`: add an `<li>` using the `card()` helper with its `mark` (put image files in `public/products/`). Live products go before the app for couples.
-3. `src/components/landing/Footer.tsx`: add the link under Products.
-4. `index.html`: add a `WebApplication` to the JSON-LD and its `@id` to the Organization's `owns`. Update the meta description if the product changes how Livales is described.
-5. `public/sitemap.xml`: bump `<lastmod>`.
+1. `src/contexts/LanguageContext.tsx`: a URL constant (like `KADO_URL`), `product.<key>.*` (name, short, cta, status) and `products.<key>.*` (body, features, facts) in **both** `id` and `en`. Update `lineup.*`, `products.body`, and the FAQ answers (`faq.a2`, `faq.a4`) too.
+2. `src/content/products.ts`: add it to the list (live products before the one in testing). Navbar, footer, home lineup and `/produk` read from here; add its feature keys in `pages/Products.tsx`.
+3. `src/components/brand/ProductMark.tsx`: its dot (put image files in `public/products/`), and its place in `HeroLineup` (`Embrace.tsx`).
+4. `index.html`: add it to the JSON-LD and its `@id` to the Organization's `owns`. `src/lib/seo.ts`: update the home and products descriptions.
+5. `scripts/prerender.mjs`: bump `PAGES_UPDATED`.
 6. This README (Rules → products list) and `CLAUDE.md`.
 
 ---
@@ -154,9 +161,10 @@ Tokens live in `src/index.css` (`:root` HSL variables for shadcn) and `tailwind.
 
 ### Prerendering and SEO
 
-- `npm run build` runs `vite build`, then an SSR build of `src/entry-server.tsx`, then `scripts/prerender.mjs`, which writes the rendered home page into `dist/index.html`. Crawlers and link previews get real HTML, and `main.tsx` hydrates it.
+- `npm run build` runs `vite build`, then an SSR build of `src/entry-server.tsx`, then `scripts/prerender.mjs`, which renders every path in `prerenderPaths` (`src/lib/seo.ts`) to its own file: `index.html`, `produk.html`, `tentang.html`, `blog.html`, `blog/<slug>.html`, plus `404.html` (noindex) and `sitemap.xml`. Netlify serves `/produk` from `produk.html` without a trailing-slash redirect, so URLs match their canonicals, and unknown paths get `404.html` with a real 404 status (there is no SPA fallback). `main.tsx` hydrates whichever page loaded.
+- **Per-page meta:** the prerender rewrites `<title>`, description, canonical, `og:*` and `twitter:*` in the `index.html` template from `getPageMeta()` (Indonesian), and appends `BlogPosting` + `BreadcrumbList` JSON-LD on articles. In the browser, `usePageMeta` keeps them in step with navigation and the language toggle. Keep those tags on one line in `index.html`; the prerender fails loudly if it can't find one.
 - **Keep the first render deterministic.** Anything that differs between the build-time render and the browser's first render causes a hydration mismatch, for example reading `localStorage`, `window`, dates, or random values during render. Read those in `useEffect` instead. Example: `LanguageProvider` always starts in `id` and restores a saved `en` choice after mount.
-- SEO tags live in `index.html`: canonical `https://livales.com/`, Open Graph/Twitter tags, and JSON-LD: `Organization` (which `owns` each product), one `WebApplication` per live product, and `WebSite`. `public/sitemap.xml` lists the URL; update its `<lastmod>` when content changes meaningfully. `public/robots.txt` points to the sitemap.
+- Site-wide JSON-LD lives in `index.html`: `Organization` (which `owns` each product), a `WebApplication` per web app, a `MobileApplication` for Hearts & Ladders, and `WebSite`. The sitemap uses each post's `date` and `PAGES_UPDATED` (in `prerender.mjs`) for other pages; bump it when their content changes meaningfully. `public/robots.txt` points to the sitemap.
 - **FAQ answers are force-mounted** (`forceMount` + `data-[state=closed]:hidden`) so they're in the prerendered HTML; Radix would otherwise leave closed answers out and Google would only see the questions. Open and close are both instant on purpose: animating only the open made the footer jump when switching questions.
 - **Put whitespace between adjacent inline elements** (`{" "}` in JSX) when they hold separate phrases, such as two buttons side by side or a name + description in a card. Without it, extracted text glues words together. Google once showed "Lihat produk kamiIkuti kabar".
 - **Favicons for Google Search** must be square (1:1) and a multiple of 48 px. `favicon.ico` (16/32/48), `favicon-96x96.png`, `favicon-192x192.png`, and a square `favicon.svg` cover this; keep them in sync if the mark changes.
@@ -174,7 +182,7 @@ Tokens live in `src/index.css` (`:root` HSL variables for shadcn) and `tailwind.
 ## Status and TODO
 
 - **Live** at https://livales.com (HTTPS, `www` → apex), verified in Google Search Console, with `sitemap.xml` submitted. See [Domain, DNS and Search Console](#domain-dns-and-search-console).
-- SEO backlog: add a separate `/en` URL + `hreflang` if English should be indexed; add content pages or a blog for non-brand keywords; bump `<lastmod>` in `public/sitemap.xml` after meaningful content changes.
+- SEO backlog: add separate `/en` URLs + `hreflang` if English should be indexed (only Indonesian is prerendered now); keep publishing blog posts for non-brand keywords; submit the regenerated sitemap in Search Console after the multipage launch.
 - **Open Graph image** (`public/og-image.png`) still uses the earlier style (blurred green/rose glow behind the logo), which the current visual system rules out. Redraw it flat: white or a soft tint, the full logo, and maybe the tagline.
 - **Google Search favicon:** Google's favicon service already has the new mark, but search results showed the default globe right after launch. They update on Google's schedule; Search Console → URL Inspection → Request indexing can speed it up.
 - Social: only LinkedIn (`linkedin.com/company/livales`) exists so far. Add others to `Footer.tsx` when they're created.

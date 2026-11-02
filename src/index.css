@@ -114,6 +114,38 @@
     @apply max-w-[36rem] text-[1.075rem] leading-[1.7] sm:text-[1.15rem];
   }
 
+  /* Blog article body: Figtree at reading size, ~65 characters a line. */
+  .article {
+    @apply text-[1.1rem] leading-[1.8] sm:text-[1.15rem];
+  }
+  .article > * + * {
+    @apply mt-6;
+  }
+  .article h2 {
+    @apply heading-md mt-14 sm:text-[1.45rem];
+  }
+  .article ul,
+  .article ol {
+    @apply space-y-3 pl-6;
+  }
+  .article ul {
+    list-style: none;
+  }
+  /* Bullets are the logo's dot. */
+  .article ul > li {
+    @apply relative;
+  }
+  .article ul > li::before {
+    content: "";
+    @apply absolute -left-6 top-[0.7em] h-2.5 w-2.5 rounded-full bg-livales-rose;
+  }
+  .article ol {
+    @apply list-decimal pl-8;
+  }
+  .article ol > li::marker {
+    @apply font-semibold text-ink/60;
+  }
+
   .btn-ink {
     @apply inline-flex h-12 items-center justify-center rounded-full bg-ink px-6 text-[1rem] font-semibold text-white transition-colors hover:bg-[#223a3e];
   }
