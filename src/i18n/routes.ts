@@ -31,19 +31,29 @@ export const absoluteUrl = (path: string) => (path === "/" ? `${SITE_URL}/` : `$
 /** The language of a path, read from its /en prefix. */
 export const localeOf = (path: string): Locale => (path === "/en" || path.startsWith("/en/") ? "en" : "id");
 
-/** Strips a trailing slash or .html so aliases match the canonical path. */
-const normalize = (path: string) => path.replace(/\.html$/, "").replace(/(.)\/$/, "$1");
+/**
+ * The canonical form of a path: no .html, no /index, no trailing slash ("/" for
+ * the home page). Astro.url and the sitemap can hand over any of those aliases.
+ */
+export const normalizePath = (path: string) =>
+  path.replace(/\.html$/, "").replace(/\/index$/, "").replace(/(.)\/$/, "$1") || "/";
+
+/** The blog slug of a post path in either language, or undefined for other pages. */
+export const postSlug = (path: string): string | undefined => {
+  const p = normalizePath(path);
+  const blog = `${pagePaths.blog[localeOf(p)]}/`;
+  return p.startsWith(blog) ? p.slice(blog.length) : undefined;
+};
 
 /**
  * The same page in the other language: a static page's pair, or the same post
- * slug under the other blog. Unknown paths fall back to that language's home.
+ * slug under the other blog (callers check the post exists in that language).
+ * Unknown paths fall back to that language's home.
  */
 export const alternatePath = (path: string, target: Locale): string => {
-  const p = normalize(path);
+  const p = normalizePath(path);
   const page = Object.values(pagePaths).find((paths) => paths.id === p || paths.en === p);
   if (page) return page[target];
-  const lang = localeOf(p);
-  const blog = `${pagePaths.blog[lang]}/`;
-  if (p.startsWith(blog)) return postPath(p.slice(blog.length), target);
-  return pagePaths.home[target];
+  const slug = postSlug(p);
+  return slug ? postPath(slug, target) : pagePaths.home[target];
 };

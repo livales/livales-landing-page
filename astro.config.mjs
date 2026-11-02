@@ -4,34 +4,40 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
-
-const SITE_URL = "https://livales.com";
+import { SITE_URL, absoluteUrl, locales, normalizePath, pagePaths, postPath } from "./src/i18n/routes";
 
 // lastmod for pages that aren't blog posts. Bump it when their content changes
 // meaningfully; changing it on every build would make the date meaningless.
 const PAGES_UPDATED = "2026-11-02";
 
-// Static pages in both languages (keep in step with src/i18n/routes.ts).
-const pairs = [
-  ["/", "/en"],
-  ["/produk", "/en/products"],
-  ["/tentang", "/en/about"],
-  ["/blog", "/en/blog"],
-];
+/** @typedef {Partial<Record<import("./src/i18n/routes").Locale, string>>} Versions */
 
-// Blog posts share one slug in both languages; lastmod is the post's date.
-const postDates = Object.fromEntries(
-  readdirSync("src/content/blog/id").map((file) => [
-    file.replace(/\.md$/, ""),
-    readFileSync(`src/content/blog/id/${file}`, "utf8").match(/^date: (\S+)$/m)?.[1] ?? PAGES_UPDATED,
-  ])
-);
-for (const slug of Object.keys(postDates)) pairs.push([`/blog/${slug}`, `/en/blog/${slug}`]);
+/**
+ * Each sitemap URL with its versions in every language (only the ones that
+ * exist: a blog post can be written in one language) and its lastmod.
+ * @type {Map<string, { versions: Versions, lastmod: string }>}
+ */
+const entries = new Map();
+/** @param {Versions} versions */
+const add = (versions, lastmod = PAGES_UPDATED) => {
+  for (const path of Object.values(versions)) entries.set(path, { versions, lastmod });
+};
 
-/** @param {string} path */
-const url = (path) => (path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`);
-/** @param {string} href */
-const pathOf = (href) => new URL(href).pathname.replace(/(.)\/$/, "$1");
+for (const paths of Object.values(pagePaths)) add(paths);
+
+// Blog posts: src/content/blog/<lang>/<slug>.md, lastmod is the post's date.
+/** @type {Map<string, { versions: Versions, lastmod: string }>} */
+const posts = new Map();
+for (const lang of locales) {
+  for (const file of readdirSync(`src/content/blog/${lang}`).filter((f) => f.endsWith(".md"))) {
+    const slug = file.slice(0, -3);
+    const date = readFileSync(`src/content/blog/${lang}/${file}`, "utf8").match(/^date:\s*["']?(\d{4}-\d{2}-\d{2})/m)?.[1];
+    const post = posts.get(slug) ?? { versions: {}, lastmod: date ?? PAGES_UPDATED };
+    post.versions[lang] = postPath(slug, lang);
+    posts.set(slug, post);
+  }
+}
+for (const { versions, lastmod } of posts.values()) add(versions, lastmod);
 
 export default defineConfig({
   site: SITE_URL,
@@ -51,23 +57,23 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !/\/404$/.test(pathOf(page)),
+      filter: (page) => !/\/404$/.test(normalizePath(new URL(page).pathname)),
       // Each URL lists its other-language version (hreflang), like the <link rel="alternate"> tags.
       serialize(item) {
-        const path = pathOf(item.url);
-        const pair = pairs.find((p) => p.includes(path));
-        const slug = path.match(/\/blog\/([^/]+)$/)?.[1];
+        const path = normalizePath(new URL(item.url).pathname);
+        const entry = entries.get(path);
+        const versions = Object.entries(entry?.versions ?? {});
         return {
           ...item,
-          url: url(path),
-          lastmod: (slug && postDates[slug]) || PAGES_UPDATED,
-          links: pair
-            ? [
-                { lang: "id", url: url(pair[0]) },
-                { lang: "en", url: url(pair[1]) },
-                { lang: "x-default", url: url(pair[0]) },
-              ]
-            : undefined,
+          url: absoluteUrl(path),
+          lastmod: entry?.lastmod ?? PAGES_UPDATED,
+          links:
+            versions.length > 1
+              ? [
+                  ...versions.map(([lang, p]) => ({ lang, url: absoluteUrl(p) })),
+                  { lang: "x-default", url: absoluteUrl(entry.versions.id ?? versions[0][1]) },
+                ]
+              : undefined,
         };
       },
     }),

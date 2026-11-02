@@ -2,11 +2,9 @@
 <!--
   Source of public/og-image.png (Indonesian) and public/og-image-en.png (English), 1200 × 630.
   Flat, per README → Brand → Visual system: white page, ink tagline, a soft green field
-  with the logo's embrace around a family. Render both with headless Chrome:
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --hide-scrollbars \
-      --window-size=1200,630 --virtual-time-budget=8000 \
-      --screenshot=public/og-image.png "file://$PWD/scripts/og-image.html?lang=id"
-  (and ?lang=en → public/og-image-en.png). The logo is the official file, not redrawn.
+  with the logo's embrace around a family. The logo is the official file, not redrawn.
+  Render both with `npm run og-image` (scripts/og-image.mjs), which passes the tagline
+  from src/i18n/ui.ts (footer.tagline) as ?lang=…&tagline=….
 -->
 <html>
   <head>
@@ -44,13 +42,9 @@
       </svg>
     </div>
     <script>
-      const taglines = {
-        id: "Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
-        en: "Closer to the people you love, and the world you want to know.",
-      };
-      const lang = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "id";
-      document.documentElement.lang = lang;
-      document.getElementById("tagline").textContent = taglines[lang];
+      const params = new URLSearchParams(location.search);
+      document.documentElement.lang = params.get("lang") ?? "id";
+      document.getElementById("tagline").textContent = params.get("tagline");
     </script>
   </body>
 </html>

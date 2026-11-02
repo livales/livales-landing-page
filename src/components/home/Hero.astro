@@ -15,7 +15,10 @@ const t = useTranslations(lang);
 // The question card draws from this article's three numbered lists.
 const SOURCE = "pertanyaan-untuk-pasangan";
 const source = await getEntry("blog", `${lang}/${SOURCE}`);
-const lists = orderedLists(source?.body ?? "");
+const lists = orderedLists(source?.rendered?.html ?? "");
+if (lists.length === 0) {
+  throw new Error(`Hero: no numbered lists in src/content/blog/${lang}/${SOURCE}.md (the question card needs them)`);
+}
 const askCopy = Object.fromEntries(
   ["label", "level1", "level2", "level3", "next", "more"].map((k) => [`hero.ask.${k}`, t(`hero.ask.${k}`)])
 );

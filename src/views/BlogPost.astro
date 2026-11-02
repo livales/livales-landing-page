@@ -1,7 +1,7 @@
 ---
-import { render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import { useTranslations, HL_TESTER_URL } from "@/i18n/ui";
-import { pagePath, postPath, type Locale } from "@/i18n/routes";
+import { locales, pagePath, postPath, type Locale } from "@/i18n/routes";
 import { breadcrumbs, blogPosting } from "@/lib/seo";
 import { formatDate, getPosts, type Post } from "@/lib/posts";
 import { products } from "@/content/products";
@@ -22,6 +22,10 @@ const path = postPath(post.slug, lang);
 const { Content } = await render(post);
 const product = products.find((p) => p.key === post.data.product);
 const others = (await getPosts(lang)).filter((p) => p.slug !== post.slug);
+// Posts may be written in one language only; link and hreflang only to versions that exist.
+const translations = (
+  await Promise.all(locales.map(async (l) => ((await getEntry("blog", `${l}/${post.slug}`)) ? l : undefined)))
+).filter((l): l is Locale => l !== undefined);
 ---
 
 <Base
@@ -30,6 +34,7 @@ const others = (await getPosts(lang)).filter((p) => p.slug !== post.slug);
   title={`${title} | Livales`}
   description={description}
   type="article"
+  translations={translations}
   jsonLd={[
     blogPosting({ title, description, date: post.isoDate, lang, path }),
     breadcrumbs([

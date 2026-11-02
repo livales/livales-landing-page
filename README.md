@@ -60,7 +60,7 @@ public/
   brand/                    Official Livales logo files (SVG + PNG) and app icons
   products/                 Product marks (kado-livales.svg = Kado's gift-tag logo), per-app screenshots, hearts-and-ladders/ (icon + screenshots from its site)
   favicon.* (svg, ico, 16–192 px png) / apple-touch-icon.png / site.webmanifest
-  og-image.png / og-image-en.png  Link previews (1200 × 630) per language, rendered from scripts/og-image.html
+  og-image.png / og-image-en.png  Link previews (1200 × 630) per language, rendered from scripts/og-image.html by `npm run og-image` (tagline from ui.ts)
   robots.txt                Points to sitemap-index.xml (written by @astrojs/sitemap)
 src/
   pages/                    Routes only: index, produk, tentang, blog/index, blog/[slug], 404, and the same under en/ (products, about, …)
@@ -68,16 +68,16 @@ src/
   layouts/Base.astro        <head> (meta, canonical, hreflang, OG, Organization JSON-LD, favicons, fonts) + Navbar, page, Updates, Footer
   components/layout/        Navbar, Updates (sign-up section), Footer, PageHeader, nav.ts (navbar pages)
   components/home/          Home page sections (Hero, HeartsAndLadders, Lineup, Why, BlogTeaser, Faq)
-  components/islands/       The only client JavaScript: MobileMenu, QuestionCard, WaitlistForm (React)
+  components/islands/       The only client JavaScript: MobileMenu, QuestionCard, Faq, WaitlistForm (React)
   components/               ProductList, ProductStack, PostList, PhoneShot, TextLink (.astro), LanguageLinks (React, rendered static in the navbar)
   components/brand/         Logo, HeroMark (animated mark, About), Embrace (illustrations), ProductMark (each product as a dot)
   content/blog/<lang>/      Blog articles, Markdown, one file per language with the same slug
   content.config.ts         Blog collection schema (title, description, date, order, readMinutes, product)
   content/products.ts       The product shelf (order, URLs, live or testing, screenshots)
   i18n/ui.ts                All copy (id/en), product/social URLs, useTranslations()
-  i18n/routes.ts            URLs per language (pagePaths, postPath, alternatePath for the language switch and hreflang)
+  i18n/routes.ts            URLs per language (pagePaths, postPath, normalizePath, alternatePath for the language switch and hreflang)
   lib/seo.ts                Per-page title/description, Organization graph, BlogPosting + breadcrumb JSON-LD
-  lib/posts.ts              getPosts(lang), formatDate, orderedLists (the hero card's questions)
+  lib/posts.ts              getPosts(lang), formatDate, orderedLists (the hero card's questions, from the article's rendered HTML)
   lib/subscribe.ts          Writes a sign-up to Firestore (SDK lazy-loaded)
   index.css                 Design tokens + global/component styles
 ```
@@ -109,7 +109,7 @@ readMinutes: 5
 product: kado         # optional: kado | kana | hl, the app the closing callout links to
 ```
 
-The body is plain Markdown (`##` headings, paragraphs, `-` and `1.` lists; quotes and dashes are kept as typed). Both URLs, the blog lists, the sitemap entry with hreflang, and the `BlogPosting` + breadcrumb JSON-LD follow from the files. Keep slugs in Indonesian and never change a published slug. The hero question card reads the three numbered lists of `pertanyaan-untuk-pasangan.md`, so keep that article's lists as questions.
+The body is plain Markdown (`##` headings, paragraphs, `-` and `1.` lists; quotes and dashes are kept as typed). Both URLs, the blog lists, the sitemap entry with hreflang, and the `BlogPosting` + breadcrumb JSON-LD follow from the files. Keep slugs in Indonesian and never change a published slug. Write both languages when you can; a post in one language only works too (no hreflang, and the other language's link goes to its blog). The hero question card reads the numbered lists of `pertanyaan-untuk-pasangan.md` in each language, so keep those lists as questions: the build fails if they disappear.
 
 ### Adding a product to the shelf
 
@@ -170,18 +170,18 @@ Tokens live in `src/index.css` (`:root` HSL variables) and `tailwind.config.ts` 
 ### Copy and language
 
 - Each page knows its language from its route (`src/pages/` vs `src/pages/en/`) and passes `lang` down. Components call `const t = useTranslations(lang)` and `t("section.key")`, which reads `ui[lang]` in `src/i18n/ui.ts`. Missing keys render the key itself, so add both `id` and `en` values for every new string.
-- URLs live in `src/i18n/routes.ts`. English pages have English names (`/en/products`, `/en/about`), blog posts keep one slug in both languages. `alternatePath()` gives the same page in the other language, used by the ID / EN links and the `hreflang` tags. A new page needs its pair in `pagePaths` and in the `pairs` list in `astro.config.mjs` (sitemap).
+- URLs live in `src/i18n/routes.ts`. English pages have English names (`/en/products`, `/en/about`), blog posts keep one slug in both languages. `alternatePath()` gives the same page in the other language, used by the ID / EN links and the `hreflang` tags. A new page only needs its pair in `pagePaths`; `astro.config.mjs` builds the sitemap alternates from it. A blog post may exist in one language only: it then gets no hreflang for the other (in the page and the sitemap), and its other-language link goes to that language's blog.
 - Islands don't import the dictionary: the page passes them only the strings they need as props.
 
 ### Rendering and SEO
 
 - `npm run build` (Astro, `output: "static"`, `build.format: "file"`) writes every page in both languages to its own file: `index.html`, `produk.html`, `tentang.html`, `blog.html`, `blog/<slug>.html`, `en.html`, `en/products.html`, … plus `404.html` and `en/404.html` (noindex). Netlify serves `/produk` from `produk.html` without a trailing-slash redirect, so URLs match their canonicals (`trailingSlash: "never"`). Unknown paths get a real 404 status: `en/404.html` under `/en/*` (a `netlify.toml` rule), `404.html` elsewhere. There is no SPA fallback.
-- **Only islands ship JavaScript:** `MobileMenu` (`client:load`; it also draws the line under the sticky header on scroll), `QuestionCard` (`client:load`, home only) and `WaitlistForm` (`client:idle`, so a fast submit can't reload the page before it hydrates). Everything else is `.astro` and renders to plain HTML. Keep new interactive bits small and in `src/components/islands/`.
+- **Only islands ship JavaScript:** `MobileMenu` (`client:load`; it also draws the line under the sticky header on scroll), `QuestionCard` (`client:load`, home only) `Faq` (`client:visible`, home only) and `WaitlistForm` (`client:load`: before hydration, a submit would reload the page). Everything else is `.astro` and renders to plain HTML. Keep new interactive bits small and in `src/components/islands/`.
 - **Keep an island's first render deterministic.** Islands are rendered at build time and hydrated in the browser, so reading `localStorage`, `window`, dates, or random values during render causes a hydration mismatch. Read those in `useEffect`. Example: `QuestionCard` always starts on the first question and shuffles on click.
 - **Per-page meta** comes from `Base.astro` props: title/description (`pageMeta` in `src/lib/seo.ts`, or the post's frontmatter), canonical, `hreflang` id/en/x-default, `og:*`, `twitter:*`, `og:locale`. Articles add `BlogPosting` + `BreadcrumbList` JSON-LD.
 - Site-wide JSON-LD (`organizationGraph` in `src/lib/seo.ts`) is on every page: `Organization` (which `owns` each product), a `WebApplication` per web app, a `MobileApplication` for Hearts & Ladders, and `WebSite`.
 - **Sitemap:** `@astrojs/sitemap` writes `sitemap-index.xml` + `sitemap-0.xml` with both languages, `xhtml:link` hreflang alternates for each pair, and `lastmod` from each post's `date` or `PAGES_UPDATED` (in `astro.config.mjs`) for other pages; bump it when their content changes meaningfully. `/sitemap.xml` 301-redirects to the index, and `public/robots.txt` points to it.
-- **FAQ answers are in the HTML:** the FAQ is a native accordion (`<details name="faq">`), so closed answers are in the page for search engines without any JavaScript. Open and close are both instant on purpose: animating only the open made the footer jump when switching questions.
+- **FAQ answers are in the HTML:** the `Faq` island renders every answer and hides closed ones with CSS, so search engines read them all. Each question is an `h3` holding a button (screen readers can jump between questions by heading). Open and close are both instant on purpose: animating only the open made the footer jump when switching questions.
 - **Put whitespace between adjacent inline elements** (`{" "}` in `.astro`/JSX) when they hold separate phrases, such as two buttons side by side or a name + description in a card. Without it, extracted text glues words together. Google once showed "Lihat produk kamiIkuti kabar".
 - **Favicons for Google Search** must be square (1:1) and a multiple of 48 px. `favicon.ico` (16/32/48), `favicon-96x96.png`, `favicon-192x192.png`, and a square `favicon.svg` cover this; keep them in sync if the mark changes.
 

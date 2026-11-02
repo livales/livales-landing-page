@@ -22,13 +22,24 @@ export const formatDate = (iso: string, lang: Locale) =>
     timeZone: "UTC",
   }).format(new Date(`${iso}T00:00:00Z`));
 
+const decode = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, "")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+
 /**
- * The numbered lists of a post, read from its Markdown: the hero question card
- * uses the three lists of "30 questions for couples" as its three levels.
+ * The numbered lists of a post, read from its rendered HTML (so line endings and
+ * wrapped items don't matter): the hero question card uses the three lists of
+ * "30 questions for couples" as its three levels.
  */
-export const orderedLists = (markdown: string): string[][] =>
-  markdown
-    .split(/\n{2,}/)
-    .map((block) => block.split("\n"))
-    .filter((lines) => lines.every((line) => /^\d+\.\s/.test(line)))
-    .map((lines) => lines.map((line) => line.replace(/^\d+\.\s+/, "")));
+export const orderedLists = (html: string): string[][] =>
+  [...html.matchAll(/<ol[^>]*>([\s\S]*?)<\/ol>/g)].map(([, list]) =>
+    [...list.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].map(([, item]) => decode(item))
+  );

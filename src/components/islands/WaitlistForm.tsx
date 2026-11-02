@@ -17,7 +17,7 @@ interface WaitlistFormProps {
   source?: string;
 }
 
-/** Email sign-up for news from Livales (an island, hydrated once the page is idle). */
+/** Email sign-up for news from Livales (an island, hydrated on load: before that, a submit would reload the page). */
 const WaitlistForm = ({ lang, copy, className, source = "updates" }: WaitlistFormProps) => {
   const t = (key: string) => copy[key] ?? key;
   const inputId = useId();

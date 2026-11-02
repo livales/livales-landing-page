@@ -58,11 +58,6 @@ export const pageMeta: Record<Locale, Record<Page, PageMeta>> = {
   },
 };
 
-export const notFoundMeta: Record<Locale, PageMeta> = {
-  id: { title: "Halaman tidak ditemukan | Livales", description: "Halaman ini tidak ada." },
-  en: { title: "Page not found | Livales", description: "This page doesn't exist." },
-};
-
 /** The company and its apps, on every page (search engines read the logo, profiles and products from it). */
 export const organizationGraph = {
   "@context": "https://schema.org",

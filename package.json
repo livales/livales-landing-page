@@ -10,7 +10,8 @@
     "check": "astro check",
     "lint": "eslint .",
     "test:rules": "npx -y firebase-tools@15 emulators:exec --only firestore \"node tests/firestore.rules.test.mjs\"",
-    "deploy:rules": "npx -y firebase-tools@15 deploy --only firestore:rules"
+    "deploy:rules": "npx -y firebase-tools@15 deploy --only firestore:rules",
+    "og-image": "node scripts/og-image.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.6",
