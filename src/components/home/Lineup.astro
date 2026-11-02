@@ -1,0 +1,24 @@
+---
+import { useTranslations } from "@/i18n/ui";
+import { pagePath, type Locale } from "@/i18n/routes";
+import ProductList from "@/components/ProductList.astro";
+
+/** Soft green field: every Livales app in one list. */
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="bg-livales-green-soft">
+  <div class="page py-20 sm:py-28">
+    <h2 class="heading-lg max-w-[20ch]">{t("lineup.title")}</h2>
+    <p class="prose-copy mt-6">{t("lineup.body")}</p>
+    <ProductList lang={lang} class="mt-12" />
+    <a href={pagePath("products", lang)} class="btn-ink mt-10">
+      {t("lineup.more")}
+    </a>
+  </div>
+</section>

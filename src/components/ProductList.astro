@@ -1,0 +1,49 @@
+---
+import { useTranslations } from "@/i18n/ui";
+import type { Locale } from "@/i18n/routes";
+import { products } from "@/content/products";
+import ProductMark from "@/components/brand/ProductMark.astro";
+import { cn } from "@/lib/utils";
+
+/**
+ * The shelf as a list: one row per app, each row a link to the app's own site.
+ * Live apps first, then the one in testing.
+ */
+interface Props {
+  lang: Locale;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<ul class={cn("border-t border-ink/15", className)} aria-label={t("nav.products")}>
+  {
+    products.map(({ key, url, live }) => (
+      <li class="border-b border-ink/15">
+        <a
+          href={url[lang]}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 gap-y-3 py-6 sm:grid-cols-[auto_minmax(0,14rem)_minmax(0,1fr)_auto] sm:gap-x-8"
+        >
+          <ProductMark product={key} class={cn("row-span-2 h-14 w-14 sm:row-span-1 sm:h-16 sm:w-16", key === "kado" && "bg-white")} />
+          <span class="font-display text-[1.2rem] font-semibold decoration-livales-rose decoration-[3px] underline-offset-[6px] group-hover:underline sm:text-[1.35rem]">
+            {t(`product.${key}.name`)}
+          </span>{" "}
+          <span class="text-[1.05rem] text-ink/75">{t(`product.${key}.short`)}</span>{" "}
+          <span
+            class={cn(
+              "col-start-2 justify-self-start rounded-full px-3.5 py-1 text-[0.9rem] font-semibold sm:col-start-auto sm:justify-self-end",
+              live ? "bg-white" : "bg-livales-rose-soft"
+            )}
+          >
+            {t(`product.${key}.status`)}
+          </span>
+          <span class="sr-only"> {t("common.newTab")}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

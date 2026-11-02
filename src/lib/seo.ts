@@ -1,38 +1,17 @@
-import type { Language } from "@/contexts/LanguageContext";
-import { getPost, posts } from "@/content/posts";
+import { SITE_URL, absoluteUrl, type Locale, type Page } from "@/i18n/routes";
 
 /*
- * Per-page <title>, description and canonical URL. Used twice: by the
- * prerender (Indonesian, written into each page's HTML) and by usePageMeta in
- * the browser (follows the language toggle). Keep titles stable: changing
- * them often resets how search engines rank the page.
+ * Per-page <title> and description, and the JSON-LD the layout writes into
+ * every page. Keep titles stable: changing them often resets how search
+ * engines rank the page.
  */
-
-export const SITE_URL = "https://livales.com";
-
-export const ROUTES = {
-  home: "/",
-  products: "/produk",
-  about: "/tentang",
-  blog: "/blog",
-} as const;
-
-export const postPath = (slug: string) => `${ROUTES.blog}/${slug}`;
-
-/** Every path the build writes as its own HTML file. */
-export const prerenderPaths = [...Object.values(ROUTES), ...posts.map((p) => postPath(p.slug))];
 
 export interface PageMeta {
   title: string;
   description: string;
-  path: string;
-  /** Extra JSON-LD for this page (the Organization graph is in index.html). */
-  jsonLd?: object[];
 }
 
-type StaticPage = Exclude<keyof typeof ROUTES, "home">;
-
-const pages: Record<Language, Record<"home" | StaticPage, Omit<PageMeta, "path">>> = {
+export const pageMeta: Record<Locale, Record<Page, PageMeta>> = {
   id: {
     home: {
       title: "Livales — Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal",
@@ -79,50 +58,137 @@ const pages: Record<Language, Record<"home" | StaticPage, Omit<PageMeta, "path">
   },
 };
 
-const breadcrumbs = (items: { name: string; path: string }[]) => ({
+export const notFoundMeta: Record<Locale, PageMeta> = {
+  id: { title: "Halaman tidak ditemukan | Livales", description: "Halaman ini tidak ada." },
+  en: { title: "Page not found | Livales", description: "This page doesn't exist." },
+};
+
+/** The company and its apps, on every page (search engines read the logo, profiles and products from it). */
+export const organizationGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://livales.com/#organization",
+      "name": "Livales",
+      "url": "https://livales.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://livales.com/brand/icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang: pasangan, keluarga, dan teman.",
+      "areaServed": "ID",
+      "sameAs": [
+        "https://www.threads.com/@livalesofficial",
+        "https://www.linkedin.com/company/livales/"
+      ],
+      "email": "admin@livales.com",
+      "owns": [
+        {
+          "@id": "https://kado.livales.com/#app"
+        },
+        {
+          "@id": "https://kana.livales.com/#app"
+        },
+        {
+          "@id": "https://heartsandladders.livales.com/#app"
+        }
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://kana.livales.com/#app",
+      "name": "Kana Speed",
+      "url": "https://kana.livales.com/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "inLanguage": [
+        "id",
+        "en"
+      ],
+      "description": "Belajar bahasa Jepang gratis dengan kuis interaktif: hiragana, katakana, salam, perkenalan diri, angka, dan waktu.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "publisher": {
+        "@id": "https://livales.com/#organization"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://kado.livales.com/#app",
+      "name": "Kado Livales",
+      "url": "https://kado.livales.com/",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web",
+      "inLanguage": "id",
+      "description": "Cari kado untuk ibu, ayah, pasangan, sahabat, atau rekan kerja: produk nyata dari marketplace Indonesia yang dipilih manual, plus wishlist dan patungan kado.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "publisher": {
+        "@id": "https://livales.com/#organization"
+      }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://heartsandladders.livales.com/#app",
+      "name": "Hearts & Ladders",
+      "url": "https://heartsandladders.livales.com/",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Android",
+      "inLanguage": [
+        "id",
+        "en"
+      ],
+      "description": "Ular tangga untuk pasangan: lempar dadu, jawab pertanyaan dan tantangan, dan simpan jawabannya jadi kenangan. Main di satu HP atau dari jauh.",
+      "publisher": {
+        "@id": "https://livales.com/#organization"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://livales.com/#website",
+      "name": "Livales",
+      "url": "https://livales.com/",
+      "inLanguage": [
+        "id",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://livales.com/#organization"
+      }
+    }
+  ]
+};
+
+export const breadcrumbs = (items: { name: string; path: string }[]) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: items.map((item, i) => ({
     "@type": "ListItem",
     position: i + 1,
     name: item.name,
-    item: `${SITE_URL}${item.path}`,
+    item: absoluteUrl(item.path),
   })),
 });
 
-export const getPageMeta = (path: string, language: Language): PageMeta | undefined => {
-  const page = (Object.keys(ROUTES) as (keyof typeof ROUTES)[]).find((k) => ROUTES[k] === path);
-  if (page) return { ...pages[language][page], path };
-
-  const slug = path.startsWith(`${ROUTES.blog}/`) ? path.slice(ROUTES.blog.length + 1) : "";
-  const post = getPost(slug);
-  if (!post) return undefined;
-  const copy = post.copy[language];
-  return {
-    title: `${copy.title} | Livales`,
-    description: copy.description,
-    path,
-    jsonLd: [
-      {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: copy.title,
-        description: copy.description,
-        datePublished: post.date,
-        dateModified: post.date,
-        inLanguage: language,
-        mainEntityOfPage: `${SITE_URL}${path}`,
-        image: `${SITE_URL}/og-image.png`,
-        author: { "@id": `${SITE_URL}/#organization` },
-        publisher: { "@id": `${SITE_URL}/#organization` },
-      },
-      breadcrumbs([
-        { name: "Livales", path: "/" },
-        { name: "Blog", path: ROUTES.blog },
-        { name: copy.title, path },
-      ]),
-    ],
-  };
-};
-
-export const canonicalUrl = (path: string) => (path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`);
+export const blogPosting = (post: { title: string; description: string; date: string; lang: Locale; path: string }) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date,
+  dateModified: post.date,
+  inLanguage: post.lang,
+  mainEntityOfPage: absoluteUrl(post.path),
+  image: `${SITE_URL}/og-image.png`,
+  author: { "@id": `${SITE_URL}/#organization` },
+  publisher: { "@id": `${SITE_URL}/#organization` },
+});

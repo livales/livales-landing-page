@@ -1,0 +1,28 @@
+---
+import { cn } from "@/lib/utils";
+
+/** The site's secondary link: ink text over a rose underline. External links open in a new tab. */
+interface Props {
+  href: string;
+  class?: string;
+  /** Screen-reader note for external links, e.g. "(opens in a new tab)". */
+  newTabLabel?: string;
+}
+
+const { href, class: className, newTabLabel } = Astro.props;
+const style = "font-semibold text-ink underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink";
+const external = href.startsWith("http");
+---
+
+{
+  external ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" class={cn(style, className)}>
+      <slot />
+      {newTabLabel && <span class="sr-only"> {newTabLabel}</span>}
+    </a>
+  ) : (
+    <a href={href} class={cn(style, className)}>
+      <slot />
+    </a>
+  )
+}

@@ -1,0 +1,74 @@
+---
+import { useTranslations, THREADS_URL, LINKEDIN_URL, CONTACT_EMAIL } from "@/i18n/ui";
+import { pagePath, type Locale } from "@/i18n/routes";
+import { products } from "@/content/products";
+import Logo from "@/components/brand/Logo.astro";
+import { navItems } from "./nav";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-ink/10">
+  <div class="page grid gap-12 py-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]">
+    <div>
+      <Logo class="h-8" />
+      <p class="mt-5 max-w-[20rem] text-[1rem] text-ink/75">{t("footer.tagline")}</p>
+    </div>
+
+    <nav aria-label={t("footer.company")}>
+      <p class="text-[0.95rem] font-semibold">{t("footer.company")}</p>
+      <ul class="mt-4 space-y-3 text-[1rem]">
+        {
+          navItems.map(({ page, key }) => (
+            <li>
+              <a href={pagePath(page, lang)} class="text-ink/75 hover:text-ink">
+                {t(key)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <p class="text-[0.95rem] font-semibold">{t("footer.products")}</p>
+      <ul class="mt-4 space-y-3 text-[1rem]">
+        {
+          products.map(({ key, url }) => (
+            <li>
+              <a href={url[lang]} target="_blank" rel="noopener noreferrer" class="text-ink/75 hover:text-ink">
+                {t(`product.${key}.name`)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-[0.95rem] font-semibold">{t("footer.social")}</p>
+      <ul class="mt-4 space-y-3 text-[1rem]">
+        <li>
+          <a href={THREADS_URL} target="_blank" rel="noopener noreferrer" class="text-ink/75 hover:text-ink">Threads</a>
+        </li>
+        <li>
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="text-ink/75 hover:text-ink">LinkedIn</a>
+        </li>
+        <li>
+          <a href={`mailto:${CONTACT_EMAIL}`} class="text-ink/75 hover:text-ink">{CONTACT_EMAIL}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page flex flex-col gap-2 border-t border-ink/10 py-6 text-[0.9rem] text-ink/60 sm:flex-row sm:justify-between">
+    <p>© {year} Livales. {t("footer.rights")}</p>
+    <p>{t("footer.made")}</p>
+  </div>
+</footer>

@@ -1,0 +1,106 @@
+---
+import "@/index.css";
+import { absoluteUrl, alternatePath, locales, type Locale } from "@/i18n/routes";
+import { organizationGraph } from "@/lib/seo";
+import Navbar from "@/components/layout/Navbar.astro";
+import Updates from "@/components/layout/Updates.astro";
+import Footer from "@/components/layout/Footer.astro";
+
+/** Every page: head tags, navbar, the page itself, the updates sign-up, and the footer. */
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  /** This page's path, without a trailing slash ("/" for the home page). */
+  path: string;
+  type?: "website" | "article";
+  /** Extra JSON-LD for this page (the Organization graph is on every page). */
+  jsonLd?: object[];
+  /** Not-found pages: noindex, no language alternates, canonical to home. */
+  notFound?: boolean;
+}
+
+const { lang, title, description, type = "website", jsonLd = [], notFound = false } = Astro.props;
+// Astro.url can read /index, .html or a trailing slash depending on the build format and server.
+const path = Astro.props.path.replace(/\.html$/, "").replace(/\/index$/, "").replace(/(.)\/$/, "$1") || "/";
+const canonical = absoluteUrl(notFound ? alternatePath("/", lang) : path);
+const languages = locales.map((l) => ({ lang: l, href: alternatePath(notFound ? "/" : path, l) }));
+const ldJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Livales" />
+    <meta name="robots" content={notFound ? "noindex" : "index, follow, max-image-preview:large"} />
+    <link rel="canonical" href={canonical} />
+    {
+      !notFound && (
+        <>
+          {languages.map((l) => (
+            <link rel="alternate" hreflang={l.lang} href={absoluteUrl(l.href)} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={absoluteUrl(alternatePath(path, "id"))} />
+        </>
+      )
+    }
+
+    <!-- Google Search needs a square icon of at least 48x48 (multiples of 48). -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Livales" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://livales.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={lang === "id" ? "Logo Livales" : "Livales logo"} />
+    <meta property="og:locale" content={lang === "id" ? "id_ID" : "en_US"} />
+    <meta property="og:locale:alternate" content={lang === "id" ? "en_US" : "id_ID"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://livales.com/og-image.png" />
+    <meta name="twitter:image:alt" content={lang === "id" ? "Logo Livales" : "Livales logo"} />
+
+    <!-- Structured data: the company, its logo, profiles and apps; plus this page's own -->
+    <script type="application/ld+json" set:html={ldJson(organizationGraph)} />
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={ldJson(data)} />)}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="min-h-screen overflow-x-clip">
+      <Navbar lang={lang} path={path} languages={languages} />
+      <main>
+        <slot />
+      </main>
+      <Updates lang={lang} />
+      <Footer lang={lang} />
+    </div>
+  </body>
+</html>

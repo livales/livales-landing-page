@@ -1,0 +1,36 @@
+---
+import { cn } from "@/lib/utils";
+
+/**
+ * The brand mark at hero size. On load the dot settles into the embrace and
+ * the base closes around it — the page's single orchestrated motion.
+ */
+interface Props {
+  label: string;
+  class?: string;
+}
+
+const { label, class: className } = Astro.props;
+---
+
+<svg viewBox="-4 -4 88 100" role="img" aria-label={label} class={cn("h-auto w-full", className)}>
+  <rect
+    x="0"
+    y="62"
+    width="80"
+    height="30"
+    rx="15"
+    fill="#f07c8f"
+    class="animate-embrace-arm"
+    style={{ transformBox: "fill-box", transformOrigin: "0% 50%" }}
+  ></rect>
+  <rect x="0" y="0" width="30" height="92" rx="15" fill="#2ecc40"></rect>
+  <circle
+    cx="58"
+    cy="32"
+    r="15"
+    fill="#2ecc40"
+    class="animate-embrace-dot"
+    style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+  ></circle>
+</svg>

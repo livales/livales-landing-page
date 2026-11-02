@@ -1,0 +1,48 @@
+---
+import { getEntry } from "astro:content";
+import { useTranslations } from "@/i18n/ui";
+import { pagePath, postPath, type Locale } from "@/i18n/routes";
+import { orderedLists } from "@/lib/posts";
+import QuestionCard from "@/components/islands/QuestionCard";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// The question card draws from this article's three numbered lists.
+const SOURCE = "pertanyaan-untuk-pasangan";
+const source = await getEntry("blog", `${lang}/${SOURCE}`);
+const lists = orderedLists(source?.body ?? "");
+const askCopy = Object.fromEntries(
+  ["label", "level1", "level2", "level3", "next", "more"].map((k) => [`hero.ask.${k}`, t(`hero.ask.${k}`)])
+);
+---
+
+<section class="page grid items-center gap-12 pb-20 pt-12 sm:pt-16 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-14 lg:pb-28 lg:pt-24">
+  <div>
+    <h1 class="heading-xl max-w-[17ch]">{t("hero.title")}</h1>
+    <p class="prose-copy mt-7 text-ink/80">{t("hero.body")}</p>
+    <div class="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+      <a href={pagePath("products", lang)} class="btn-ink">
+        {t("hero.cta.primary")}
+      </a>{" "}
+      <a
+        href="#updates"
+        class="font-semibold text-ink underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink"
+      >
+        {t("hero.cta.secondary")}
+      </a>
+    </div>
+  </div>
+
+  <QuestionCard
+    client:load
+    lists={lists}
+    moreHref={postPath(SOURCE, lang)}
+    copy={askCopy}
+    className="w-full max-w-[32rem] lg:max-w-none"
+  />
+</section>

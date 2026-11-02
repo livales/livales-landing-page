@@ -1,0 +1,106 @@
+---
+import { useTranslations, CONTACT_EMAIL, THREADS_URL, LINKEDIN_URL } from "@/i18n/ui";
+import type { Locale } from "@/i18n/routes";
+import { pageMeta } from "@/lib/seo";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/layout/PageHeader.astro";
+import Embrace from "@/components/brand/Embrace.astro";
+import HeroMark from "@/components/brand/HeroMark.astro";
+import TextLink from "@/components/TextLink.astro";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const groups = ["couple", "family", "anyone"] as const;
+const principles = ["p1", "p2", "p3", "p4"];
+---
+
+<Base lang={lang} path={Astro.url.pathname} {...pageMeta[lang].about}>
+  <PageHeader title={t("about.title")} lead={t("about.lead")}>
+    <div slot="aside" class="order-first w-28 sm:w-36 lg:order-none lg:ml-auto lg:w-48">
+      <HeroMark label={t("about.markLabel")} />
+    </div>
+  </PageHeader>
+
+  <!-- A short note from the team. -->
+  <section aria-labelledby="why-title" class="border-t border-ink/10">
+    <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+      <h2 id="why-title" class="heading-lg">
+        {t("about.why.title")}
+      </h2>
+      <div class="space-y-6 text-[1.15rem] leading-[1.75] sm:text-[1.3rem]">
+        <p class="max-w-[38rem]">{t("about.p1")}</p>
+        <p class="max-w-[38rem]">{t("about.p2")}</p>
+        <p class="max-w-[38rem] text-ink/75">{t("about.p3")}</p>
+        <p class="pt-2 font-display text-[1rem] font-semibold">{t("about.sign")}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soft rose field: the logo's embrace around different groups of people. -->
+  <section aria-labelledby="audience-title" class="bg-livales-rose-soft">
+    <div class="page py-20 sm:py-28">
+      <h2 id="audience-title" class="heading-lg">
+        {t("audience.title")}
+      </h2>
+      <ul class="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-3">
+        {
+          groups.map((g) => (
+            <li>
+              <Embrace group={g} class="max-w-[11rem]" />
+              <h3 class="heading-md mt-7">{t(`audience.${g}.title`)}</h3>
+              <p class="mt-2 max-w-[18rem] text-[1.05rem] leading-relaxed">{t(`audience.${g}.body`)}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="approach-title">
+    <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+      <h2 id="approach-title" class="heading-lg">
+        {t("approach.title")}
+      </h2>
+      <dl class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        {
+          principles.map((p) => (
+            <div>
+              <dt class="heading-md">{t(`approach.${p}.title`)}</dt>
+              <dd class="mt-3 text-[1.05rem] leading-relaxed text-ink/75">{t(`approach.${p}.body`)}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-title" class="border-t border-ink/10">
+    <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+      <h2 id="contact-title" class="heading-lg">
+        {t("contact.title")}
+      </h2>
+      <div>
+        <p class="prose-copy">{t("contact.body")}</p>
+        <dl class="mt-10 grid max-w-[36rem] gap-8 sm:grid-cols-2">
+          <div>
+            <dt class="text-[0.95rem] text-ink/65">{t("contact.email")}</dt>
+            <dd class="mt-2 text-[1.1rem]">
+              <TextLink href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</TextLink>
+            </dd>
+          </div>
+          <div>
+            <dt class="text-[0.95rem] text-ink/65">{t("contact.social")}</dt>
+            <dd class="mt-2 flex gap-6 text-[1.1rem]">
+              <TextLink href={THREADS_URL} newTabLabel={t("common.newTab")}>Threads</TextLink>{" "}
+              <TextLink href={LINKEDIN_URL} newTabLabel={t("common.newTab")}>LinkedIn</TextLink>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>

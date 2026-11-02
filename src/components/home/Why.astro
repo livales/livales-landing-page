@@ -1,0 +1,30 @@
+---
+import { useTranslations } from "@/i18n/ui";
+import { pagePath, type Locale } from "@/i18n/routes";
+import Embrace from "@/components/brand/Embrace.astro";
+import TextLink from "@/components/TextLink.astro";
+
+/** The company's reason for existing, in two sentences, with the way to the full story. */
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section>
+  <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+    <div>
+      <Embrace group="family" class="max-w-[9rem]" />
+      <h2 class="heading-lg mt-8">{t("why.title")}</h2>
+    </div>
+    <div class="space-y-6 text-[1.15rem] leading-[1.75] sm:text-[1.3rem]">
+      <p class="max-w-[38rem]">{t("why.p1")}</p>
+      <p class="max-w-[38rem]">{t("why.p2")}</p>
+      <p class="pt-2 text-[1.05rem]">
+        <TextLink href={pagePath("about", lang)}>{t("why.more")}</TextLink>
+      </p>
+    </div>
+  </div>
+</section>

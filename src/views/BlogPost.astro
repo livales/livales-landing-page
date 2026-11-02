@@ -1,0 +1,107 @@
+---
+import { render } from "astro:content";
+import { useTranslations, HL_TESTER_URL } from "@/i18n/ui";
+import { pagePath, postPath, type Locale } from "@/i18n/routes";
+import { breadcrumbs, blogPosting } from "@/lib/seo";
+import { formatDate, getPosts, type Post } from "@/lib/posts";
+import { products } from "@/content/products";
+import { cn } from "@/lib/utils";
+import Base from "@/layouts/Base.astro";
+import ProductMark from "@/components/brand/ProductMark.astro";
+import PostList from "@/components/PostList.astro";
+
+interface Props {
+  lang: Locale;
+  post: Post;
+}
+
+const { lang, post } = Astro.props;
+const t = useTranslations(lang);
+const { title, description, readMinutes } = post.data;
+const path = postPath(post.slug, lang);
+const { Content } = await render(post);
+const product = products.find((p) => p.key === post.data.product);
+const others = (await getPosts(lang)).filter((p) => p.slug !== post.slug);
+---
+
+<Base
+  lang={lang}
+  path={path}
+  title={`${title} | Livales`}
+  description={description}
+  type="article"
+  jsonLd={[
+    blogPosting({ title, description, date: post.isoDate, lang, path }),
+    breadcrumbs([
+      { name: "Livales", path: pagePath("home", lang) },
+      { name: "Blog", path: pagePath("blog", lang) },
+      { name: title, path },
+    ]),
+  ]}
+>
+  <article class="page pb-20 pt-10 sm:pb-28 sm:pt-14">
+    <nav aria-label={t("blog.breadcrumb")} class="text-[0.98rem]">
+      <a href={pagePath("blog", lang)} class="inline-flex items-center gap-2 font-semibold text-ink/75 hover:text-ink">
+        <span aria-hidden="true" class="h-2.5 w-2.5 rounded-full bg-livales-rose"></span>
+        {t("blog.back")}
+      </a>
+    </nav>
+
+    <header class="mt-10 max-w-[46rem]">
+      <h1 class="font-display text-[2rem] font-semibold leading-[1.12] tracking-[-0.02em] sm:text-[2.9rem]">
+        {title}
+      </h1>
+      <p class="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-[0.98rem] text-ink/65">
+        <span>
+          {t("blog.published")} <time datetime={post.isoDate}>{formatDate(post.isoDate, lang)}</time>
+        </span>{" "}
+        <span>
+          {readMinutes} {t("blog.readTime")}
+        </span>
+      </p>
+      <p class="mt-8 text-[1.2rem] leading-[1.7] text-ink/85 sm:text-[1.3rem]">{description}</p>
+    </header>
+
+    <div class="article mt-12 max-w-[40rem]"><Content /></div>
+
+    {
+      product && (
+        <aside
+          aria-label={t("blog.related")}
+          class={cn(
+            "mt-16 flex max-w-[40rem] flex-col gap-6 rounded-[2rem] p-7 sm:flex-row sm:items-center sm:p-8",
+            product.key === "hl" ? "bg-livales-rose-soft" : "bg-livales-green-soft"
+          )}
+        >
+          <ProductMark product={product.key} class="h-16 w-16" />
+          <div>
+            <p class="font-display text-[1.2rem] font-semibold">{t(`product.${product.key}.name`)}</p>{" "}
+            <p class="mt-1 text-[1.02rem] text-ink/75">{t(`product.${product.key}.short`)}</p>{" "}
+            <a
+              href={product.key === "hl" ? HL_TESTER_URL[lang] : product.url[lang]}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-ink mt-5 h-11 px-5 text-[0.95rem]"
+            >
+              {t(product.key === "hl" ? "product.hl.tester" : `product.${product.key}.cta`)}
+              <span class="sr-only"> {t("common.newTab")}</span>
+            </a>
+          </div>
+        </aside>
+      )
+    }
+  </article>
+
+  {
+    others.length > 0 && (
+      <section aria-labelledby="more-title" class="border-t border-ink/10">
+        <div class="page grid gap-10 py-20 sm:py-24 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+          <h2 id="more-title" class="heading-lg">
+            {t("blog.more")}
+          </h2>
+          <PostList lang={lang} posts={others} compact />
+        </div>
+      </section>
+    )
+  }
+</Base>

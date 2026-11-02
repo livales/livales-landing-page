@@ -1,0 +1,38 @@
+---
+import { cn } from "@/lib/utils";
+import type { ProductKey } from "@/content/products";
+
+/*
+ * Each product as a dot, the same round shape the logo uses for people.
+ * Kado and Hearts & Ladders use their own logo files (public/products/);
+ * Kana Speed has no logo yet, so it's the か character on ink.
+ */
+interface Props {
+  product: ProductKey;
+  class?: string;
+}
+
+const { product, class: className } = Astro.props;
+// class goes last so callers can change the size or the dot's fill.
+const base = (fill?: string) => cn("flex shrink-0 items-center justify-center overflow-hidden rounded-full", fill, className);
+---
+
+{
+  product === "kado" ? (
+    <span aria-hidden="true" class={base("bg-livales-green-soft")}>
+      <img src="/products/kado-livales.svg" alt="" width={48} height={48} class="h-[70%] w-[70%]" />
+    </span>
+  ) : product === "hl" ? (
+    <span aria-hidden="true" class={base()}>
+      <img src="/products/hearts-and-ladders/icon.png" alt="" width={192} height={192} class="h-full w-full" />
+    </span>
+  ) : (
+    <span aria-hidden="true" class={base("bg-ink")}>
+      <svg viewBox="0 0 48 48" class="h-full w-full">
+        <text x="24" y="25" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="24" font-weight="700">
+          か
+        </text>
+      </svg>
+    </span>
+  )
+}
