@@ -88,7 +88,7 @@ Every page shares the layout: Navbar (Produk, Blog, Tentang, language toggle, "I
 | Path | File | Contents |
 |---|---|---|
 | `/` | `pages/Index.tsx` + `components/home/*` | Hero (the logo's L embracing the three apps as dots, the home page's one animation) → Hearts & Ladders (**soft rose**, screenshots, tester CTA to its site) → Lineup (**soft green**, `ProductList`) → Why Livales → latest blog posts → FAQ |
-| `/produk` | `pages/Products.tsx` | One section per app (white, **soft green**, **soft rose**): description, features, platform/language/price facts, link |
+| `/produk` | `pages/Products.tsx` | Header with `ProductStack` (a fanned stack of real phone screenshots, one per app, each linking to its section), then one section per app (white, **soft green**, **soft rose**): description, features, platform/language/price facts, link |
 | `/tentang` | `pages/About.tsx` | Why we exist (note from the team), Who it's for (**soft rose**, `Embrace`), How we work, Contact |
 | `/blog` | `pages/Blog.tsx` | All articles, newest first |
 | `/blog/:slug` | `pages/BlogPost.tsx` | Article, a callout for the related Livales app, more articles |
@@ -104,7 +104,7 @@ Add an entry to `src/content/posts.ts` with both `id` and `en` copy, a `date`, `
 When a new Livales product goes live, update all of these in one PR:
 
 1. `src/contexts/LanguageContext.tsx`: a URL constant (like `KADO_URL`), `product.<key>.*` (name, short, cta, status) and `products.<key>.*` (body, features, facts) in **both** `id` and `en`. Update `lineup.*`, `products.body`, and the FAQ answers (`faq.a2`, `faq.a4`) too.
-2. `src/content/products.ts`: add it to the list (live products before the one in testing). Navbar, footer, home lineup and `/produk` read from here; add its feature keys in `pages/Products.tsx`.
+2. `src/content/products.ts`: add it to the list (live products before the one in testing), with a `preview` screenshot per language: 600 × 1334 WebP of its home page at a 375 px-wide viewport, in `public/products/<key>/`. Add its place in `ProductStack.tsx`. Navbar, footer, home lineup and `/produk` read from here; add its feature keys in `pages/Products.tsx`.
 3. `src/components/brand/ProductMark.tsx`: its dot (put image files in `public/products/`), and its place in `HeroLineup` (`Embrace.tsx`).
 4. `index.html`: add it to the JSON-LD and its `@id` to the Organization's `owns`. `src/lib/seo.ts`: update the home and products descriptions.
 5. `scripts/prerender.mjs`: bump `PAGES_UPDATED`.

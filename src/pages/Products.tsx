@@ -1,7 +1,7 @@
 import { useLanguage, HL_TESTER_URL } from "@/contexts/LanguageContext";
 import { products, type ProductKey } from "@/content/products";
 import { ProductMark } from "@/components/brand/ProductMark";
-import { HeroLineup } from "@/components/brand/Embrace";
+import ProductStack from "@/components/ProductStack";
 import PageHeader from "@/components/layout/PageHeader";
 import PhoneShot from "@/components/PhoneShot";
 import TextLink from "@/components/TextLink";
@@ -28,7 +28,8 @@ const Products = () => {
       <PageHeader
         title={t("products.title")}
         lead={t("products.body")}
-        aside={<HeroLineup label={t("hero.art")} className="order-first max-w-[16rem] lg:order-none" />}
+        aside={<ProductStack />}
+        wideAside
       />
 
       {products.map(({ key, url }) => (

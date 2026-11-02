@@ -144,6 +144,9 @@ const translations: Record<Language, Record<string, string>> = {
     "products.facts.language": "Bahasa",
     "products.facts.price": "Harga",
     "products.features": "Yang bisa kamu lakukan",
+    "products.preview.kado": "Halaman depan Kado Livales di HP",
+    "products.preview.kana": "Halaman depan Kana Speed di HP",
+    "products.preview.hl": "Papan Hearts & Ladders di HP",
     "products.kado.body":
       "Kado Livales membantu kamu menemukan kado yang beneran disukai, bukan sekadar ide. Isinya produk nyata dari marketplace Indonesia yang kami pilih satu per satu.",
     "products.kado.f1": "Cari kado lewat kuis empat langkah, untuk ibu, ayah, pasangan, sahabat, atau rekan kerja.",
@@ -340,6 +343,9 @@ const translations: Record<Language, Record<string, string>> = {
     "products.facts.language": "Languages",
     "products.facts.price": "Price",
     "products.features": "What you can do",
+    "products.preview.kado": "The Kado Livales home page on a phone",
+    "products.preview.kana": "The Kana Speed home page on a phone",
+    "products.preview.hl": "The Hearts & Ladders board on a phone",
     "products.kado.body":
       "Kado Livales helps you find a gift the person will actually like, not just an idea. It's full of real products from Indonesian marketplaces that we pick one by one.",
     "products.kado.f1": "Find a gift through a four-step quiz, for your mum, dad, partner, best friend, or coworker.",
