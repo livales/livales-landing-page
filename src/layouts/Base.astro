@@ -1,7 +1,8 @@
 ---
 import "@/index.css";
 import { absoluteUrl, alternatePath, locales, type Locale } from "@/i18n/routes";
-import { organizationGraph } from "@/lib/seo";
+import { organizationGraph, ogImage } from "@/lib/seo";
+import { useTranslations } from "@/i18n/ui";
 import Navbar from "@/components/layout/Navbar.astro";
 import Updates from "@/components/layout/Updates.astro";
 import Footer from "@/components/layout/Footer.astro";
@@ -25,6 +26,8 @@ const { lang, title, description, type = "website", jsonLd = [], notFound = fals
 const path = Astro.props.path.replace(/\.html$/, "").replace(/\/index$/, "").replace(/(.)\/$/, "$1") || "/";
 const canonical = absoluteUrl(notFound ? alternatePath("/", lang) : path);
 const languages = locales.map((l) => ({ lang: l, href: alternatePath(notFound ? "/" : path, l) }));
+const image = ogImage(lang);
+const imageAlt = `Livales — ${useTranslations(lang)("footer.tagline")}`;
 const ldJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
 ---
 
@@ -67,10 +70,10 @@ const ldJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Livales" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://livales.com/og-image.png" />
+    <meta property="og:image" content={image} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={lang === "id" ? "Logo Livales" : "Livales logo"} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content={lang === "id" ? "id_ID" : "en_US"} />
     <meta property="og:locale:alternate" content={lang === "id" ? "en_US" : "id_ID"} />
 
@@ -78,8 +81,8 @@ const ldJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://livales.com/og-image.png" />
-    <meta name="twitter:image:alt" content={lang === "id" ? "Logo Livales" : "Livales logo"} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     <!-- Structured data: the company, its logo, profiles and apps; plus this page's own -->
     <script type="application/ld+json" set:html={ldJson(organizationGraph)} />

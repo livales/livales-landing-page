@@ -59,7 +59,8 @@ tests/                      Firestore rules tests (@firebase/rules-unit-testing)
 public/
   brand/                    Official Livales logo files (SVG + PNG) and app icons
   products/                 Product marks (kado-livales.svg = Kado's gift-tag logo), per-app screenshots, hearts-and-ladders/ (icon + screenshots from its site)
-  favicon.* (svg, ico, 16–192 px png) / apple-touch-icon.png / site.webmanifest / og-image.png
+  favicon.* (svg, ico, 16–192 px png) / apple-touch-icon.png / site.webmanifest
+  og-image.png / og-image-en.png  Link previews (1200 × 630) per language, rendered from scripts/og-image.html
   robots.txt                Points to sitemap-index.xml (written by @astrojs/sitemap)
 src/
   pages/                    Routes only: index, produk, tentang, blog/index, blog/[slug], 404, and the same under en/ (products, about, …)
@@ -198,7 +199,6 @@ Tokens live in `src/index.css` (`:root` HSL variables) and `tailwind.config.ts` 
 
 - **Live** at https://livales.com (HTTPS, `www` → apex), verified in Google Search Console, with `sitemap.xml` submitted. See [Domain, DNS and Search Console](#domain-dns-and-search-console).
 - SEO backlog: keep publishing blog posts for non-brand keywords; in Search Console, submit `https://livales.com/sitemap-index.xml` (it now lists the English pages too) after the Astro launch.
-- **Open Graph image** (`public/og-image.png`) still uses the earlier style (blurred green/rose glow behind the logo), which the current visual system rules out. Redraw it flat: white or a soft tint, the full logo, and maybe the tagline.
 - **Google Search favicon:** Google's favicon service already has the new mark, but search results showed the default globe right after launch. They update on Google's schedule; Search Console → URL Inspection → Request indexing can speed it up.
 - Social: only LinkedIn (`linkedin.com/company/livales`) exists so far. Add others to `src/components/layout/Footer.astro` when they're created.
 - Optional: Firebase App Check if the sign-up form gets spammed.
