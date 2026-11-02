@@ -4,9 +4,9 @@ import "./index.css";
 
 const container = document.getElementById("root")!;
 
-// "/" is prerendered at build time (scripts/prerender.mjs), so hydrate it.
-// Other paths get the same HTML via the SPA fallback, so render them fresh.
-if (container.hasChildNodes() && window.location.pathname === "/") {
+// Every page (and 404.html) is prerendered at build time (scripts/prerender.mjs),
+// so hydrate it. The dev server serves an empty root, so render it fresh there.
+if (container.hasChildNodes()) {
   hydrateRoot(container, <App />);
 } else {
   createRoot(container).render(<App />);

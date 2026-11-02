@@ -5,7 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import SiteLayout from "@/components/layout/SiteLayout";
+import { ROUTES } from "@/lib/seo";
 import Index from "./pages/Index";
+import Products from "./pages/Products";
+import About from "./pages/About";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,9 +31,15 @@ export const AppProviders = ({ children }: { children: ReactNode }) => (
 
 export const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<Index />} />
-    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-    <Route path="*" element={<NotFound />} />
+    <Route element={<SiteLayout />}>
+      <Route path={ROUTES.home} element={<Index />} />
+      <Route path={ROUTES.products} element={<Products />} />
+      <Route path={ROUTES.about} element={<About />} />
+      <Route path={ROUTES.blog} element={<Blog />} />
+      <Route path={`${ROUTES.blog}/:slug`} element={<BlogPost />} />
+      {/* New pages also go in ROUTES (src/lib/seo.ts) so they're prerendered. */}
+      <Route path="*" element={<NotFound />} />
+    </Route>
   </Routes>
 );
 

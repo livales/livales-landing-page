@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
 
+    <!-- Per-page tags: scripts/prerender.mjs rewrites title, description, canonical,
+         og:url, og:title/description and twitter:title/description for every page
+         (values in src/lib/seo.ts). Keep each on one line. -->
     <title>Livales — Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal</title>
-    <meta
-      name="description"
-      content="Livales membuat aplikasi yang mendekatkan kamu dengan orang tersayang: Kado Livales untuk mencari kado yang beneran disukai, dan aplikasi untuk pasangan, segera hadir. Ada juga Kana Speed untuk belajar huruf Jepang."
-    />
+    <meta name="description" content="" />
     <meta name="author" content="Livales" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://livales.com/" />
@@ -25,11 +25,8 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Livales — Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal" />
-    <meta
-      property="og:description"
-      content="Aplikasi dari Indonesia supaya kamu lebih dekat dengan orang tersayang. Cari kado lewat Kado Livales, dan daftar untuk dikabari: aplikasi untuk pasangan, segera hadir."
-    />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Livales" />
     <meta property="og:url" content="https://livales.com/" />
@@ -42,11 +39,8 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Livales — Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal" />
-    <meta
-      name="twitter:description"
-      content="Aplikasi dari Indonesia supaya kamu lebih dekat dengan orang tersayang. Cari kado lewat Kado Livales, dan daftar untuk dikabari: aplikasi untuk pasangan, segera hadir."
-    />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:description" content="" />
     <meta name="twitter:image" content="https://livales.com/og-image.png" />
     <meta name="twitter:image:alt" content="Logo Livales" />
 
@@ -69,7 +63,12 @@
             "description": "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang: pasangan, keluarga, dan teman.",
             "areaServed": "ID",
             "sameAs": ["https://www.threads.com/@livalesofficial", "https://www.linkedin.com/company/livales/"],
-            "owns": [{ "@id": "https://kado.livales.com/#app" }, { "@id": "https://kana.livales.com/#app" }]
+            "email": "admin@livales.com",
+            "owns": [
+              { "@id": "https://kado.livales.com/#app" },
+              { "@id": "https://kana.livales.com/#app" },
+              { "@id": "https://heartsandladders.livales.com/#app" }
+            ]
           },
           {
             "@type": "WebApplication",
@@ -93,6 +92,17 @@
             "inLanguage": "id",
             "description": "Cari kado untuk ibu, ayah, pasangan, sahabat, atau rekan kerja: produk nyata dari marketplace Indonesia yang dipilih manual, plus wishlist dan patungan kado.",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" },
+            "publisher": { "@id": "https://livales.com/#organization" }
+          },
+          {
+            "@type": "MobileApplication",
+            "@id": "https://heartsandladders.livales.com/#app",
+            "name": "Hearts & Ladders",
+            "url": "https://heartsandladders.livales.com/",
+            "applicationCategory": "GameApplication",
+            "operatingSystem": "Android",
+            "inLanguage": ["id", "en"],
+            "description": "Ular tangga untuk pasangan: lempar dadu, jawab pertanyaan dan tantangan, dan simpan jawabannya jadi kenangan. Main di satu HP atau dari jauh.",
             "publisher": { "@id": "https://livales.com/#organization" }
           },
           {

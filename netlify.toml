@@ -13,7 +13,5 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# No SPA fallback: every page is prerendered to its own file (produk.html,
+# blog/<slug>.html, …), and unknown paths get 404.html with a real 404 status.

@@ -1,7 +1,7 @@
 import { useLanguage, THREADS_URL, LINKEDIN_URL } from "@/contexts/LanguageContext";
-import WaitlistForm from "./WaitlistForm";
+import WaitlistForm from "@/components/WaitlistForm";
 
-const FinalCta = () => {
+const Updates = () => {
   const { t } = useLanguage();
 
   return (
@@ -28,4 +28,4 @@ const FinalCta = () => {
   );
 };
 
-export default FinalCta;
+export default Updates;

@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ROUTES } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/brand/Logo";
 import LanguageSelector from "@/components/LanguageSelector";
 
-export const sections = ["about", "audience", "approach", "product", "faq"] as const;
+export const navItems = [
+  { to: ROUTES.products, key: "nav.products" },
+  { to: ROUTES.blog, key: "nav.blog" },
+  { to: ROUTES.about, key: "nav.about" },
+] as const;
 
 const Navbar = () => {
   const { t } = useLanguage();
@@ -43,17 +49,26 @@ const Navbar = () => {
         isScrolled || isOpen ? "border-b border-ink/10" : "border-b border-transparent"
       )}
     >
-      <nav className="page flex h-[4.5rem] items-center justify-between gap-6">
-        <a href="#top" onClick={close} aria-label="Livales" className="shrink-0">
+      <nav aria-label={t("nav.main")} className="page flex h-[4.5rem] items-center justify-between gap-6">
+        <Link to={ROUTES.home} onClick={close} aria-label="Livales" className="shrink-0">
           <Logo className="h-7" />
-        </a>
+        </Link>
 
-        <ul className="hidden items-center gap-7 text-[0.98rem] font-medium min-[900px]:flex">
-          {sections.map((id) => (
-            <li key={id}>
-              <a href={`#${id}`} className="text-ink/75 hover:text-ink">
-                {t(`nav.${id}`)}
-              </a>
+        <ul className="hidden items-center gap-2 text-[0.98rem] font-medium min-[900px]:flex">
+          {navItems.map(({ to, key }) => (
+            <li key={to}>
+              {/* The current section sits in a soft rose pill: the logo's base shape. */}
+              <NavLink
+                to={to}
+                className={({ isActive }) =>
+                  cn(
+                    "rounded-full px-4 py-2",
+                    isActive ? "bg-livales-rose-soft text-ink" : "text-ink/75 hover:text-ink"
+                  )
+                }
+              >
+                {t(key)}
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -80,15 +95,26 @@ const Navbar = () => {
         <div className="h-[calc(100dvh-4.5rem)] bg-white min-[900px]:hidden">
           <div className="page flex h-full flex-col pb-8 pt-4">
             <ul>
-              {sections.map((id) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
+              {[{ to: ROUTES.home, key: "nav.home" }, ...navItems].map(({ to, key }) => (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    end={to === ROUTES.home}
                     onClick={close}
-                    className="block border-b border-ink/10 py-4 font-display text-[1.5rem] font-semibold"
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center justify-between border-b border-ink/10 py-4 font-display text-[1.5rem] font-semibold",
+                        !isActive && "text-ink/80"
+                      )
+                    }
                   >
-                    {t(`nav.${id}`)}
-                  </a>
+                    {({ isActive }) => (
+                      <>
+                        {t(key)}
+                        {isActive && <span aria-hidden="true" className="h-3 w-3 rounded-full bg-livales-rose" />}
+                      </>
+                    )}
+                  </NavLink>
                 </li>
               ))}
             </ul>
