@@ -238,6 +238,11 @@ export const ui: Record<Locale, Record<string, string>> = {
     "notFound.title": "Halaman ini tidak ada.",
     "notFound.body": "Mungkin alamatnya salah ketik, atau halamannya sudah dipindah.",
     "notFound.cta": "Kembali ke beranda",
+    "notFound.metaTitle": "Halaman tidak ditemukan | Livales",
+    "notFound.metaDescription": "Halaman ini tidak ada.",
+
+    // Link previews
+    "meta.ogImageAlt": "Livales — Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
   },
   en: {
     // Navbar
@@ -441,6 +446,11 @@ export const ui: Record<Locale, Record<string, string>> = {
     "notFound.title": "This page doesn't exist.",
     "notFound.body": "The address may have a typo, or the page has moved.",
     "notFound.cta": "Back to home",
+    "notFound.metaTitle": "Page not found | Livales",
+    "notFound.metaDescription": "This page doesn't exist.",
+
+    // Link previews
+    "meta.ogImageAlt": "Livales — Closer to the people you love, and the world you want to know.",
   },
 };
 

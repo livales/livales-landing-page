@@ -1,6 +1,6 @@
 ---
 import "@/index.css";
-import { absoluteUrl, alternatePath, locales, type Locale } from "@/i18n/routes";
+import { absoluteUrl, alternatePath, locales, normalizePath, pagePath, type Locale } from "@/i18n/routes";
 import { organizationGraph, ogImage } from "@/lib/seo";
 import { useTranslations } from "@/i18n/ui";
 import Navbar from "@/components/layout/Navbar.astro";
@@ -19,15 +19,28 @@ interface Props {
   jsonLd?: object[];
   /** Not-found pages: noindex, no language alternates, canonical to home. */
   notFound?: boolean;
+  /**
+   * The languages this page exists in (default: both). A blog post written in
+   * one language only gets no hreflang for the other, and its language link
+   * goes to that language's blog instead.
+   */
+  translations?: Locale[];
 }
 
-const { lang, title, description, type = "website", jsonLd = [], notFound = false } = Astro.props;
-// Astro.url can read /index, .html or a trailing slash depending on the build format and server.
-const path = Astro.props.path.replace(/\.html$/, "").replace(/\/index$/, "").replace(/(.)\/$/, "$1") || "/";
+const { lang, title, description, type = "website", jsonLd = [], notFound = false, translations = locales } = Astro.props;
+const t = useTranslations(lang);
+const path = normalizePath(Astro.props.path);
 const canonical = absoluteUrl(notFound ? alternatePath("/", lang) : path);
-const languages = locales.map((l) => ({ lang: l, href: alternatePath(notFound ? "/" : path, l) }));
+const exists = (l: Locale) => !notFound && translations.includes(l);
+// This page in each language, for the ID / EN links; a missing translation links to that language's blog.
+const languages = locales.map((l) => ({
+  lang: l,
+  href: exists(l) ? alternatePath(path, l) : notFound ? pagePath("home", l) : pagePath("blog", l),
+}));
+const hreflangs = languages.filter((l) => exists(l.lang));
+const xDefault = hreflangs.find((l) => l.lang === "id") ?? hreflangs[0];
 const image = ogImage(lang);
-const imageAlt = `Livales — ${useTranslations(lang)("footer.tagline")}`;
+const imageAlt = t("meta.ogImageAlt");
 const ldJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
 ---
 
@@ -44,12 +57,12 @@ const ldJson = (data: object) => JSON.stringify(data).replace(/</g, "\\u003c");
     <meta name="robots" content={notFound ? "noindex" : "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={canonical} />
     {
-      !notFound && (
+      hreflangs.length > 1 && (
         <>
-          {languages.map((l) => (
+          {hreflangs.map((l) => (
             <link rel="alternate" hreflang={l.lang} href={absoluteUrl(l.href)} />
           ))}
-          <link rel="alternate" hreflang="x-default" href={absoluteUrl(alternatePath(path, "id"))} />
+          <link rel="alternate" hreflang="x-default" href={absoluteUrl(xDefault.href)} />
         </>
       )
     }

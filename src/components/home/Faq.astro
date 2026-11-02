@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "@/i18n/ui";
 import type { Locale } from "@/i18n/routes";
+import FaqList from "@/components/islands/Faq";
 
 interface Props {
   lang: Locale;
@@ -8,35 +9,12 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const items = ["1", "2", "3", "4", "5"];
+const items = ["1", "2", "3", "4", "5"].map((n) => ({ q: t(`faq.q${n}`), a: t(`faq.a${n}`) }));
 ---
 
 <section id="faq">
   <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
     <h2 class="heading-lg">{t("faq.title")}</h2>
-
-    <!--
-      A native accordion: <details> elements sharing one name open one answer
-      at a time and need no JavaScript. Closed answers stay in the HTML, so
-      search engines can read them. Open and close are both instant (animating
-      only the open made the page shrink then grow when switching questions).
-    -->
-    <div class="border-t border-ink/15">
-      {
-        items.map((n) => (
-          <details name="faq" class="group border-b border-ink/15">
-            <summary class="flex w-full cursor-pointer list-none items-center justify-between gap-6 py-6 text-left text-[1.15rem] font-semibold sm:text-[1.25rem] [&::-webkit-details-marker]:hidden">
-              <h3>{t(`faq.q${n}`)}</h3>
-              {/* Plus that turns into a minus: two pills, the vertical one collapses. */}
-              <span aria-hidden="true" class="relative h-4 w-4 shrink-0">
-                <span class="absolute left-0 top-1/2 h-[3px] w-4 -translate-y-1/2 rounded-full bg-ink" />
-                <span class="absolute left-1/2 top-0 h-4 w-[3px] -translate-x-1/2 rounded-full bg-ink transition-transform duration-200 group-open:scale-y-0" />
-              </span>
-            </summary>
-            <p class="max-w-[40rem] pb-7 pr-10 text-[1.05rem] leading-relaxed text-ink/75">{t(`faq.a${n}`)}</p>
-          </details>
-        ))
-      }
-    </div>
+    <FaqList client:visible items={items} />
   </div>
 </section>

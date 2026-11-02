@@ -8,7 +8,7 @@ Livales company website: Astro 7 (static) + TypeScript + Tailwind, with small Re
 - **Light, flat, logo-derived; never dark, never "AI template".** White page, ink text, whole sections in soft flat tints (`livales-green-soft` / `livales-rose-soft`); saturated green `#2ECC40` / rose `#F07C8F` only for the logo, illustrations and small accents; shapes are the logo's pills and dots. No gradients, glows, shadows, eyebrow labels, highlighted headline words, 01/02 numbering, stat rows, or scroll animations. Headings Unbounded, body Figtree. See README → Brand → Visual system.
 - **Logo** = "L Memeluk". Use `<Logo />` or the files in `public/brand/`. Never redraw it, and never bring back the old striped-arc logo or arc motifs.
 - **All copy is bilingual.** Add both `id` and `en` keys in `src/i18n/ui.ts` and use `t()` from `useTranslations(lang)`. Never hard-code strings. Every page exists in Indonesian (root) and English (`/en/...`, URLs in `src/i18n/routes.ts`).
-- **Zero JS by default.** Pages and components are `.astro`. Only `src/components/islands/` (MobileMenu, QuestionCard, WaitlistForm) ship JavaScript; keep it that way.
+- **Zero JS by default.** Pages and components are `.astro`. Only `src/components/islands/` (MobileMenu, QuestionCard, Faq, WaitlistForm) ship JavaScript; keep it that way.
 - **Firebase = project `livales` only** (collection `landing_subscribers`). After editing `firestore.rules`, run `npm run test:rules` before `npm run deploy:rules`.
 
 ## Commands
@@ -21,7 +21,7 @@ Livales company website: Astro 7 (static) + TypeScript + Tailwind, with small Re
 - Tokens: `src/index.css` + `tailwind.config.ts`; layout helpers `.page`, `.heading-lg`, `.heading-md`, `.btn-ink`
 - Illustrations: `src/components/brand/Embrace.astro` (the L embracing dots)
 - Islands are rendered at build time and hydrated, so never read `localStorage`/`window` during their render; use `useEffect` (see README → Rendering and SEO)
-- The canonical domain is `https://livales.com/`, no trailing slashes (`build.format: "file"`). SEO gotchas (FAQ answers stay in the HTML via `<details>`, `{" "}` between inline phrases, square ≥48 px favicons) are in README → Rendering and SEO
+- The canonical domain is `https://livales.com/`, no trailing slashes (`build.format: "file"`). SEO gotchas (FAQ answers stay in the HTML while closed, `{" "}` between inline phrases, square ≥48 px favicons) are in README → Rendering and SEO
 - New live product? Follow README → Adding a product to the shelf (6 places)
 
 ## README sections
