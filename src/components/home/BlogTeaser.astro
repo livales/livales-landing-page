@@ -1,0 +1,28 @@
+---
+import { useTranslations } from "@/i18n/ui";
+import { pagePath, type Locale } from "@/i18n/routes";
+import { getPosts } from "@/lib/posts";
+import PostList from "@/components/PostList.astro";
+import TextLink from "@/components/TextLink.astro";
+
+/** The newest articles, so the home page links into the blog. */
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const posts = (await getPosts(lang)).slice(0, 3);
+---
+
+<section class="border-t border-ink/10">
+  <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-20">
+    <div>
+      <h2 class="heading-lg">{t("blogTeaser.title")}</h2>
+      <p class="mt-6 text-[1.05rem]">
+        <TextLink href={pagePath("blog", lang)}>{t("blogTeaser.more")}</TextLink>
+      </p>
+    </div>
+    <PostList lang={lang} posts={posts} compact />
+  </div>
+</section>

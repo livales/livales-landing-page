@@ -1,0 +1,111 @@
+---
+import { useTranslations, HL_TESTER_URL } from "@/i18n/ui";
+import type { Locale } from "@/i18n/routes";
+import { pageMeta } from "@/lib/seo";
+import { products, type ProductKey } from "@/content/products";
+import { cn } from "@/lib/utils";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/layout/PageHeader.astro";
+import ProductMark from "@/components/brand/ProductMark.astro";
+import ProductStack from "@/components/ProductStack.astro";
+import PhoneShot from "@/components/PhoneShot.astro";
+import TextLink from "@/components/TextLink.astro";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const features: Record<ProductKey, string[]> = {
+  kado: ["f1", "f2", "f3", "f4"],
+  kana: ["f1", "f2", "f3"],
+  hl: ["f1", "f2", "f3", "f4"],
+};
+const facts = ["platform", "language", "price"];
+// Flat fields alternate so each app reads as its own room.
+const field: Record<ProductKey, string> = {
+  kado: "",
+  kana: "bg-livales-green-soft",
+  hl: "bg-livales-rose-soft",
+};
+---
+
+<Base lang={lang} path={Astro.url.pathname} {...pageMeta[lang].products}>
+  <PageHeader title={t("products.title")} lead={t("products.body")} wideAside>
+    <ProductStack slot="aside" lang={lang} />
+  </PageHeader>
+
+  {
+    products.map(({ key, url }) => (
+      <section id={key} aria-labelledby={`${key}-title`} class={cn(field[key], !field[key] && "border-t border-ink/10")}>
+        <div
+          class={cn(
+            "page grid gap-12 py-20 sm:py-24 lg:gap-20",
+            key === "hl" ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)]" : "lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]"
+          )}
+        >
+          <div>
+            <div class="flex flex-wrap items-center gap-4">
+              <ProductMark product={key} class="h-16 w-16" />
+              <span class={cn("rounded-full px-4 py-1.5 text-[0.95rem] font-semibold", field[key] ? "bg-white" : "bg-livales-green-soft")}>
+                {t(`product.${key}.status`)}
+              </span>
+            </div>
+            <h2 id={`${key}-title`} class="heading-lg mt-8">
+              {t(`product.${key}.name`)}
+            </h2>
+            <p class="prose-copy mt-5 text-ink/80">{t(`products.${key}.body`)}</p>
+
+            <h3 class="heading-md mt-10">{t("products.features")}</h3>
+            <ul class="mt-5 max-w-[36rem] space-y-3 text-[1.05rem]">
+              {features[key].map((f) => (
+                <li class="flex gap-3">
+                  <span aria-hidden="true" class="mt-[0.55rem] h-2.5 w-2.5 shrink-0 rounded-full bg-livales-green" />
+                  {t(`products.${key}.${f}`)}
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+              {key === "hl" ? (
+                <>
+                  <a href={HL_TESTER_URL[lang]} target="_blank" rel="noopener noreferrer" class="btn-ink">
+                    {t("product.hl.tester")}
+                    <span class="sr-only"> {t("common.newTab")}</span>
+                  </a>{" "}
+                  <TextLink href={url[lang]} newTabLabel={t("common.newTab")}>
+                    {t("product.hl.cta")}
+                  </TextLink>
+                </>
+              ) : (
+                <a href={url[lang]} target="_blank" rel="noopener noreferrer" class="btn-ink">
+                  {t(`product.${key}.cta`)}
+                  <span class="sr-only"> {t("common.newTab")}</span>
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-10">
+            {key === "hl" && (
+              <div class="grid grid-cols-2 gap-4">
+                <PhoneShot src={`/products/hearts-and-ladders/board-${lang}.webp`} alt={t("hl.shot.board")} />
+                <PhoneShot src={`/products/hearts-and-ladders/vault-${lang}.webp`} alt={t("hl.shot.vault")} class="mt-12" />
+              </div>
+            )}
+            <dl class="border-t border-ink/15">
+              {facts.map((f) => (
+                <div class="flex justify-between gap-6 border-b border-ink/15 py-4 text-[1rem]">
+                  <dt class="text-ink/65">{t(`products.facts.${f}`)}</dt>
+                  <dd class="text-right font-semibold">{t(`products.${key}.${f}`)}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</Base>

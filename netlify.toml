@@ -1,5 +1,7 @@
 [build]
-  # `npm run build` also prerenders the home page into dist/index.html (SEO).
+  # Astro writes every page as its own HTML file (produk.html, en/products.html,
+  # blog/<slug>.html, …); Netlify serves them at /produk, /en/products, … with
+  # no trailing-slash redirect, so the URLs match the canonical ones.
   command = "npm run build"
   publish = "dist"
 
@@ -13,5 +15,17 @@
   status = 301
   force = true
 
-# No SPA fallback: every page is prerendered to its own file (produk.html,
-# blog/<slug>.html, …), and unknown paths get 404.html with a real 404 status.
+# @astrojs/sitemap writes sitemap-index.xml; the old address (submitted to
+# Search Console and in older robots.txt copies) keeps working.
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
+
+# No SPA fallback. Unknown paths get a real 404 status: the English 404 page
+# under /en, and 404.html (Indonesian) everywhere else, which Netlify serves on
+# its own. Without force, existing files under /en are still served as usual.
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404.html"
+  status = 404

@@ -1,0 +1,30 @@
+---
+import { ui, useTranslations, THREADS_URL, LINKEDIN_URL } from "@/i18n/ui";
+import type { Locale } from "@/i18n/routes";
+import WaitlistForm from "@/components/islands/WaitlistForm";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const formCopy = Object.fromEntries(Object.entries(ui[lang]).filter(([key]) => key.startsWith("form.")));
+const link = "font-semibold underline decoration-livales-rose decoration-[3px] underline-offset-[6px] hover:decoration-ink text-ink";
+---
+
+<section id="updates" class="bg-livales-rose-soft">
+  <div class="page grid gap-10 py-20 sm:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:items-end lg:gap-20">
+    <div>
+      <h2 class="heading-lg max-w-[20ch]">{t("cta.title")}</h2>
+      <p class="mt-5 text-[1.1rem] text-ink/75">{t("cta.body")}</p>
+      <p class="mt-5 text-[1.05rem] text-ink/75">
+        {t("cta.follow")}{" "}
+        <a href={THREADS_URL} target="_blank" rel="noopener noreferrer" class={link}>Threads</a>{" "}
+        {t("cta.and")}{" "}
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class={link}>LinkedIn</a>.
+      </p>
+    </div>
+    <WaitlistForm client:idle lang={lang} copy={formCopy} />
+  </div>
+</section>

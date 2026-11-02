@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://livales.com/sitemap.xml
+Sitemap: https://livales.com/sitemap-index.xml

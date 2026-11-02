@@ -1,4 +1,4 @@
-import type { Language } from "@/contexts/LanguageContext";
+import type { Locale } from "@/i18n/routes";
 
 // Firebase project "livales" (company website — separate from the app
 // projects). The web config is public by design; access is enforced by
@@ -22,7 +22,7 @@ async function getDb() {
 }
 
 /** Saves an email sign-up to Firestore. Throws if the write is rejected. */
-export async function subscribe(email: string, lang: Language, source: string) {
+export async function subscribe(email: string, lang: Locale, source: string) {
   const db = await getDb();
   const { addDoc, collection, serverTimestamp } = await import("firebase/firestore/lite");
   await addDoc(collection(db, "landing_subscribers"), {

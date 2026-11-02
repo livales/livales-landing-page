@@ -1,14 +1,15 @@
-import { HL_URL, KADO_URL, KANA_URL, type Language } from "@/contexts/LanguageContext";
+import { HL_URL, KADO_URL, KANA_URL } from "@/i18n/ui";
+import type { Locale } from "@/i18n/routes";
 
 export type ProductKey = "kado" | "kana" | "hl";
 
 export interface Product {
   key: ProductKey;
-  url: Record<Language, string>;
+  url: Record<Locale, string>;
   /** Live products come first; the one in testing follows. */
   live: boolean;
   /** A real 600 × 1334 phone screenshot, per language (public/products/). */
-  preview: (language: Language) => string;
+  preview: (lang: Locale) => string;
 }
 
 /** The shelf, in order. Copy lives under `product.<key>.*` and `products.<key>.*`. */

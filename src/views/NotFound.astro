@@ -1,0 +1,25 @@
+---
+import { useTranslations } from "@/i18n/ui";
+import { pagePath, type Locale } from "@/i18n/routes";
+import { notFoundMeta } from "@/lib/seo";
+import Base from "@/layouts/Base.astro";
+import Logo from "@/components/brand/Logo.astro";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Base lang={lang} path={Astro.url.pathname} notFound {...notFoundMeta[lang]}>
+  <div class="page flex flex-col items-start py-24 sm:py-32">
+    <Logo markOnly class="h-16" />
+    <h1 class="heading-lg mt-10 max-w-[18ch]">{t("notFound.title")}</h1>
+    <p class="mt-4 text-[1.1rem] text-ink/75">{t("notFound.body")}</p>
+    <a href={pagePath("home", lang)} class="btn-ink mt-10">
+      {t("notFound.cta")}
+    </a>
+  </div>
+</Base>

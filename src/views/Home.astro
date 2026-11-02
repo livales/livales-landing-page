@@ -1,0 +1,26 @@
+---
+import type { Locale } from "@/i18n/routes";
+import { pageMeta } from "@/lib/seo";
+import Base from "@/layouts/Base.astro";
+import Hero from "@/components/home/Hero.astro";
+import HeartsAndLadders from "@/components/home/HeartsAndLadders.astro";
+import Lineup from "@/components/home/Lineup.astro";
+import Why from "@/components/home/Why.astro";
+import BlogTeaser from "@/components/home/BlogTeaser.astro";
+import Faq from "@/components/home/Faq.astro";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<Base lang={lang} path={Astro.url.pathname} {...pageMeta[lang].home}>
+  <Hero lang={lang} />
+  <HeartsAndLadders lang={lang} />
+  <Lineup lang={lang} />
+  <Why lang={lang} />
+  <BlogTeaser lang={lang} />
+  <Faq lang={lang} />
+</Base>

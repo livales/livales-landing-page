@@ -1,0 +1,68 @@
+---
+import { useTranslations } from "@/i18n/ui";
+import { pagePath, type Locale } from "@/i18n/routes";
+import { cn } from "@/lib/utils";
+import Logo from "@/components/brand/Logo.astro";
+import LanguageLinks, { type LanguageLink } from "@/components/LanguageLinks";
+import MobileMenu from "@/components/islands/MobileMenu";
+import { navItems, isCurrent } from "./nav";
+
+interface Props {
+  lang: Locale;
+  /** This page's path, for the current section. */
+  path: string;
+  languages: LanguageLink[];
+}
+
+const { lang, path, languages } = Astro.props;
+const t = useTranslations(lang);
+const menuItems = [{ page: "home" as const, key: "nav.home" }, ...navItems].map(({ page, key }) => ({
+  href: pagePath(page, lang),
+  label: t(key),
+  active: isCurrent(page, lang, path),
+}));
+---
+
+<!-- The line under the header appears once the page scrolls or the mobile menu opens (data-line, set by MobileMenu). -->
+<header data-site-header class="sticky top-0 z-50 border-b border-transparent bg-white transition-[border-color] duration-200 data-[line]:border-ink/10">
+  <nav aria-label={t("nav.main")} class="page flex h-[4.5rem] items-center justify-between gap-6">
+    <a href={pagePath("home", lang)} aria-label="Livales" class="shrink-0">
+      <Logo class="h-7" />
+    </a>
+
+    <ul class="hidden items-center gap-2 text-[0.98rem] font-medium min-[900px]:flex">
+      {
+        navItems.map(({ page, key }) => {
+          const active = isCurrent(page, lang, path);
+          return (
+            <li>
+              {/* The current section sits in a soft rose pill: the logo's base shape. */}
+              <a
+                href={pagePath(page, lang)}
+                aria-current={active ? "page" : undefined}
+                class={cn("rounded-full px-4 py-2", active ? "bg-livales-rose-soft text-ink" : "text-ink/75 hover:text-ink")}
+              >
+                {t(key)}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="hidden items-center gap-5 min-[900px]:flex">
+      <LanguageLinks links={languages} current={lang} />
+      <a href="#updates" class="btn-ink h-11 px-5 text-[0.95rem]">
+        {t("nav.cta")}
+      </a>
+    </div>
+
+    <MobileMenu
+      client:load
+      lang={lang}
+      items={menuItems}
+      languages={languages}
+      copy={{ menu: t("nav.menu"), close: t("nav.close"), cta: t("nav.cta") }}
+    />
+  </nav>
+</header>
