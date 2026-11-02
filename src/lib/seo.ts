@@ -168,6 +168,9 @@ export const organizationGraph = {
   ]
 };
 
+/** Link-preview image per language (source: scripts/og-image.html). */
+export const ogImage = (lang: Locale) => `${SITE_URL}/${lang === "id" ? "og-image.png" : "og-image-en.png"}`;
+
 export const breadcrumbs = (items: { name: string; path: string }[]) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -188,7 +191,7 @@ export const blogPosting = (post: { title: string; description: string; date: st
   dateModified: post.date,
   inLanguage: post.lang,
   mainEntityOfPage: absoluteUrl(post.path),
-  image: `${SITE_URL}/og-image.png`,
+  image: ogImage(post.lang),
   author: { "@id": `${SITE_URL}/#organization` },
   publisher: { "@id": `${SITE_URL}/#organization` },
 });
