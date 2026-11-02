@@ -1,6 +1,4 @@
 import { cn } from "@/lib/utils";
-import type { ProductKey } from "@/content/products";
-import { ProductMark } from "./ProductMark";
 
 /*
  * Illustrations built from the logo's own parts: an L (stem + base) that
@@ -62,36 +60,6 @@ export const Embrace = ({ group, className }: { group: EmbraceGroup; className?:
     </svg>
   );
 };
-
-const lineup: { product: ProductKey; left: string; delay: string }[] = [
-  { product: "kado", left: "20.5%", delay: "0.35s" },
-  { product: "kana", left: "47.1%", delay: "0.5s" },
-  { product: "hl", left: "73.8%", delay: "0.65s" },
-];
-
-/**
- * Home hero: the logo's L (green stem, rose base) embracing Livales' apps,
- * drawn as dots. On load they settle into the embrace one after another, the
- * home page's single orchestrated motion. Geometry is a 210 × 150 box.
- */
-export const HeroLineup = ({ label, className }: { label: string; className?: string }) => (
-  <div role="img" aria-label={label} className={cn("relative aspect-[210/150] w-full", className)}>
-    <span
-      className="absolute bottom-0 left-0 h-[21.3%] w-full animate-embrace-arm rounded-full bg-livales-rose"
-      style={{ transformOrigin: "0% 50%" }}
-    />
-    <span className="absolute left-0 top-0 h-full w-[15.2%] rounded-full bg-livales-green" />
-    {lineup.map(({ product, left, delay }) => (
-      <span
-        key={product}
-        className="absolute top-[42.7%] w-[23.8%] animate-embrace-dot"
-        style={{ left, animationDelay: delay }}
-      >
-        <ProductMark product={product} className="aspect-square w-full" />
-      </span>
-    ))}
-  </div>
-);
 
 /**
  * The brand mark at hero size. On load the dot settles into the embrace and

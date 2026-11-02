@@ -85,9 +85,13 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.body":
       "Livales adalah perusahaan teknologi dari Indonesia. Kami merancang dan membangun aplikasi sendiri, untuk merawat hubungan dengan orang-orang terdekatmu: pasangan, keluarga, dan teman.",
     "hero.cta.primary": "Lihat produk kami",
-    "hero.cta.secondary": "Baca blog kami",
-    "hero.art":
-      "Huruf L dari logo Livales merangkul tiga titik: Kado Livales, Kana Speed, dan Hearts & Ladders",
+    "hero.cta.secondary": "Ikuti kabar dari kami",
+    "hero.ask.label": "Tanyakan ke pasanganmu malam ini",
+    "hero.ask.next": "Pertanyaan lain",
+    "hero.ask.level1": "Ringan",
+    "hero.ask.level2": "Tentang kalian",
+    "hero.ask.level3": "Lebih dalam",
+    "hero.ask.more": "Baca 30 pertanyaan untuk pasangan",
 
     // Home: Hearts & Ladders
     "hl.title": "Hearts & Ladders: ular tangga yang bikin kalian makin dekat.",
@@ -284,9 +288,13 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.body":
       "Livales is a technology company from Indonesia. We design and build our own apps, for staying close to the people who matter to you: your partner, your family, and your friends.",
     "hero.cta.primary": "See our products",
-    "hero.cta.secondary": "Read our blog",
-    "hero.art":
-      "The L from the Livales logo embracing three dots: Kado Livales, Kana Speed, and Hearts & Ladders",
+    "hero.cta.secondary": "Get updates from us",
+    "hero.ask.label": "Ask your partner tonight",
+    "hero.ask.next": "Another question",
+    "hero.ask.level1": "Light",
+    "hero.ask.level2": "About you two",
+    "hero.ask.level3": "Deeper",
+    "hero.ask.more": "Read 30 questions for couples",
 
     // Home: Hearts & Ladders
     "hl.title": "Hearts & Ladders: snakes and ladders that brings you closer.",
