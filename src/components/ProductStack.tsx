@@ -12,8 +12,9 @@ const placement: Record<ProductKey, string> = {
 
 /**
  * Products page header: a real screenshot of every Livales app, stacked. The
- * phones rise out of the line under the header (the bottom is cropped by it),
- * and each one jumps to that app's section below.
+ * phones rise out of the line under the header: clip-path crops only the
+ * bottom edge, so tilted corners and the hover lift stay whole. Each phone
+ * jumps to that app's section below.
  */
 const ProductStack = ({ className }: { className?: string }) => {
   const { t, language } = useLanguage();
@@ -22,7 +23,7 @@ const ProductStack = ({ className }: { className?: string }) => {
     <ul
       aria-label={t("nav.products")}
       className={cn(
-        "relative -mb-16 h-[19rem] w-full max-w-[24rem] overflow-hidden sm:-mb-20 sm:h-[24rem] lg:max-w-none",
+        "relative -mb-16 h-[19rem] w-full max-w-[24rem] [clip-path:inset(-4rem_-4rem_0_-4rem)] sm:-mb-20 sm:h-[24rem] lg:max-w-none",
         className
       )}
     >
