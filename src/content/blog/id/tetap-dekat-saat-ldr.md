@@ -28,4 +28,4 @@ Tanpa nada suara dan ekspresi wajah, pesan singkat mudah disalahartikan. Kalau m
 
 Banyak pasangan yang pernah LDR justru mengenang masa itu sebagai waktu mereka belajar berkomunikasi. Kebiasaan yang kalian bangun sekarang akan tetap berguna saat sudah tinggal di kota yang sama.
 
-Untuk kencan virtual yang berbeda, coba Hearts & Ladders yang sedang kami uji di Android. Dua HP bisa tersambung lewat kode undangan, jadi kalian bisa main ular tangga dan menjawab tantangan bersama dari kota yang berbeda.
+Untuk kencan virtual yang berbeda, coba Hearts & Ladders, gratis di Google Play untuk HP Android. Dua HP bisa tersambung lewat kode undangan, jadi kalian bisa main ular tangga dan menjawab tantangan bersama dari kota yang berbeda.

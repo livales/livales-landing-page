@@ -11,7 +11,7 @@ This README is also the main context file for AI coding assistants working on th
 1. **The page is about the company, not one product.** Positioning follows the tagline shared with Instagram and Threads: closer to the people you love, and to the world you want to know (new languages and cultures). **Relationships are the main focus** (couples, family, friends). Language learning is not a second pillar, so don't present it as one in the hero, About, Who it's for, FAQ, or meta tags. Say "aplikasi / apps" rather than "software" in copy. Products are shown as a growing shelf, in this order:
    - **Kado Livales** (live, public, Indonesian with an English version at `/en`): gift recommendations from Indonesian marketplaces, plus wishlists and group gifts ("patungan"), at [kado.livales.com](https://kado.livales.com/). It can be named, described, and linked.
    - **Kana Speed** (live, public): a free web app for learning Japanese through quizzes, at [kana.livales.com](https://kana.livales.com/id/). It can be named, described, and linked. Don't label it a "side project": every live product counts.
-   - **Hearts & Ladders** (public, in Android testing): snakes and ladders for couples, at [heartsandladders.livales.com](https://heartsandladders.livales.com/) (`/en` for English). Testers sign up on its own site (`#gabung`). Live products come before it.
+   - **Hearts & Ladders** (public, on Google Play for Android since Nov 2026): snakes and ladders for couples, at [heartsandladders.livales.com](https://heartsandladders.livales.com/) (`/en` for English). Its download buttons use `GooglePlayButton.astro` (Play store page in the reader's language, `HL_PLAY_URL`).
 2. **Describe Hearts & Ladders only with what its own site says.** It was confidential until its site launched (Nov 2026). Never mention its private repository, its Firebase project, or features its site doesn't announce. The screenshots in `public/products/hearts-and-ladders/` are copied from its site.
 3. **Light, never dark, and no generic "AI template" styling.** The brand is about people and the things they care about (couples, family, friends), so it should feel friendly. A dark design was rejected as creepy ("menyeramkan"). A later design full of stock patterns (eyebrow labels, gradient headline words, glows, identical shadowed cards, 01/02 numbering, stat rows, fade-up animations) was rejected as "AI slop". Follow the visual system in [Brand → Visual system](#visual-system).
 4. **Use the official logo files only** (see [Brand](#brand)). Don't redraw, recolor, rotate, stretch, or add effects to the mark. The old striped-arc logo was a stock design shared with another company, so never bring it or arc-stripe motifs back.
@@ -73,7 +73,7 @@ src/
   components/brand/         Logo, HeroMark (animated mark, About), Embrace (illustrations), ProductMark (each product as a dot)
   content/blog/<lang>/      Blog articles, Markdown, one file per language with the same slug
   content.config.ts         Blog collection schema (title, description, date, order, readMinutes, product)
-  content/products.ts       The product shelf (order, URLs, live or testing, screenshots)
+  content/products.ts       The product shelf (order, URLs, screenshots)
   i18n/ui.ts                All copy (id/en), product/social URLs, useTranslations()
   i18n/routes.ts            URLs per language (pagePaths, postPath, normalizePath, alternatePath for the language switch and hreflang)
   lib/seo.ts                Per-page title/description, Organization graph, BlogPosting + breadcrumb JSON-LD
@@ -88,7 +88,7 @@ Every page shares `layouts/Base.astro`: Navbar (Produk, Blog, Tentang, ID / EN l
 
 | Path | View | Contents |
 |---|---|---|
-| `/` | `views/Home.astro` + `components/home/*` | Hero (tagline + a card with a question to ask your partner, reshuffled on click from the "30 pertanyaan untuk pasangan" article) → Hearts & Ladders (**soft rose**, screenshots, tester CTA to its site) → Lineup (**soft green**, `ProductList`) → Why Livales → latest blog posts → FAQ |
+| `/` | `views/Home.astro` + `components/home/*` | Hero (tagline + a card with a question to ask your partner, reshuffled on click from the "30 pertanyaan untuk pasangan" article) → Hearts & Ladders (**soft rose**, screenshots, Google Play button) → Lineup (**soft green**, `ProductList`) → Why Livales → latest blog posts → FAQ |
 | `/produk` | `views/Products.astro` | Header with `ProductStack` (a fanned stack of real phone screenshots, one per app, each linking to its section), then one section per app (white, **soft green**, **soft rose**): description, features, platform/language/price facts, link |
 | `/tentang` | `views/About.astro` | Why we exist (note from the team), Who it's for (**soft rose**, `Embrace`), How we work, Contact |
 | `/blog` | `views/Blog.astro` | All articles, newest first |
@@ -116,7 +116,7 @@ The body is plain Markdown (`##` headings, paragraphs, `-` and `1.` lists; quote
 When a new Livales product goes live, update all of these in one PR:
 
 1. `src/i18n/ui.ts`: a URL constant (like `KADO_URL`), `product.<key>.*` (name, short, cta, status) and `products.<key>.*` (body, features, facts) in **both** `id` and `en`. Update `lineup.*`, `products.body`, and the FAQ answers (`faq.a2`, `faq.a4`) too.
-2. `src/content/products.ts`: add it to the list (live products before the one in testing), with a `preview` screenshot per language: 600 × 1334 WebP of its home page at a 375 px-wide viewport, in `public/products/<key>/`. Add its place in `ProductStack.astro`. Footer, home lineup and `/produk` read from here; add its feature keys in `views/Products.astro`.
+2. `src/content/products.ts`: add it to the list, with a `preview` screenshot per language: 600 × 1334 WebP of its home page at a 375 px-wide viewport, in `public/products/<key>/`. Add its place in `ProductStack.astro`. Footer, home lineup and `/produk` read from here; add its feature keys in `views/Products.astro`.
 3. `src/components/brand/ProductMark.astro`: its dot (put image files in `public/products/`).
 4. `src/lib/seo.ts`: add it to `organizationGraph` (and its `@id` to the Organization's `owns`), and update the home and products descriptions in both languages.
 5. `astro.config.mjs`: bump `PAGES_UPDATED` (the sitemap's lastmod for non-blog pages).

@@ -28,4 +28,4 @@ Without tone of voice or facial expressions, short messages are easy to misread.
 
 Many couples who've been long-distance remember it as the time they learned to communicate. The habits you build now will still help once you're in the same city.
 
-For a different kind of virtual date, try Hearts & Ladders, which we're testing on Android. Two phones can connect with an invite code, so you can play snakes and ladders and take on challenges together from different cities.
+For a different kind of virtual date, try Hearts & Ladders, free on Google Play for Android phones. Two phones can connect with an invite code, so you can play snakes and ladders and take on challenges together from different cities.

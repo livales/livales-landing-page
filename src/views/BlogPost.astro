@@ -1,6 +1,6 @@
 ---
 import { getEntry, render } from "astro:content";
-import { useTranslations, HL_TESTER_URL } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/ui";
 import { locales, pagePath, postPath, type Locale } from "@/i18n/routes";
 import { breadcrumbs, blogPosting } from "@/lib/seo";
 import { formatDate, getPosts, type Post } from "@/lib/posts";
@@ -8,6 +8,7 @@ import { products } from "@/content/products";
 import { cn } from "@/lib/utils";
 import Base from "@/layouts/Base.astro";
 import ProductMark from "@/components/brand/ProductMark.astro";
+import GooglePlayButton from "@/components/GooglePlayButton.astro";
 import PostList from "@/components/PostList.astro";
 
 interface Props {
@@ -82,15 +83,14 @@ const translations = (
           <div>
             <p class="font-display text-[1.2rem] font-semibold">{t(`product.${product.key}.name`)}</p>{" "}
             <p class="mt-1 text-[1.02rem] text-ink/75">{t(`product.${product.key}.short`)}</p>{" "}
-            <a
-              href={product.key === "hl" ? HL_TESTER_URL[lang] : product.url[lang]}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-ink mt-5 h-11 px-5 text-[0.95rem]"
-            >
-              {t(product.key === "hl" ? "product.hl.tester" : `product.${product.key}.cta`)}
-              <span class="sr-only"> {t("common.newTab")}</span>
-            </a>
+            {product.key === "hl" ? (
+              <GooglePlayButton lang={lang} class="mt-5 h-11 px-5 text-[0.95rem]" />
+            ) : (
+              <a href={product.url[lang]} target="_blank" rel="noopener noreferrer" class="btn-ink mt-5 h-11 px-5 text-[0.95rem]">
+                {t(`product.${product.key}.cta`)}
+                <span class="sr-only"> {t("common.newTab")}</span>
+              </a>
+            )}
           </div>
         </aside>
       )
