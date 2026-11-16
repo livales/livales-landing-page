@@ -143,6 +143,12 @@ export const organizationGraph = {
         "en"
       ],
       "description": "Ular tangga untuk pasangan: lempar dadu, jawab pertanyaan dan tantangan, dan simpan jawabannya jadi kenangan. Main di satu HP atau dari jauh.",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.livales.ulartanggacinta",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
       "publisher": {
         "@id": "https://livales.com/#organization"
       }

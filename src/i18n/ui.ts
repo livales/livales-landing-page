@@ -8,8 +8,8 @@
 // and Hearts & Ladders). Kana Speed (learning Japanese) is a live product shown
 // after Kado, without a "side project" label, but language is never presented
 // as a second pillar in the hero, About, audience or FAQ.
-// Hearts & Ladders is public (heartsandladders.livales.com) and in Android
-// testing; describe it only with what its own site says.
+// Hearts & Ladders is public (heartsandladders.livales.com) and on Google Play
+// for Android; describe it only with what its own site says.
 // Voice: warm and plain, first person plural ("kami"), talking to "kamu".
 // Blog articles live in src/content/blog/<lang>/<slug>.md, also in both languages.
 import type { Locale } from "./routes";
@@ -26,10 +26,10 @@ export const HL_URL: Record<Locale, string> = {
   id: "https://heartsandladders.livales.com/",
   en: "https://heartsandladders.livales.com/en",
 };
-/** The tester sign-up section on the Hearts & Ladders site (same id in both languages). */
-export const HL_TESTER_URL: Record<Locale, string> = {
-  id: `${HL_URL.id}#gabung`,
-  en: `${HL_URL.en}#gabung`,
+/** Hearts & Ladders on Google Play, the store page in the reader's language. */
+export const HL_PLAY_URL: Record<Locale, string> = {
+  id: "https://play.google.com/store/apps/details?id=com.livales.ulartanggacinta&hl=id",
+  en: "https://play.google.com/store/apps/details?id=com.livales.ulartanggacinta&hl=en",
 };
 export const THREADS_URL = "https://www.threads.com/@livalesofficial";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/livales/";
@@ -52,16 +52,13 @@ export const ui: Record<Locale, Record<string, string>> = {
     "product.kado.name": "Kado Livales",
     "product.kado.short": "Cari kado yang beneran dia suka.",
     "product.kado.cta": "Buka Kado Livales",
-    "product.kado.status": "Sudah bisa dipakai",
     "product.kana.name": "Kana Speed",
     "product.kana.short": "Belajar huruf Jepang lewat kuis singkat.",
     "product.kana.cta": "Buka Kana Speed",
-    "product.kana.status": "Sudah bisa dipakai",
     "product.hl.name": "Hearts & Ladders",
     "product.hl.short": "Ular tangga untuk pasangan, penuh obrolan dan tantangan.",
     "product.hl.cta": "Kunjungi Hearts & Ladders",
-    "product.hl.status": "Uji coba di Android",
-    "product.hl.tester": "Daftar jadi penguji awal",
+    "product.hl.play": "Unduh di Google Play",
 
     // Home: hero
     "hero.title": "Lebih dekat dengan orang tersayang, dan dunia yang ingin kamu kenal.",
@@ -79,7 +76,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     // Home: Hearts & Ladders
     "hl.title": "Hearts & Ladders: ular tangga yang bikin kalian makin dekat.",
     "hl.body":
-      "Lempar dadu, mendarat di kotak hati, lalu jawab pertanyaan atau selesaikan tantangan berdua. Jawaban dan foto kalian tersimpan jadi kenangan. Sekarang sedang diuji di Android, dan kami mencari pasangan yang mau mencobanya lebih dulu.",
+      "Lempar dadu, mendarat di kotak hati, lalu jawab pertanyaan atau selesaikan tantangan berdua. Jawaban dan foto kalian tersimpan jadi kenangan. Sekarang gratis di Google Play untuk HP Android.",
     "hl.point1": "Main berdua di satu HP, atau dari jauh dengan dua HP.",
     "hl.point2": "Mode yang pas untuk tahap hubungan kalian, dari baru kenal sampai menikah.",
     "hl.point3": "Gratis dimainkan, tanpa perlu daftar.",
@@ -90,7 +87,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     // Home: product lineup
     "lineup.title": "Tiga aplikasi, satu tujuan: mendekatkan.",
     "lineup.body":
-      "Setiap aplikasi Livales kami rancang dan bangun sendiri. Dua sudah bisa kamu pakai hari ini, dan satu sedang diuji.",
+      "Setiap aplikasi Livales kami rancang dan bangun sendiri, dan ketiganya bisa kamu coba gratis hari ini.",
     "lineup.more": "Lihat semua produk",
 
     // Home: why
@@ -112,10 +109,10 @@ export const ui: Record<Locale, Record<string, string>> = {
       "Perusahaan teknologi dari Indonesia yang merancang dan membangun aplikasinya sendiri, supaya kamu lebih dekat dengan orang tersayang: pasangan, keluarga, dan teman.",
     "faq.q2": "Apa saja produk Livales?",
     "faq.a2":
-      "Kado Livales untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com). Kana Speed, aplikasi gratis untuk belajar huruf Jepang (kana.livales.com). Hearts & Ladders, ular tangga untuk pasangan yang sedang diuji di Android (heartsandladders.livales.com).",
-    "faq.q3": "Kapan Hearts & Ladders bisa diunduh?",
+      "Kado Livales untuk mencari kado, bikin wishlist, dan patungan kado bareng teman (kado.livales.com). Kana Speed, aplikasi gratis untuk belajar huruf Jepang (kana.livales.com). Hearts & Ladders, ular tangga untuk pasangan di HP Android (heartsandladders.livales.com).",
+    "faq.q3": "Di mana Hearts & Ladders bisa diunduh?",
     "faq.a3":
-      "Hearts & Ladders sedang diuji di Android sebelum rilis. Kalau mau mencobanya lebih dulu, daftar jadi penguji awal di heartsandladders.livales.com. Untuk kabar rilisnya, daftarkan email kamu di bawah.",
+      "Di Google Play, gratis untuk HP Android 7.0 ke atas. Untuk sementara belum tersedia di Uni Eropa, Inggris, dan Jepang.",
     "faq.q4": "Apakah aplikasi Livales gratis?",
     "faq.a4":
       "Kado Livales dan Kana Speed gratis. Hearts & Ladders gratis dimainkan, dengan mode Rumah Kita dan fitur tambahan lewat Premium.",
@@ -157,7 +154,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     "products.hl.f2": "Pilih mode sesuai tahap hubungan: Nyambung Dulu, Kita Banget, atau Rumah Kita.",
     "products.hl.f3": "Simpan jawaban dan foto di Memory Vault, lalu buka lagi kapan saja.",
     "products.hl.f4": "Ngobrol lebih dalam lewat Deep Talk: satu pertanyaan, bergantian bercerita.",
-    "products.hl.platform": "Android (uji coba)",
+    "products.hl.platform": "Android 7.0 ke atas",
     "products.hl.language": "Indonesia dan Inggris",
     "products.hl.price": "Gratis, dengan Premium",
 
@@ -171,7 +168,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     "about.p2":
       "Kami ingin membuat yang sebaliknya: aplikasi yang membawa kamu lebih dekat. Ke pasangan, keluarga, dan teman yang kamu sayang.",
     "about.p3":
-      "Semua produk Livales kami rancang dan bangun sendiri, di Indonesia. Kado Livales dan Kana Speed sudah bisa kamu pakai, dan Hearts & Ladders sedang diuji bersama pasangan-pasangan pertamanya.",
+      "Semua produk Livales, yaitu Kado Livales, Kana Speed, dan Hearts & Ladders, kami rancang dan bangun sendiri di Indonesia.",
     "about.sign": "Tim Livales",
     "about.markLabel": "Simbol Livales: huruf L yang merangkul sebuah titik",
     "audience.title": "Untuk siapa",
@@ -260,16 +257,13 @@ export const ui: Record<Locale, Record<string, string>> = {
     "product.kado.name": "Kado Livales",
     "product.kado.short": "Find a gift they'll actually like.",
     "product.kado.cta": "Open Kado Livales",
-    "product.kado.status": "Ready to use",
     "product.kana.name": "Kana Speed",
     "product.kana.short": "Learn the Japanese alphabets through short quizzes.",
     "product.kana.cta": "Open Kana Speed",
-    "product.kana.status": "Ready to use",
     "product.hl.name": "Hearts & Ladders",
     "product.hl.short": "Snakes and ladders for couples, full of questions and dares.",
     "product.hl.cta": "Visit Hearts & Ladders",
-    "product.hl.status": "Testing on Android",
-    "product.hl.tester": "Sign up as an early tester",
+    "product.hl.play": "Get it on Google Play",
 
     // Home: hero
     "hero.title": "Closer to the people you love, and the world you want to know.",
@@ -287,7 +281,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     // Home: Hearts & Ladders
     "hl.title": "Hearts & Ladders: snakes and ladders that brings you closer.",
     "hl.body":
-      "Roll the dice, land on a heart, then answer a question or take on a dare together. Your answers and photos are saved as memories. It's being tested on Android now, and we're looking for couples who'd like to try it first.",
+      "Roll the dice, land on a heart, then answer a question or take on a dare together. Your answers and photos are saved as memories. It's free on Google Play for Android phones.",
     "hl.point1": "Play together on one phone, or from far away on two.",
     "hl.point2": "Modes for every stage of a relationship, from just met to married.",
     "hl.point3": "Free to play, no sign-up needed.",
@@ -298,7 +292,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     // Home: product lineup
     "lineup.title": "Three apps, one goal: bringing people closer.",
     "lineup.body":
-      "We design and build every Livales app ourselves. Two are ready to use today, and one is being tested.",
+      "We design and build every Livales app ourselves, and all three are free to try today.",
     "lineup.more": "See all products",
 
     // Home: why
@@ -320,10 +314,10 @@ export const ui: Record<Locale, Record<string, string>> = {
       "A technology company from Indonesia that designs and builds its own apps, to bring you closer to the people you love: your partner, your family, and your friends.",
     "faq.q2": "What products does Livales make?",
     "faq.a2":
-      "Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com). Kana Speed, a free app for learning the Japanese alphabets (kana.livales.com). Hearts & Ladders, snakes and ladders for couples, now in Android testing (heartsandladders.livales.com).",
-    "faq.q3": "When can I download Hearts & Ladders?",
+      "Kado Livales, for finding gifts, making wishlists, and chipping in on gifts with friends (kado.livales.com). Kana Speed, a free app for learning the Japanese alphabets (kana.livales.com). Hearts & Ladders, snakes and ladders for couples on Android phones (heartsandladders.livales.com).",
+    "faq.q3": "Where can I download Hearts & Ladders?",
     "faq.a3":
-      "Hearts & Ladders is being tested on Android before release. To try it early, sign up as a tester at heartsandladders.livales.com. To hear when it launches, leave your email below.",
+      "On Google Play, free for Android 7.0 or later. For now it is not available in the EU, the UK, or Japan.",
     "faq.q4": "Are Livales apps free?",
     "faq.a4":
       "Kado Livales and Kana Speed are free. Hearts & Ladders is free to play, with the Rumah Kita mode and extra features in Premium.",
@@ -365,7 +359,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     "products.hl.f2": "Choose a mode for your stage: Nyambung Dulu, Kita Banget, or Rumah Kita.",
     "products.hl.f3": "Keep answers and photos in the Memory Vault, and open them again anytime.",
     "products.hl.f4": "Go deeper with Deep Talk: one question, taking turns to share.",
-    "products.hl.platform": "Android (testing)",
+    "products.hl.platform": "Android 7.0 or later",
     "products.hl.language": "Indonesian and English",
     "products.hl.price": "Free, with Premium",
 
@@ -379,7 +373,7 @@ export const ui: Record<Locale, Record<string, string>> = {
     "about.p2":
       "We want to build the opposite: apps that bring you closer. To the partner, family, and friends you love.",
     "about.p3":
-      "We design and build every Livales product ourselves, in Indonesia. Kado Livales and Kana Speed are ready to use, and Hearts & Ladders is being tested with its first couples.",
+      "We design and build every Livales product ourselves, in Indonesia: Kado Livales, Kana Speed and Hearts & Ladders.",
     "about.sign": "The Livales team",
     "about.markLabel": "The Livales mark: a letter L embracing a dot",
     "audience.title": "Who it's for",
